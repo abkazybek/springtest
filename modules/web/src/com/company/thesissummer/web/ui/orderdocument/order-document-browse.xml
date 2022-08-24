@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:thesis="http://schemas.haulmont.com/thesis/thesis-window.xsd"
+        class="com.company.thesissummer.web.ui.orderdocument.OrderDocumentBrowse"
+        messagesPack="com.company.thesissummer.web.ui.orderdocument"
+        caption="msg://browseCaption"
+        lookupComponent="cardsTable"
+        focusComponent="genericFilter">
+    <dsContext>
+        <groupDatasource id="cardsDs"
+                         class="com.company.thesissummer.entity.OrderDocument"
+                         datasourceClass="com.haulmont.thesis.web.ui.DocDatasource"
+                         view="browse">
+            <query>
+                <![CDATA[select distinct d from thesissummer$OrderDocument d
+                where d.template = false and d.versionOf is null and d.isArchivedDoc = false
+                order by d.dateTime]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <layout>
+        <vbox expand="split" spacing="true" height="100%">
+            <hbox id="filterBox" spacing="true" height="AUTO" width="100%">
+                <filter id="genericFilter"
+                        datasource="cardsDs"
+                        applyTo="cardsTable"
+                        manualApplyRequired="#property{thesis.docBrowser.filterManualApplyRequired}">
+                    <properties include=".*"
+                                exclude="procFamily|important|template|versionOf|templateName|createdBy|id|jbpmProcessId|
+                                    createTs|docOfficeData|docKind|docCategory|category|locState|description|state|extraFields|
+                                    currentActorsFullString|currentActorsString|addressees|executor|signedBy|deleteTs|version|project|
+                                    amount|vatInclusive|vatRate|vatAmount|currency"/>
+                    <custom name="docProject" caption="msg://Doc.project" join="join d.projects p"
+                            paramClass="com.haulmont.thesis.core.entity.Project">
+                        p.id in (?)
+                    </custom>
+                    <custom id="docState" name="docState" caption="msg://Doc.state"
+                            paramClass="com.haulmont.thesis.core.enums.DocState">
+                        d.state like ?
+                    </custom>
+                    <custom name="addresseeName" caption="msg://addresseeName" paramClass="java.lang.String"
+                            join="join d.docOfficeData.docOfficeDataAddressees a">
+                        a.addressee.name like ?
+                    </custom>
+                    <custom name="receivingMethod" caption="msg://receivingMethod"
+                            paramClass="com.haulmont.thesis.core.entity.DocReceivingMethod">
+                        d.docOfficeData.receivingMethod.id in (?)
+                    </custom>
+                    <custom id="responseToDoc" name="responseToDoc" caption="msg://responseToDoc"
+                            paramClass="com.haulmont.thesis.core.entity.Doc">
+                        d.docOfficeData.responseToDoc.id in (?)
+                    </custom>
+                    <custom name="sender" caption="msg://sender"
+                            paramClass="com.haulmont.thesis.core.entity.Correspondent">
+                        d.docOfficeData.sender.id in (?)
+                    </custom>
+                    <custom name="officeFile" caption="msg://officeFile"
+                            paramClass="com.haulmont.thesis.core.entity.OfficeFile" paramView="browse">
+                        d.docOfficeData.officeFile.id in (?)
+                    </custom>
+                    <custom name="officeExecutor" caption="msg://officeExecutor"
+                            paramClass="com.haulmont.thesis.core.entity.ContactPerson">
+                        d.docOfficeData.officeExecutor.id in (?)
+                    </custom>
+                    <custom id="employeeExecutorFilterId" name="employeeExecutor" caption="msg://employeeExecutor"
+                            paramClass="com.haulmont.thesis.core.entity.Employee">
+                        d.docOfficeData.employeeExecutor.id in (?)
+                    </custom>
+                    <custom name="officeSignedBy" caption="msg://officeSignedBy"
+                            paramClass="com.haulmont.thesis.core.entity.ContactPerson">
+                        d.docOfficeData.officeSignedBy.id in (?)
+                    </custom>
+                    <custom id="docKindFilterId" name="docKind" caption="msg://docKind"
+                            join="join d.docKind dk"
+                            paramClass="com.haulmont.thesis.core.entity.DocKind"
+                            paramWhere="{E}.docType.name = 'thesissummer$OrderDocument'">
+                        dk.id in (?)
+                    </custom>
+                    <custom id="docCategoryFilterId" name="category" caption="msg://docCategory"
+                            join="left join d.docCategory dc"
+                            paramWhere="{E}.docType.name = 'thesissummer$OrderDocument'"
+                            paramClass="com.haulmont.thesis.core.entity.DocCategory">
+                        dc.id in (?)
+                    </custom>
+                </filter>
+            </hbox>
+            <split id="split" orientation="vertical" pos="60" width="100%">
+                <vbox id="table-panel" expand="cardsTable" spacing="true" height="100%">
+                    <groupTable id="cardsTable"
+                                editable="false"
+                                presentations="true"
+                                multiselect="true"
+                                width="100%">
+                        <buttonsPanel id="buttonsPanel">
+                            <popupButton id="createButton" icon="" caption="msg://actions.Create"/>
+                            <button id="createDocBtn" visible="false"/>
+                            <thesis:separator/>
+                            <button id="editBtn" action="cardsTable.edit"/>
+                            <button id="removeBtn" action="cardsTable.remove"/>
+                            <button id="saveAsTemplateBtn" visible="false"/>
+                            <thesis:separator/>
+                            <button id="refreshBtn" action="cardsTable.refresh"/>
+                            <button id="excel" action="cardsTable.excel"/>
+                            <button id="expandBtn" action="cardsTable.expand"/>
+                            <runReportPopupButton id="printButton" icon="ts-font-icon:PRINT" description="msg://print"/>
+                        </buttonsPanel>
+                        <actions>
+                            <action id="create"/>
+                            <action id="edit"/>
+                            <action id="remove"/>
+                            <action id="saveAsTemplate" visible="false"/>
+                            <action id="deleteNotification"/>
+                            <action id="openNewTab"/>
+                            <action id="showLink"/>
+                            <action id="expand"/>
+                        </actions>
+                        <tableSettings id="tableSettings"/>
+                        <rowsCount/>
+                        <columns>
+                            <column id="hasAttachments" caption="msg://hasAttachments"
+                                    width="theme://thesis.browser.icon-header-width">
+                                <formatter
+                                        class="com.haulmont.thesis.gui.components.formatter.HasAttachmentsFormatter"/>
+                            </column>
+                            <column id="important" caption="msg://important"
+                                    width="theme://thesis.browser.icon-header-width">
+                                <formatter class="com.haulmont.thesis.gui.components.formatter.ImportantDocFormatter"/>
+                            </column>
+                            <column id="currentActorsString" caption="msg://currentActors" maxTextLength="40"/>
+                            <column id="docKind" caption="msg://docKind"/>
+                            <column id="number" caption="msg://number"/>
+                            <column id="regNo" caption="msg://regNo"/>
+                            <column id="date" caption="msg://date"/>
+                            <column id="contractor" collapsed="true" caption="msg://contractor"/>
+                            <column id="proc.locName" collapsed="true" caption="msg://procName"/>
+                            <column id="locState" caption="msg://state"/>
+                            <column id="theme" caption="msg://theme" maxTextLength="30"/>
+                            <column id="project" collapsed="true"/>
+                            <column id="comment" caption="msg://comment" maxTextLength="30"/>
+                            <column id="owner" collapsed="true" caption="msg://owner"/>
+                            <column id="organization" caption="msg://organization"/>
+                            <column id="department" collapsed="true" caption="msg://department"/>
+
+                            <column id="dataZayavki" collapsed="true" caption="msg://dataZayavki"/>
+                            <column id="avtorZayavki" collapsed="true" caption="msg://avtorZayavki"/>
+                            <column id="podrazdelenie" collapsed="true" caption="msg://podrazdelenie"/>
+                            <column id="summaPerechesleniya" collapsed="true" caption="msg://summaPerechesleniya"/>
+                            <column id="dataPerevoda" collapsed="true" caption="msg://dataPerevoda"/>
+                            <column id="dataPrechesleniya" collapsed="true" caption="msg://dataPrechesleniya"/>
+                            <column id="vidVzaimorachetov" collapsed="true" caption="msg://vidVzaimorachetov"/>
+                            <column id="summaKOplate" collapsed="true" caption="msg://summaKOplate"/>
+                            <column id="bankScherPlatelshika" collapsed="true" caption="msg://bankScherPlatelshika"/>
+                            <column id="dogovorPlatelshika" collapsed="true" caption="msg://dogovorPlatelshika"/>
+                            <column id="poluchatel" collapsed="true" caption="msg://poluchatel"/>
+                            <column id="rashcetniyaSchet" collapsed="true" caption="msg://rashcetniyaSchet"/>
+                            <column id="nomerRaspor" collapsed="true" caption="msg://nomerRaspor"/>
+                            <column id="dataRaspor" collapsed="true" caption="msg://dataRaspor"/>
+                            <column id="ishPismo" collapsed="true" caption="msg://ishPismo"/>
+                            <column id="podrazdeleniyaAkimata" collapsed="true" caption="msg://podrazdeleniyaAkimata"/>
+                            <column id="rayon" collapsed="true" caption="msg://rayon"/>
+                            <column id="summaDlyaPerechesleniya" collapsed="true" caption="msg://summaDlyaPerechesleniya"/>
+                            <column id="oblasti" collapsed="true" caption="msg://oblasti"/>
+                            <column id="tema" collapsed="true" caption="msg://tema"/>
+                            <column id="dogovorPorucheniya" collapsed="true" caption="msg://dogovorPorucheniya"/>
+                            <column id="osnovnoiDolg" collapsed="true" caption="msg://osnovnoiDolg"/>
+                            <column id="voznagrozhedniya" collapsed="true" caption="msg://voznagrozhedniya"/>
+                            <column id="penya" collapsed="true" caption="msg://penya"/>
+                            <column id="ugdPoRayonu" collapsed="true" caption="msg://ugdPoRayonu"/>
+
+                            <column id="dgdpoRaoynu" collapsed="true" caption="msg://dgdpoRaoynu"/>
+                            <column id="podrazdelenie2" collapsed="true" caption="msg://podrazdelenie2"/>
+                            <column id="nomerProtocola" collapsed="true" caption="msg://nomerProtocola"/>
+                            <column id="zaemchik" collapsed="true" caption="msg://zaemchik"/>
+                            <column id="dogovorRamoch" collapsed="true" caption="msg://dogovorRamoch"/>
+                            <column id="obshayaSummaZalog" collapsed="true" caption="msg://obshayaSummaZalog"/>
+                            <column id="obshyaTekSumma" collapsed="true" caption="msg://obshyaTekSumma"/>
+                            <column id="obshayaSummaPereocenki" collapsed="true" caption="msg://obshayaSummaPereocenki"/>
+                            <column id="obshayaSummaItogovoyPereocenki" collapsed="true" caption="msg://obshayaSummaItogovoyPereocenki"/>
+                            <column id="osnovaniyaSnyatiyaObespech" collapsed="true" caption="msg://osnovaniyaSnyatiyaObespech"/>
+                            <column id="schetKorp" collapsed="true" caption="msg://schetKorp"/>
+
+                            <column id="bankOrg" collapsed="true" caption="msg://bankOrg"/>
+                            <column id="bikBanka" collapsed="true" caption="msg://bikBanka"/>
+                            <column id="oblastPodrazdelenia" collapsed="true" caption="msg://oblastPodrazdelenia"/>
+                            <column id="kvartal1" collapsed="true" caption="msg://kvartal1"/>
+                            <column id="naznacheniyaPlatezha" collapsed="true" caption="msg://naznacheniyaPlatezha"/>
+                            <column id="summaPostupleniya" collapsed="true" caption="msg://summaPostupleniya"/>
+                            <column id="dataPostupleniya" collapsed="true" caption="msg://dataPostupleniya"/>
+                            <column id="dogovorSubsidirovaniya" collapsed="true" caption="msg://dogovorSubsidirovaniya"/>
+                            <column id="dataDogovoraSubsidirovaniya" collapsed="true" caption="msg://dataDogovoraSubsidirovaniya"/>
+                            <column id="rabOrgan" collapsed="true" caption="msg://rabOrgan"/>
+                            <column id="binUsh" collapsed="true" caption="msg://binUsh"/>
+                            <column id="kvartal2" collapsed="true" caption="msg://kvartal2"/>
+
+                            <column id="summaSubsidiy" collapsed="true" caption="msg://summaSubsidiy"/>
+                            <column id="schetPoluchatelya" collapsed="true" caption="msg://schetPoluchatelya"/>
+                            <column id="bikPoluchatelya" collapsed="true" caption="msg://bikPoluchatelya"/>
+                            <column id="bankPoluchatelya" collapsed="true" caption="msg://bankPoluchatelya"/>
+                            <column id="kbk" collapsed="true" caption="msg://kbk"/>
+                            <column id="oblastPodrazdelenia2" collapsed="true" caption="msg://oblastPodrazdelenia2"/>
+                            <column id="nomerProtokolaKK" collapsed="true" caption="msg://nomerProtokolaKK"/>
+                            <column id="osnovaniye" collapsed="true" caption="msg://osnovaniye"/>
+                            <column id="contragent" collapsed="true" caption="msg://contragent"/>
+                            <column id="binContragenta" collapsed="true" caption="msg://binContragenta"/>
+                            <column id="konechniyZaemchik" collapsed="true" caption="msg://konechniyZaemchik"/>
+                            <column id="polnoeNaimenovanie" collapsed="true" caption="msg://polnoeNaimenovanie"/>
+
+                            <column id="dogovor" collapsed="true" caption="msg://dogovor"/>
+                            <column id="summa" collapsed="true" caption="msg://summa"/>
+                            <column id="kreditnayaLiniya" collapsed="true" caption="msg://kreditnayaLiniya"/>
+                            <column id="istochnikFinansirovaniya" collapsed="true" caption="msg://istochnikFinansirovaniya"/>
+                            <column id="stavkaVoz" collapsed="true" caption="msg://stavkaVoz"/>
+                            <column id="srokKredita" collapsed="true" caption="msg://srokKredita"/>
+                            <column id="bank" collapsed="true" caption="msg://bank"/>
+                            <column id="summanaSpecChetevNB" collapsed="true" caption="msg://summanaSpecChetevNB"/>
+                            <column id="bik" collapsed="true" caption="msg://bik"/>
+                            <column id="iik" collapsed="true" caption="msg://iik"/>
+                            <column id="bin" collapsed="true" caption="msg://bin"/>
+                            <column id="knp" collapsed="true" caption="msg://knp"/>
+                            <column id="kod" collapsed="true" caption="msg://kod"/>
+                            <column id="kbe" collapsed="true" caption="msg://kbe"/>
+                            <column id="urAdres" collapsed="true" caption="msg://urAdres"/>
+
+                            <column id="regDate" collapsed="true" caption="msg://regDate">
+
+                            <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
+                                           format="msg://dateFormat"/>
+                            </column>
+                            <column id="endorsementStartDate" collapsed="true" caption="msg://endorsementStartDate">
+                                <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
+                                           format="msg://dateTimeFormat"/>
+                            </column>
+                            <column id="endorsementEndDate" collapsed="true" caption="msg://endorsementEndDate">
+                                <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
+                                           format="msg://dateTimeFormat"/>
+                            </column>
+                            <column id="approvalDate" collapsed="true" caption="msg://approvalDate">
+                                <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
+                                           format="msg://dateTimeFormat"/>
+                            </column>
+                            <column id="hasAttributes" collapsed="true" caption="msg://hasAttributes">
+                                <formatter class="com.haulmont.thesis.gui.components.formatter.HasAttributesFormatter"/>
+                            </column>
+                        </columns>
+                        <rows datasource="cardsDs"/>
+                    </groupTable>
+                </vbox>
+                <vbox id="cardDetailsTabSheetBox" width="100%" height="100%">
+                    <tabSheet id="cardDetailsTabSheet" height="100%" width="100%">
+                        <tab id="resolutionsTab" caption="msg://resolutions">
+                            <frame id="resolutionsFrame" screen="resolutionsFrame" height="100%"/>
+                        </tab>
+                        <tab id="hierarchyTab" caption="msg://hierarchy">
+                            <frame id="cardTreeFrame" screen="cardTreeFrame" height="100%"/>
+                        </tab>
+                    </tabSheet>
+                </vbox>
+            </split>
+        </vbox>
+    </layout>
+</window>

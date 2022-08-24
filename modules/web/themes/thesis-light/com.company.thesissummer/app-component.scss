@@ -1,0 +1,5 @@
+@import "thesis-light-ext";
+
+@mixin com_company_thesissummer {
+  @include com_company_thesissummer-thesis-light-ext;
+}

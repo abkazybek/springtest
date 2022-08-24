@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:ext="http://schemas.haulmont.com/cuba/window-ext.xsd"
+        class="com.company.thesissummer.web.ui.extdepartment.ExtDepartmentLookup"
+        extends="com/haulmont/thesis/web/ui/department/department-lookup.xml"
+        messagesPack="com.company.thesissummer.web.ui.extdepartment">
+    <layout/>
+</window>

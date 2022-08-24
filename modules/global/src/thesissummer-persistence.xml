@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="thesissummer"
+                      transaction-type="RESOURCE_LOCAL">
+
+        <class>com.company.thesissummer.entity.ExtCardTypeFieldInfoDatasource</class>
+        <class>com.company.thesissummer.entity.OrderDocument</class>
+        <class>com.company.thesissummer.entity.ExtDepartment</class>
+        <class>com.company.thesissummer.entity.ExtEmployee</class>
+        <class>com.company.thesissummer.entity.Memo</class>
+        <class>com.company.thesissummer.entity.OrderDocument1C</class>
+        <class>com.company.thesissummer.entity.OrderDocumentFull1C</class>
+        <class>com.company.thesissummer.entity.Aaa</class>
+        <class>com.company.thesissummer.entity.ProtocolFileTemplate</class>
+    </persistence-unit>
+</persistence>

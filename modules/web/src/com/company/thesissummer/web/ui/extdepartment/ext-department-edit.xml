@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:ext="http://schemas.haulmont.com/cuba/window-ext.xsd"
+        class="com.company.thesissummer.web.ui.extdepartment.ExtDepartmentEditor"
+        extends="com/haulmont/thesis/web/ui/department/department-edit.xml"
+        messagesPack="com.company.thesissummer.web.ui.extdepartment">
+    <dsContext>
+        <datasource id="departmentDs" class="com.company.thesissummer.entity.ExtDepartment"/>
+    </dsContext>
+    <layout>
+        <vbox id="mainGridBox">
+            <grid id="grid">
+                <rows>
+                    <row id="podrazdelenieRow">
+                        <textField datasource="departmentDs" property="podrazdelenie"
+                                   caption="msg://com.company.thesissummer.entity/ExtDepartment.podrazdelenie"
+                                   width="theme://thesis.gui.editor-fields.width"/>
+                    </row>
+                    <row id="describe">
+                        <textField datasource="departmentDs" property="describe"
+                                   caption="msg://com.company.thesissummer.entity/ExtDepartment.describe"
+                                   width="theme://thesis.gui.editor-fields.width"/>
+                    </row>
+                </rows>
+            </grid>
+        </vbox>
+    </layout>
+</window>

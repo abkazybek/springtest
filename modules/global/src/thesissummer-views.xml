@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+
+    <view entity="thesissummer$OrderDocument" name="browse" extends="_local">
+        <property name="proc" view="proc-minimal"/>
+        <property name="substitutedCreator" view="user-minimal"/>
+        <property name="docKind" view="_minimal"/>
+        <property name="organization" view="_minimal"/>
+        <property name="department" view="_minimal"/>
+        <property name="docCategory" view="_minimal"/>
+        <property name="creator" view="user-minimal"/>
+        <property name="category" view="_minimal"/>
+        <property name="owner" view="_minimal"/>
+        <property name="project" view="_minimal"/>
+        <property name="parentCard" view="_minimal"/>
+        <property name="contractor" view="_minimal"/>
+        <property name="createdBy"/>
+        <property name="createTs"/>
+        <property name="packageDoc" view="with-proc-base-info"/>
+    </view>
+    <view entity="thesissummer$OrderDocument" name="edit" extends="_local">
+        <property name="category" view="_minimal"/>
+        <property name="procs" view="card-edit"/>
+        <property name="roles" view="card-edit"/>
+        <property name="attachments" view="doc-edit"/>
+        <property name="substitutedCreator" view="user-minimal"/>
+        <property name="parentCard" view="card-tree-for-parent"/>
+        <property name="proc" view="_local"/>
+        <property name="project" view="_minimal"/>
+        <property name="projects" view="_minimal"/>
+        <property name="organization" view="_minimal"/>
+        <property name="docKind" view="edit"/>
+        <property name="owner" view="withuserdepartment"/>
+        <property name="docCategory" view="_local"/>
+        <property name="department" view="_local"/>
+        <property name="versionOf" view="_minimal"/>
+        <property name="contractor" view="_minimal"/>
+        <property name="cardAdditionalInfo" view="_local"/>
+        <property name="createdBy"/>
+        <property name="createTs"/>
+        <property name="packageDoc" view="with-proc-base-info"/>
+        <property name="orderDocument1C" view="_minimal">
+            <property name="nomerTable"/>
+            <property name="zaemchikTable"/>
+            <property name="binTable"/>
+            <property name="zalogodatelTable"/>
+            <property name="naimenovaniyaZaemchikaTable"/>
+            <property name="dogovorSvyazSObespechTable"/>
+            <property name="naimenovaniyaZalogodatelyaTable"/>
+            <property name="predmetTable"/>
+            <property name="tekuchayaStoimostTable"/>
+            <property name="preocenStoimostTable"/>
+            <property name="obespecheniyaTable"/>
+            <property name="zalogStoimostTable"/>
+            <property name="itogSummaKSpisaniya"/>
+            <property name="dataPereocen"/>
+            <property name="osnovaniyaTable"/>
+            <property name="documentUsloviyTable"/>
+            <property name="iinTable"/>
+            <property name="nomerAndDataKreditniyDogovorTable"/>
+            <property name="summaSubsidiyDlyaPerechesleniyaTable"/>
+            <property name="otkloneniePoSummeSubsidiyTable"/>
+            <property name="iikZaemchikaDlyaPerechesleniyaSubTable"/>
+            <property name="bankTable"/>
+            <property name="poyasneniyeTable"/>
+        </property>
+        <property name="orderDocuentFull1C" view="_minimal">
+            <property name="number"/>
+            <property name="zaemchik"/>
+            <property name="bin"/>
+            <property name="zalogodatel"/>
+            <property name="naimenovanieZaemchika"/>
+            <property name="naimenovanieZalogodatelya"/>
+            <property name="dogovorSvyazanniSObespecheniem"/>
+            <property name="predmet"/>
+            <property name="tekushayaStoimost"/>
+            <property name="pereocenStoimost"/>
+            <property name="obespechenie"/>
+            <property name="zalogovayaStoimost"/>
+            <property name="itogSummaKSpisaniyu"/>
+            <property name="datapereocen"/>
+            <property name="osnovaniye"/>
+            <property name="documentUsloviy"/>
+            <property name="iin"/>
+            <property name="nomerAndData"/>
+            <property name="summaSubsidiDlyaPerech"/>
+            <property name="otkoneniyePoSummeSubsidiy"/>
+            <property name="iikZaemchika"/>
+            <property name="bank"/>
+            <property name="poyasnenie"/>
+        </property>
+    </view>
+    <view entity="thesissummer$OrderDocument" name="cycle" extends="_local">
+        <property name="docOfficeData" view="cycle"/>
+        <property name="parentCard" view="_minimal"/>
+    </view>
+    <view entity="thesissummer$OrderDocument" name="reassignmentedit" extends="_local">
+        <property name="roles" view="reassignmentcardrole"/>
+        <property name="proc" view="_local"/>
+        <property name="procs" view="reassignmentcardproc"/>
+        <property name="docKind" view="edit"/>
+        <property name="docCategory" view="_local"/>
+        <property name="owner" view="withuserdepartment"/>
+        <property name="substitutedCreator" view="user-minimal"/>
+        <property name="category" view="_minimal"/>
+        <property name="assignments">
+            <property name="user"/>
+            <property name="finished"/>
+        </property>
+    </view>
+    <view entity="thesissummer$OrderDocument" name="version" extends="_local">
+        <property name="createTs"/>
+        <property name="docKind" view="_minimal"/>
+        <property name="versionOf" view="_local"/>
+    </view>
+    <view entity="thesissummer$OrderDocument" name="tray-notification" extends="_minimal">
+        <property name="docKind" view="edit"/>
+        <property name="registered"/>
+        <property name="regNo"/>
+        <property name="regDate"/>
+        <property name="number"/>
+        <property name="date"/>
+        <property name="description"/>
+    </view>
+    <view entity="thesissummer$ExtDepartment" name="browse" overwrite="true" extends="_local">
+        <property name="organization" view="_local"/>
+        <property name="parentDepartment" view="_local"/>
+    </view>
+    <view entity="thesissummer$ExtDepartment" name="edit" overwrite="true" extends="_local">
+        <property name="organization" view="_local"/>
+        <property name="parentDepartment" view="_local"/>
+    </view>
+    <view entity="thesissummer$ExtEmployee" name="edit" overwrite="true" extends="_local">
+        <property name="organization" view="_minimal"/>
+        <property name="employeeDepartmentPositionRelations" view="browse"/>
+        <property name="correspondentAttachments" view="correspondent_attachment_edit"/>
+        <property name="position" view="_local"/>
+        <property name="facsimile" view="_local"/>
+        <property name="mobileAvatar" view="_local"/>
+        <property name="avatar" view="_local"/>
+        <property name="photo" view="_local"/>
+        <property name="user" view="_local"/>
+        <property name="department" view="employee-edit"/>
+    </view>
+    <view entity="thesissummer$ExtEmployee" name="browse" overwrite="true" extends="_local">
+        <property name="avatar" view="_local"/>
+        <property name="position" view="_local"/>
+        <property name="user" view="_local"/>
+        <property name="organization" view="_minimal"/>
+        <property name="department" view="_minimal"/>
+    </view>
+    <view entity="thesissummer$Memo" name="browse" extends="_local">
+        <property name="proc" view="proc-minimal"/>
+        <property name="substitutedCreator" view="user-minimal"/>
+        <property name="docKind" view="_minimal"/>
+        <property name="organization" view="_minimal"/>
+        <property name="department" view="_minimal"/>
+        <property name="docCategory" view="_minimal"/>
+        <property name="creator" view="user-minimal"/>
+        <property name="category" view="_minimal"/>
+        <property name="owner" view="_minimal"/>
+        <property name="project" view="_minimal"/>
+        <property name="parentCard" view="_minimal"/>
+        <property name="contractor" view="_minimal"/>
+        <property name="createdBy"/>
+        <property name="createTs"/>
+        <property name="packageDoc" view="with-proc-base-info"/>
+    </view>
+    <view entity="thesissummer$Memo" name="edit" extends="_local">
+        <property name="category" view="_minimal"/>
+        <property name="procs" view="card-edit"/>
+        <property name="roles" view="card-edit"/>
+        <property name="attachments" view="doc-edit"/>
+        <property name="substitutedCreator" view="user-minimal"/>
+        <property name="parentCard" view="card-tree-for-parent"/>
+        <property name="proc" view="_local"/>
+        <property name="project" view="_minimal"/>
+        <property name="projects" view="_minimal"/>
+        <property name="organization" view="_minimal"/>
+        <property name="docKind" view="edit"/>
+        <property name="owner" view="withuserdepartment"/>
+        <property name="docCategory" view="_local"/>
+        <property name="department" view="_local"/>
+        <property name="versionOf" view="_minimal"/>
+        <property name="contractor" view="_minimal"/>
+        <property name="cardAdditionalInfo" view="_local"/>
+        <property name="createdBy"/>
+        <property name="createTs"/>
+        <property name="packageDoc" view="with-proc-base-info"/>
+    </view>
+    <view entity="thesissummer$Memo" name="cycle" extends="_local">
+        <property name="docOfficeData" view="cycle"/>
+        <property name="parentCard" view="_minimal"/>
+    </view>
+    <view entity="thesissummer$Memo" name="reassignmentedit" extends="_local">
+        <property name="roles" view="reassignmentcardrole"/>
+        <property name="proc" view="_local"/>
+        <property name="procs" view="reassignmentcardproc"/>
+        <property name="docKind" view="edit"/>
+        <property name="docCategory" view="_local"/>
+        <property name="owner" view="withuserdepartment"/>
+        <property name="substitutedCreator" view="user-minimal"/>
+        <property name="category" view="_minimal"/>
+        <property name="assignments">
+            <property name="user"/>
+            <property name="finished"/>
+        </property>
+    </view>
+    <view entity="thesissummer$Memo" name="version" extends="_local">
+        <property name="createTs"/>
+        <property name="docKind" view="_minimal"/>
+        <property name="versionOf" view="_local"/>
+    </view>
+    <view entity="thesissummer$Memo" name="tray-notification" extends="_minimal">
+        <property name="docKind" view="edit"/>
+        <property name="registered"/>
+        <property name="regNo"/>
+        <property name="regDate"/>
+        <property name="number"/>
+        <property name="date"/>
+        <property name="description"/>
+    </view>
+    <view entity="thesissummer$OrderDocument1C" name="orderDocument1C-view" extends="_local"/>
+    <view entity="thesissummer$OrderDocumentFull1C" name="browse" extends="_local">
+        <property name="proc" view="_local"/>
+        <property name="substitutedCreator" view="_minimal"/>
+        <property name="createdBy"/>
+        <property name="createTs"/>
+    </view>
+    <view entity="thesissummer$OrderDocumentFull1C" name="edit" extends="_local">
+        <property name="cardAdditionalInfo" view="_local"/>
+        <property name="proc" view="_local"/>
+        <property name="parentCard" view="card-tree-for-parent"/>
+        <property name="substitutedCreator" view="user-minimal"/>
+        <property name="category" view="_minimal"/>
+        <property name="procs" view="card-edit"/>
+        <property name="roles" view="card-edit"/>
+        <property name="attachments" view="card-edit"/>
+        <property name="createdBy"/>
+        <property name="createTs"/>
+        <property name="creator" view="user-minimal"/>
+    </view>
+    <view entity="thesissummer$OrderDocumentFull1C" name="subCard" extends="_minimal">
+        <property name="procFamily">
+            <property name="card" view="_minimal"/>
+        </property>
+        <property name="number"/>
+        <property name="createTs"/>
+        <property name="description"/>
+    </view>
+    <view entity="thesissummer$Aaa" name="browse" extends="_local"/>
+    <view entity="thesissummer$Aaa" name="edit" extends="_local"/>
+</views>

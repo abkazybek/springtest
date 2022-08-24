@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:context="http://www.springframework.org/schema/context"
+           xmlns:gui="http://schemas.haulmont.com/cuba/spring/cuba-gui.xsd">
+
+    <!-- Annotation-based beans -->
+    <context:component-scan base-package="com.company.thesissummer.web"/>
+
+    <gui:screens base-packages="com.company.thesissummer.web "/>
+    <bean id="thesissummer_proxyCreator" class="com.haulmont.cuba.web.sys.remoting.WebRemoteProxyBeanCreator">
+        <property name="serverSelector" ref="cuba_ServerSelector"/>
+        <property name="remoteServices">
+            <map>
+                <entry key="thesissummer_OrderService" value="com.company.thesissummer.service.OrderService"/>
+                <entry key="thesissummer_CKEditorService" value="com.company.thesissummer.service.CKEditorService"/>
+                <entry key="thesissummer_OrderTemplateService"
+                       value="com.company.thesissummer.service.OrderTemplateService"/>
+                <entry key="thesissummer_QRCodeGeneratorService"
+                       value="com.company.thesissummer.service.QRCodeGeneratorService"/>
+            </map>
+        </property>
+    </bean>
+
+</beans>

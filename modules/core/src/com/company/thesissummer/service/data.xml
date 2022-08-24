@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sbapi>
+	<header>
+		<interface id="201703427" version="8"/>
+		<message ignore_id="yes" id="1" type="5000" created="2021-12-22T11:04:34Z"/>
+		<error id="0"/>
+		<auth pwd="hash">PGF1dGhkYXRhIG1zZ19pZD0iMSIgdXNlcj0iYXBpLnNpZ24yIiBwYXNzd29yZD0iODExNzEzYjYzZGViZjI4Mjc1Yzc2N2E5NzFhZWU3YjQwNWZkZWYyYTE3YmEwZjFiNzkwZGRjMTgzYmRiYzg3YmQ3M2I3ZDRhNjYxODA4ZjRlYzc2OGM1MmEyZWU4M2I1YzY3MmRjMzU5ZTNmMGU2ODAzZjRlZmFlZWY4MzU4N2IiIG1zZ190eXBlPSI1MDAwIiB1c2VyX2lwPSIxMjcuMC4wLjEiIC8+</auth>
+	</header>
+	<body>
+		<function name="f_1c_cad_init_pereotsenka_obespecheniya">
+			<arg name="Nomer">АКМ03132</arg>
+			<arg name="Data">22.12.2021</arg>
+			<arg name="NomerProtokola">КК КТ №134 от 16.11.2021 г.</arg>
+			<arg name="Podrazdelenie">Филиал в г. Нур-Султан</arg>
+			<arg name="DogovorKonragenta">Рамочное соглашение №330-АКМ-КТ9 от 13 мая 2016 г.</arg>
+			<arg name="Zaemchik">КТ Ерейментау-Агро</arg>
+			<arg name="KonechnyiZaemchik">КХ Ерсаин</arg>
+			<arg name="Avtor">Zharaspayev.D@agrocredit.kz</arg>
+			<arg name="Podpisant">Tumanova.N@agrocredit.kz</arg>
+			<arg name="ObshayaTekushayStoimost">Сумма:15 875 400,00</arg>
+			<arg name="ObshayaSummaPereocenka">Сумма:18 240 727,00</arg>
+			<arg name="ObshayaItogPereocenki">Сумма:2 365 327,00 (Два миллиона триста шестьдесят пять тысяч триста двадцать семь  00  тиын)</arg>
+			<arg name="Tablica">
+				<Tablica>
+					<Structura>
+						<Nomer>1</Nomer>
+						<Zalogodatel>Шошанов Канат Амангельдинович</Zalogodatel>
+						<Dogovor>Договор залога  № 330-АКМ-КТ9-5-НИ1 от 20 сентября 2016 г.</Dogovor>
+						<Obespechenie>Жилой дом  (000048796)</Obespechenie>
+						<TekushayStoimost>Сумма:4 308 400,00</TekushayStoimost>
+						<SummaPereocenka>Сумма:10 593 127,00</SummaPereocenka>
+						<ItogPereocenki>Сумма:6 284 727,00</ItogPereocenki>
+						<DataPereocenki>18.11.2021</DataPereocenki>
+						<Osnovanie>Договор залога/гарантии 00000190241 от 18.11.2021</Osnovanie>
+					</Structura>
+					<Structura>
+						<Nomer>2</Nomer>
+						<Zalogodatel>КХ Ерсаин</Zalogodatel>
+						<Dogovor>Договор залога № 330-АКМ-КТ9-5-ДИ2 от 10.10.2018</Dogovor>
+						<Obespechenie>Колесный трактор «Беларус 82.1», 2018 г.в., гос.номер С646АСЕ, заводской номер Y4R900Z01J1102287, номер двигателя 015001 – 1 ед.  (191958   )</Obespechenie>
+						<TekushayStoimost>Сумма:7 074 000,00</TekushayStoimost>
+						<SummaPereocenka>Сумма:4 951 800,00</SummaPereocenka>
+						<ItogPereocenki>Сумма:-2 122 200,00</ItogPereocenki>
+						<DataPereocenki>18.11.2021</DataPereocenki>
+						<Osnovanie>Договор залога/гарантии 00000190257 от 18.11.2021</Osnovanie>
+					</Structura>
+					<Structura>
+						<Nomer>3</Nomer>
+						<Zalogodatel>КХ Ерсаин</Zalogodatel>
+						<Dogovor>Договор залога № 330-АКМ-КТ9-5-ДИ3 от 10.10.2018</Dogovor>
+						<Obespechenie>Косилка роторная навесная Z-069, 2017 г.в. – 1 ед (191960   )</Obespechenie>
+						<TekushayStoimost>Сумма:797 000,00</TekushayStoimost>
+						<SummaPereocenka>Сумма:478 200,00</SummaPereocenka>
+						<ItogPereocenki>Сумма:-318 800,00</ItogPereocenki>
+						<DataPereocenki>18.11.2021</DataPereocenki>
+						<Osnovanie>Договор залога/гарантии 00000190260 от 18.11.2021</Osnovanie>
+					</Structura>
+					<Structura>
+						<Nomer>4</Nomer>
+						<Zalogodatel>КХ Ерсаин</Zalogodatel>
+						<Dogovor>Договор залога № 330-АКМ-КТ9-5-ДИ3 от 10.10.2018</Dogovor>
+						<Obespechenie>Погрузчик ПГУ-0,8 в комплектации: ковш 0,9 м3, 2017 г.в., заводской номер 3071 – 1 ед (191961   )</Obespechenie>
+						<TekushayStoimost>Сумма:829 000,00</TekushayStoimost>
+						<SummaPereocenka>Сумма:497 400,00</SummaPereocenka>
+						<ItogPereocenki>Сумма:-331 600,00</ItogPereocenki>
+						<DataPereocenki>18.11.2021</DataPereocenki>
+						<Osnovanie>Договор залога/гарантии 00000190260 от 18.11.2021</Osnovanie>
+					</Structura>
+					<Structura>
+						<Nomer>5</Nomer>
+						<Zalogodatel>КХ Ерсаин</Zalogodatel>
+						<Dogovor>Договор залога № 330-АКМ-КТ9-5-ДИ3 от 10.10.2018</Dogovor>
+						<Obespechenie>Пресс-подборщик рулонный ПР-Ф-145, 2018 г.в., заводской номер 4754 – 1 ед (191962   )</Obespechenie>
+						<TekushayStoimost>Сумма:2 867 000,00</TekushayStoimost>
+						<SummaPereocenka>Сумма:1 720 200,00</SummaPereocenka>
+						<ItogPereocenki>Сумма:-1 146 800,00</ItogPereocenki>
+						<DataPereocenki>18.11.2021</DataPereocenki>
+						<Osnovanie>Договор залога/гарантии 00000190260 от 18.11.2021</Osnovanie>
+					</Structura>
+				</Tablica>
+			</arg>
+			<arg name="Tablica2">
+				<Tablica2>
+					<Structura2>
+						<Soglasovanti>Kushkunbayev.a@agrocredit.kz</Soglasovanti>
+					</Structura2>
+				</Tablica2>
+			</arg>
+		</function>
+	</body>
+</sbapi>

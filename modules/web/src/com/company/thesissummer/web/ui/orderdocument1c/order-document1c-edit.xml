@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://orderDocument1CEdit.caption"
+        focusComponent="form"
+        messagesPack="com.company.thesissummer.web.ui.orderdocument1c">
+    <data>
+        <instance id="orderDocument1CDc"
+                  class="com.company.thesissummer.entity.OrderDocument1C">
+            <view extends="_local"/>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="orderDocument1CDc" width="100%">
+                <column width="350px">
+                    <textField id="nomerTableField" property="nomerTable"/>
+                    <textField id="zaemchikTableField" property="zaemchikTable"/>
+                    <textField id="binTableField" property="binTable"/>
+                    <textField id="zalogodatelTableField" property="zalogodatelTable"/>
+                    <textField id="naimenovaniyaZaemchikaTableField" property="naimenovaniyaZaemchikaTable"/>
+                    <textField id="naimenovaniyaZalogodatelyaTableField" property="naimenovaniyaZalogodatelyaTable"/>
+                    <textField id="dogovorSvyazSObespechTableField" property="dogovorSvyazSObespechTable"/>
+                    <textField id="predmetTableField" property="predmetTable"/>
+                    <textField id="tekuchayaStoimostTableField" property="tekuchayaStoimostTable"/>
+                    <textField id="preocenStoimostTableField" property="preocenStoimostTable"/>
+                    <textField id="obespecheniyaTableField" property="obespecheniyaTable"/>
+                    <textField id="zalogStoimostTableField" property="zalogStoimostTable"/>
+                    <textField id="itogSummaKSpisaniyaField" property="itogSummaKSpisaniya"/>
+                    <textField id="dataPereocenField" property="dataPereocen"/>
+                    <textField id="osnovaniyaTableField" property="osnovaniyaTable"/>
+                    <textField id="documentUsloviyTableField" property="documentUsloviyTable"/>
+                    <textField id="iinTableField" property="iinTable"/>
+                    <textField id="nomerAndDataKreditniyDogovorTableField"
+                               property="nomerAndDataKreditniyDogovorTable"/>
+                    <textField id="summaSubsidiyDlyaPerechesleniyaTableField"
+                               property="summaSubsidiyDlyaPerechesleniyaTable"/>
+                    <textField id="otkloneniePoSummeSubsidiyTableField" property="otkloneniePoSummeSubsidiyTable"/>
+                    <textField id="iikZaemchikaDlyaPerechesleniyaSubTableField"
+                               property="iikZaemchikaDlyaPerechesleniyaSubTable"/>
+                    <textField id="bankTableField" property="bankTable"/>
+                    <textField id="poyasneniyeTableField" property="poyasneniyeTable"/>
+                </column>
+            </form>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

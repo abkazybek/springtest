@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<entities xmlns="http://schemas.haulmont.com/thesis/4.0/loggedEntities.xsd">
+    <entity metaClass="thesissummer$ExtCardTypeFieldInfoDatasource"/>
+    <entity metaClass="thesissummer$OrderDocument"/>
+    <entity metaClass="thesissummer$ExtDepartment"/>
+    <entity metaClass="thesissummer$ExtEmployee"/>
+    <entity metaClass="thesissummer$Memo"/>
+    <entity metaClass="thesissummer$OrderDocument1C"/>
+    <entity metaClass="thesissummer$OrderDocumentFull1C"/>
+    <entity metaClass="thesissummer$Aaa"/>
+    <entity metaClass="thesissummer$ProtocolFileTemplate"/>
+</entities>

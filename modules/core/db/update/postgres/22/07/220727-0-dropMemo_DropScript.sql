@@ -1,0 +1,1 @@
+drop table if exists THESISSUMMER_MEMO__U60451 cascade ;

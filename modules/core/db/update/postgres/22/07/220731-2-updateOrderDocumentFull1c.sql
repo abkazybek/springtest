@@ -1,0 +1,4 @@
+-- alter table THESISSUMMER_ORDER_DOCUMENT_FULL1C add column ORDER_DOCUMENT_ID uuid ^
+-- update THESISSUMMER_ORDER_DOCUMENT_FULL1C set ORDER_DOCUMENT_ID = <default_value> ;
+-- alter table THESISSUMMER_ORDER_DOCUMENT_FULL1C alter column ORDER_DOCUMENT_ID set not null ;
+alter table THESISSUMMER_ORDER_DOCUMENT_FULL1C add column ORDER_DOCUMENT_ID uuid not null ;

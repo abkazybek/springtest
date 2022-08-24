@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:thesis="http://schemas.haulmont.com/thesis/thesis-window.xsd"
+        class="com.company.thesissummer.web.ui.aaa.AaaBrowse"
+        messagesPack="com.company.thesissummer.web.ui.aaa"
+        caption="msg://browseCaption"
+        lookupComponent="aaasTable"
+        focusComponent="genericFilter">
+    <dsContext>
+        <collectionDatasource id="aaasDs"
+                              class="com.company.thesissummer.entity.Aaa"
+                              view="browse">
+            <query>
+                <![CDATA[select e from thesissummer$Aaa e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout>
+        <vbox id="filterBox" expand="table-panel" spacing="true" height="100%">
+            <filter id="genericFilter"
+                    datasource="aaasDs" stylename="edit-area" applyTo="aaasTable">
+                <properties include=".*"/>
+            </filter>
+            <vbox id="table-panel" expand="aaasTable" spacing="true">
+                <table id="aaasTable"
+                       width="100%"
+                       presentations="true"
+                       multiselect="true">
+                    <buttonsPanel id="buttonsPanel" alwaysVisible="true">
+                        <button id="createBtn"
+                                action="aaasTable.create"/>
+                        <thesis:separator/>
+                        <button id="editBtn"
+                                action="aaasTable.edit"/>
+                        <button id="removeBtn"
+                                action="aaasTable.remove"/>
+                    </buttonsPanel>
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <rowsCount/>
+                    <columns>
+                    </columns>
+                    <rows datasource="aaasDs"/>
+                </table>
+            </vbox>
+        </vbox>
+    </layout>
+</window>

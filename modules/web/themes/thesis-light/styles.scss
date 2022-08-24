@@ -1,0 +1,8 @@
+@import "thesis-light-defaults";
+@import "com.company.thesissummer/thesis-light-ext-defaults";
+@import "app-components";
+@import "com.company.thesissummer/thesis-light-ext";
+
+// include auto-generated app components SCSS
+@include app_components;
+@include com_company_thesissummer-thesis-light-ext;
