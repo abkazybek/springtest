@@ -1,68 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
     <include file="/thesissummer-screens.xml"/>
-    <screen id="thesissummer$OrderDocument.browse"
-            template="com/company/thesissummer/web/ui/orderdocument/order-document-browse.xml"/>
-    <screen id="thesissummer$OrderDocument.edit"
-            template="com/company/thesissummer/web/ui/orderdocument/order-document-edit.xml"/>
-    <screen id="thesissummer$OrderDocument.lookup"
-            template="com/company/thesissummer/web/ui/orderdocument/order-document-browse.xml"/>
-    <screen id="thesissummer$OrderDocument.templateBrowse"
-            template="com/company/thesissummer/web/ui/orderdocument/order-document-template-browse.xml"/>
-    <screen id="thesissummer$OrderWriteOff.browse"
-            template="com/company/thesissummer/web/ui/orderwriteoff/order-write-off-browse.xml"/>
-    <screen id="thesissummer$OrderWriteOff.edit"
-            template="com/company/thesissummer/web/ui/orderwriteoff/order-write-off-edit.xml"/>
-    <screen id="thesissummer$OrderWriteOff.lookup"
-            template="com/company/thesissummer/web/ui/orderwriteoff/order-write-off-browse.xml"/>
-    <screen id="thesissummer$OrderWriteOff.templateBrowse"
-            template="com/company/thesissummer/web/ui/orderwriteoff/order-write-off-template-browse.xml"/>
-    <screen id="thesissummer$OrderRevaluation.browse"
-            template="com/company/thesissummer/web/ui/orderrevaluation/order-revaluation-browse.xml"/>
-    <screen id="thesissummer$OrderRevaluation.edit"
-            template="com/company/thesissummer/web/ui/orderrevaluation/order-revaluation-edit.xml"/>
-    <screen id="thesissummer$OrderRevaluation.lookup"
-            template="com/company/thesissummer/web/ui/orderrevaluation/order-revaluation-browse.xml"/>
-    <screen id="thesissummer$OrderRevaluation.templateBrowse"
-            template="com/company/thesissummer/web/ui/orderrevaluation/order-revaluation-template-browse.xml"/>
-    <screen id="thesissummer$OrderPosting.browse"
-            template="com/company/thesissummer/web/ui/orderposting/order-posting-browse.xml"/>
-    <screen id="thesissummer$OrderPosting.edit"
-            template="com/company/thesissummer/web/ui/orderposting/order-posting-edit.xml"/>
-    <screen id="thesissummer$OrderPosting.lookup"
-            template="com/company/thesissummer/web/ui/orderposting/order-posting-browse.xml"/>
-    <screen id="thesissummer$OrderPosting.templateBrowse"
-            template="com/company/thesissummer/web/ui/orderposting/order-posting-template-browse.xml"/>
-    <screen id="thesissummer$OrderRembursement.browse"
-            template="com/company/thesissummer/web/ui/orderrembursement/order-rembursement-browse.xml"/>
-    <screen id="thesissummer$OrderRembursement.edit"
-            template="com/company/thesissummer/web/ui/orderrembursement/order-rembursement-edit.xml"/>
-    <screen id="thesissummer$OrderRembursement.lookup"
-            template="com/company/thesissummer/web/ui/orderrembursement/order-rembursement-browse.xml"/>
-    <screen id="thesissummer$OrderRembursement.templateBrowse"
-            template="com/company/thesissummer/web/ui/orderrembursement/order-rembursement-template-browse.xml"/>
-    <screen id="thesissummer$OrderTransfer.browse"
-            template="com/company/thesissummer/web/ui/ordertransfer/order-transfer-browse.xml"/>
-    <screen id="thesissummer$OrderTransfer.edit"
-            template="com/company/thesissummer/web/ui/ordertransfer/order-transfer-edit.xml"/>
-    <screen id="thesissummer$OrderTransfer.lookup"
-            template="com/company/thesissummer/web/ui/ordertransfer/order-transfer-browse.xml"/>
-    <screen id="thesissummer$OrderTransfer.templateBrowse"
-            template="com/company/thesissummer/web/ui/ordertransfer/order-transfer-template-browse.xml"/>
-    <screen id="thesissummer$OrderReturn.browse"
-            template="com/company/thesissummer/web/ui/orderreturn/order-return-browse.xml"/>
-    <screen id="thesissummer$OrderReturn.edit"
-            template="com/company/thesissummer/web/ui/orderreturn/order-return-edit.xml"/>
-    <screen id="thesissummer$OrderReturn.lookup"
-            template="com/company/thesissummer/web/ui/orderreturn/order-return-browse.xml"/>
-    <screen id="thesissummer$OrderReturn.templateBrowse"
-            template="com/company/thesissummer/web/ui/orderreturn/order-return-template-browse.xml"/>
-    <screen id="thesissummer$ProjectMemo.edit"
-            template="com/company/thesissummer/web/ui/projectmemo/project-memo-edit.xml"/>
-    <screen id="thesissummer$Memo.browse" template="com/company/thesissummer/web/ui/memo/memo-browse.xml"/>
-    <screen id="thesissummer$Memo.lookup" template="com/company/thesissummer/web/ui/memo/memo-browse.xml"/>
-    <screen id="thesissummer$Memo.templateBrowse"
-            template="com/company/thesissummer/web/ui/memo/memo-template-browse.xml"/>
     <screen id="df$Department.browse"
             template="com/company/thesissummer/web/ui/extdepartment/ext-department-browse.xml"/>
     <screen id="df$Department.edit" template="com/company/thesissummer/web/ui/extdepartment/ext-department-edit.xml"/>
@@ -75,23 +13,6 @@
     <screen id="df$Employee.browseFrame"
             template="com/company/thesissummer/web/ui/extemployee/ext-employee-browse-frame.xml"/>
     <screen id="df$Employee.edit" template="com/company/thesissummer/web/ui/extemployee/ext-employee-edit.xml"/>
-    <screen id="thesissummer$OrderReturn1.browse"
-            template="com/company/thesissummer/web/ui/orderreturn1/order-return1-browse.xml"/>
-    <screen id="thesissummer$OrderReturn1.edit"
-            template="com/company/thesissummer/web/ui/orderreturn1/order-return1-edit.xml"/>
-    <screen id="thesissummer$OrderReturn1.lookup"
-            template="com/company/thesissummer/web/ui/orderreturn1/order-return1-browse.xml"/>
-    <screen id="thesissummer$OrderReturn1.templateBrowse"
-            template="com/company/thesissummer/web/ui/orderreturn1/order-return1-template-browse.xml"/>
-    <screen id="thesissummer$Memo.edit" template="com/company/thesissummer/web/ui/memo/memo-edit.xml"/>
-    <screen id="thesissummer$Projectmemo.browse"
-            template="com/company/thesissummer/web/ui/projectmemo/projectmemo-browse.xml"/>
-    <screen id="thesissummer$Projectmemo.edit"
-            template="com/company/thesissummer/web/ui/projectmemo/projectmemo-edit.xml"/>
-    <screen id="thesissummer$Projectmemo.lookup"
-            template="com/company/thesissummer/web/ui/projectmemo/projectmemo-browse.xml"/>
-    <screen id="thesissummer$Projectmemo.templateBrowse"
-            template="com/company/thesissummer/web/ui/projectmemo/projectmemo-template-browse.xml"/>
     <screen id="thesissummer$OrderLoan.browse"
             template="com/company/thesissummer/web/ui/orderloan/order-loan-browse.xml"/>
     <screen id="thesissummer$OrderLoan.edit" template="com/company/thesissummer/web/ui/orderloan/order-loan-edit.xml"/>
@@ -99,29 +20,19 @@
             template="com/company/thesissummer/web/ui/orderloan/order-loan-browse.xml"/>
     <screen id="thesissummer$OrderLoan.templateBrowse"
             template="com/company/thesissummer/web/ui/orderloan/order-loan-template-browse.xml"/>
-    <screen id="thesissummer$OrderTransferMoney.browse"
-            template="com/company/thesissummer/web/ui/ordertransfermoney/order-transfer-money-browse.xml"/>
-    <screen id="thesissummer$OrderTransferMoney.edit"
-            template="com/company/thesissummer/web/ui/ordertransfermoney/order-transfer-money-edit.xml"/>
-    <screen id="thesissummer$OrderTransferMoney.lookup"
-            template="com/company/thesissummer/web/ui/ordertransfermoney/order-transfer-money-browse.xml"/>
-    <screen id="thesissummer$OrderTransferMoney.templateBrowse"
-            template="com/company/thesissummer/web/ui/ordertransfermoney/order-transfer-money-template-browse.xml"/>
-    <screen id="thesissummer$OrderSubsidy.browse"
-            template="com/company/thesissummer/web/ui/ordersubsidy/order-subsidy-browse.xml"/>
-    <screen id="thesissummer$OrderSubsidy.edit"
-            template="com/company/thesissummer/web/ui/ordersubsidy/order-subsidy-edit.xml"/>
-    <screen id="thesissummer$OrderSubsidy.lookup"
-            template="com/company/thesissummer/web/ui/ordersubsidy/order-subsidy-browse.xml"/>
-    <screen id="thesissummer$OrderSubsidy.templateBrowse"
-            template="com/company/thesissummer/web/ui/ordersubsidy/order-subsidy-template-browse.xml"/>
-    <screen id="thesissummer$TaskMoney.browse"
-            template="com/company/thesissummer/web/ui/taskmoney/task-money-browse.xml"/>
-    <screen id="thesissummer$TaskMoney.edit" template="com/company/thesissummer/web/ui/taskmoney/task-money-edit.xml"/>
-    <screen id="thesissummer$TaskMoney.lookup"
-            template="com/company/thesissummer/web/ui/taskmoney/task-money-browse.xml"/>
-    <screen id="thesissummer$TaskMoney.templateBrowse"
-            template="com/company/thesissummer/web/ui/taskmoney/task-money-template-browse.xml"/>
+    <screen id="thesissummer$OrderIns.browse" template="com/company/thesissummer/web/ui/orderins/order-ins-browse.xml"/>
+    <screen id="thesissummer$OrderIns.edit" template="com/company/thesissummer/web/ui/orderins/order-ins-edit.xml"/>
+    <screen id="thesissummer$OrderIns.lookup" template="com/company/thesissummer/web/ui/orderins/order-ins-browse.xml"/>
+    <screen id="thesissummer$OrderIns.templateBrowse"
+            template="com/company/thesissummer/web/ui/orderins/order-ins-template-browse.xml"/>
+    <screen id="thesissummer$OrderTranferMoney.browse"
+            template="com/company/thesissummer/web/ui/ordertranfermoney/order-tranfer-money-browse.xml"/>
+    <screen id="thesissummer$OrderTranferMoney.edit"
+            template="com/company/thesissummer/web/ui/ordertranfermoney/order-tranfer-money-edit.xml"/>
+    <screen id="thesissummer$OrderTranferMoney.lookup"
+            template="com/company/thesissummer/web/ui/ordertranfermoney/order-tranfer-money-browse.xml"/>
+    <screen id="thesissummer$OrderTranferMoney.templateBrowse"
+            template="com/company/thesissummer/web/ui/ordertranfermoney/order-tranfer-money-template-browse.xml"/>
     <screen id="thesissummer$OrderLoanSI.browse"
             template="com/company/thesissummer/web/ui/orderloansi/order-loan-s-i-browse.xml"/>
     <screen id="thesissummer$OrderLoanSI.edit"
@@ -130,21 +41,12 @@
             template="com/company/thesissummer/web/ui/orderloansi/order-loan-s-i-browse.xml"/>
     <screen id="thesissummer$OrderLoanSI.templateBrowse"
             template="com/company/thesissummer/web/ui/orderloansi/order-loan-s-i-template-browse.xml"/>
-    <screen id="thesissummer$OrderInsur.browse"
-            template="com/company/thesissummer/web/ui/orderinsur/order-insur-browse.xml"/>
-    <screen id="thesissummer$OrderInsur.edit"
-            template="com/company/thesissummer/web/ui/orderinsur/order-insur-edit.xml"/>
-    <screen id="thesissummer$OrderInsur.lookup"
-            template="com/company/thesissummer/web/ui/orderinsur/order-insur-browse.xml"/>
-    <screen id="thesissummer$OrderInsur.templateBrowse"
-            template="com/company/thesissummer/web/ui/orderinsur/order-insur-template-browse.xml"/>
-    <screen id="thesissummer$OrderDocumentFull1C.browse"
-            template="com/company/thesissummer/web/ui/orderdocumentfull1c/order-document-full1-c-browse.xml"/>
-    <screen id="thesissummer$OrderDocumentFull1C.edit"
-            template="com/company/thesissummer/web/ui/orderdocumentfull1c/order-document-full1-c-edit.xml"/>
-    <screen id="thesissummer$OrderDocumentFull1C.lookup"
-            template="com/company/thesissummer/web/ui/orderdocumentfull1c/order-document-full1-c-browse.xml"/>
-    <screen id="thesissummer$Aaa.browse" template="com/company/thesissummer/web/ui/aaa/aaa-browse.xml"/>
-    <screen id="thesissummer$Aaa.edit" template="com/company/thesissummer/web/ui/aaa/aaa-edit.xml"/>
-    <screen id="thesissummer$Aaa.lookup" template="com/company/thesissummer/web/ui/aaa/aaa-browse.xml"/>
+    <screen id="thesissummer$OrderVozvratvGu.browse"
+            template="com/company/thesissummer/web/ui/ordervozvratvgu/order-vozvratv-gu-browse.xml"/>
+    <screen id="thesissummer$OrderVozvratvGu.edit"
+            template="com/company/thesissummer/web/ui/ordervozvratvgu/order-vozvratv-gu-edit.xml"/>
+    <screen id="thesissummer$OrderVozvratvGu.lookup"
+            template="com/company/thesissummer/web/ui/ordervozvratvgu/order-vozvratv-gu-browse.xml"/>
+    <screen id="thesissummer$OrderVozvratvGu.templateBrowse"
+            template="com/company/thesissummer/web/ui/ordervozvratvgu/order-vozvratv-gu-template-browse.xml"/>
 </screen-config>

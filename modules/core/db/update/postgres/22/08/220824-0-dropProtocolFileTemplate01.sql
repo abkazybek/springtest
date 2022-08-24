@@ -1,0 +1,1 @@
+alter table thesissummer_protocol_file_template rename to THESISSUMMER_PROTOCOL_FILE_TEMPLATE__U73989 ;

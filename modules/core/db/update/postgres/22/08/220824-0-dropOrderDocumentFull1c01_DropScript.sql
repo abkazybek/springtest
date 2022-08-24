@@ -1,0 +1,1 @@
+drop table if exists THESISSUMMER_ORDER_DOCUMENT_FULL1C__U05366 cascade ;

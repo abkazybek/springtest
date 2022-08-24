@@ -1,7 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
-    <item id="thesissummer$OrderDocument.browse" insertBefore="docCreatorItem"  caption="Распоряжения" shortcut="${thesis.shortcut.docBrowse}"/>
-    <item screen="thesissummer$ProtocolFileTemplate.browse"
-          caption="mainMsg://menu_config.thesissummer$ProtocolFileTemplate.browse" insertAfter="df$DocKind.browse"/>
-    <separator/>
+    <item id="thesissummer$OrderLoan.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderLoan:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderIns.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderIns:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderTranferMoney.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderTranferMoney:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderLoanSI.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderLoanSI:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderVozvratvGu.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderVozvratvGu:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <menu id="Order" caption="Распоряжения" insertBefore="df$DocKind.browse">
+    <item id="thesissummer$OrderLoan.lookup"/>
+    <item id="thesissummer$OrderIns.lookup" />
+    <item id="thesissummer$OrderTranferMoney.lookup" />
+    <item id="thesissummer$OrderLoanSI.lookup" />
+    <item id="thesissummer$OrderVozvratvGu.lookup" />
+    </menu>
 </menu-config>

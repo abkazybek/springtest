@@ -6,12 +6,13 @@
 
 package com.company.thesissummer.web.ui.aaa;
 
+import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.gui.components.AbstractEditor;
-import com.company.thesissummer.entity.Aaa;
+
 import java.util.Map;
 
 
-public class AaaEdit<T extends Aaa> extends AbstractEditor<T> {
+public class AaaEdit<T extends StandardEntity> extends AbstractEditor<T> {
     @Override
     public void init(Map<String, Object> params) {
         super.init(params);

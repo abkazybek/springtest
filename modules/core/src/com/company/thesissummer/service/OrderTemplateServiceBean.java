@@ -6,8 +6,6 @@
 
 package com.company.thesissummer.service;
 
-import com.company.thesissummer.entity.OrderDocument;
-import com.company.thesissummer.entity.ProtocolFileTemplate;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.haulmont.cuba.core.app.FileStorageService;
 import com.haulmont.cuba.core.entity.Entity;
@@ -38,6 +36,11 @@ import java.util.List;
 public class OrderTemplateServiceBean implements OrderTemplateService {
     private static final Logger log = LoggerFactory.getLogger(OrderTemplateServiceBean.class);
 
+    @Override
+    public void generateTemplate(Entity nomerOrder) {
+
+    }
+/*
     @Inject
     private DataManager dataManager;
 

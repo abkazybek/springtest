@@ -8,49 +8,13 @@
 <fts-config>
     <entities>
 
-        <entity class="com.company.thesissummer.entity.ExtCardTypeFieldInfoDatasource">
-            <include re=".*"/>
-        </entity>
-        <entity class="com.company.thesissummer.entity.OrderDocument">
-            <include re=".*"/>
-            <include name="attachments.file"/>
-            <include name="assignments.attachments.file"/>
-            <exclude name="cardInfos"/>
-            <exclude name="cardVariables"/>
-            <exclude name="jbpmProcessId"/>
-            <exclude name="parentCard"/>
-            <exclude name="proc"/>
-            <exclude name="procFamily"/>
-            <exclude name="procs"/>
-            <exclude name="subCards"/>
-            <exclude name="aclList"/>
-            <exclude name="cardAdditionalInfo"/>
-            <exclude name="cardUserInfo"/>
-            <exclude name="copyFrom"/>
-            <exclude name="currentActorsFullString"/>
-            <exclude name="currentActorsString"/>
-            <exclude name="edmSending"/>
-            <exclude name="signatures"/>
-            <exclude name="category"/>
-            <exclude name="addressees"/>
-            <exclude name="descriptionIfLoaded"/>
-            <exclude name="executor"/>
-            <exclude name="extraFields"/>
-            <exclude name="signedBy"/>
-            <exclude name="templateName"/>
-            <exclude name="versionOf"/>
-            <searchableIf disableDuringReindex="true">entity.versionOf == null</searchableIf>
-            <reindexQueryFilter>
-                <c join="left join {E}.versionOf v">v is null</c>
-            </reindexQueryFilter>
-        </entity>
         <entity class="com.company.thesissummer.entity.ExtDepartment">
             <include re=".*"/>
         </entity>
         <entity class="com.company.thesissummer.entity.ExtEmployee">
             <include re=".*"/>
         </entity>
-        <entity class="com.company.thesissummer.entity.Memo">
+        <entity class="com.company.thesissummer.entity.OrderLoan">
             <include re=".*"/>
             <include name="attachments.file"/>
             <include name="assignments.attachments.file"/>
@@ -83,10 +47,7 @@
                 <c join="left join {E}.versionOf v">v is null</c>
             </reindexQueryFilter>
         </entity>
-        <entity class="com.company.thesissummer.entity.OrderDocument1C">
-            <include re=".*"/>
-        </entity>
-        <entity class="com.company.thesissummer.entity.OrderDocumentFull1C">
+        <entity class="com.company.thesissummer.entity.OrderIns">
             <include re=".*"/>
             <include name="attachments.file"/>
             <include name="assignments.attachments.file"/>
@@ -106,12 +67,117 @@
             <exclude name="currentActorsString"/>
             <exclude name="edmSending"/>
             <exclude name="signatures"/>
+            <exclude name="category"/>
+            <exclude name="addressees"/>
+            <exclude name="descriptionIfLoaded"/>
+            <exclude name="executor"/>
+            <exclude name="extraFields"/>
+            <exclude name="signedBy"/>
+            <exclude name="templateName"/>
+            <exclude name="versionOf"/>
+            <searchableIf disableDuringReindex="true">entity.versionOf == null</searchableIf>
+            <reindexQueryFilter>
+                <c join="left join {E}.versionOf v">v is null</c>
+            </reindexQueryFilter>
         </entity>
-        <entity class="com.company.thesissummer.entity.Aaa">
+        <entity class="com.company.thesissummer.entity.OrderTranferMoney">
             <include re=".*"/>
+            <include name="attachments.file"/>
+            <include name="assignments.attachments.file"/>
+            <exclude name="cardInfos"/>
+            <exclude name="cardVariables"/>
+            <exclude name="jbpmProcessId"/>
+            <exclude name="parentCard"/>
+            <exclude name="proc"/>
+            <exclude name="procFamily"/>
+            <exclude name="procs"/>
+            <exclude name="subCards"/>
+            <exclude name="aclList"/>
+            <exclude name="cardAdditionalInfo"/>
+            <exclude name="cardUserInfo"/>
+            <exclude name="copyFrom"/>
+            <exclude name="currentActorsFullString"/>
+            <exclude name="currentActorsString"/>
+            <exclude name="edmSending"/>
+            <exclude name="signatures"/>
+            <exclude name="category"/>
+            <exclude name="addressees"/>
+            <exclude name="descriptionIfLoaded"/>
+            <exclude name="executor"/>
+            <exclude name="extraFields"/>
+            <exclude name="signedBy"/>
+            <exclude name="templateName"/>
+            <exclude name="versionOf"/>
+            <searchableIf disableDuringReindex="true">entity.versionOf == null</searchableIf>
+            <reindexQueryFilter>
+                <c join="left join {E}.versionOf v">v is null</c>
+            </reindexQueryFilter>
         </entity>
-        <entity class="com.company.thesissummer.entity.ProtocolFileTemplate">
+        <entity class="com.company.thesissummer.entity.OrderLoanSI">
             <include re=".*"/>
+            <include name="attachments.file"/>
+            <include name="assignments.attachments.file"/>
+            <exclude name="cardInfos"/>
+            <exclude name="cardVariables"/>
+            <exclude name="jbpmProcessId"/>
+            <exclude name="parentCard"/>
+            <exclude name="proc"/>
+            <exclude name="procFamily"/>
+            <exclude name="procs"/>
+            <exclude name="subCards"/>
+            <exclude name="aclList"/>
+            <exclude name="cardAdditionalInfo"/>
+            <exclude name="cardUserInfo"/>
+            <exclude name="copyFrom"/>
+            <exclude name="currentActorsFullString"/>
+            <exclude name="currentActorsString"/>
+            <exclude name="edmSending"/>
+            <exclude name="signatures"/>
+            <exclude name="category"/>
+            <exclude name="addressees"/>
+            <exclude name="descriptionIfLoaded"/>
+            <exclude name="executor"/>
+            <exclude name="extraFields"/>
+            <exclude name="signedBy"/>
+            <exclude name="templateName"/>
+            <exclude name="versionOf"/>
+            <searchableIf disableDuringReindex="true">entity.versionOf == null</searchableIf>
+            <reindexQueryFilter>
+                <c join="left join {E}.versionOf v">v is null</c>
+            </reindexQueryFilter>
+        </entity>
+        <entity class="com.company.thesissummer.entity.OrderVozvratvGu">
+            <include re=".*"/>
+            <include name="attachments.file"/>
+            <include name="assignments.attachments.file"/>
+            <exclude name="cardInfos"/>
+            <exclude name="cardVariables"/>
+            <exclude name="jbpmProcessId"/>
+            <exclude name="parentCard"/>
+            <exclude name="proc"/>
+            <exclude name="procFamily"/>
+            <exclude name="procs"/>
+            <exclude name="subCards"/>
+            <exclude name="aclList"/>
+            <exclude name="cardAdditionalInfo"/>
+            <exclude name="cardUserInfo"/>
+            <exclude name="copyFrom"/>
+            <exclude name="currentActorsFullString"/>
+            <exclude name="currentActorsString"/>
+            <exclude name="edmSending"/>
+            <exclude name="signatures"/>
+            <exclude name="category"/>
+            <exclude name="addressees"/>
+            <exclude name="descriptionIfLoaded"/>
+            <exclude name="executor"/>
+            <exclude name="extraFields"/>
+            <exclude name="signedBy"/>
+            <exclude name="templateName"/>
+            <exclude name="versionOf"/>
+            <searchableIf disableDuringReindex="true">entity.versionOf == null</searchableIf>
+            <reindexQueryFilter>
+                <c join="left join {E}.versionOf v">v is null</c>
+            </reindexQueryFilter>
         </entity>
     </entities>
 </fts-config>

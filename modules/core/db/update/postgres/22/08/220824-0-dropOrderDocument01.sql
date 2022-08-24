@@ -1,0 +1,1 @@
+alter table thesissummer_order_document rename to THESISSUMMER_ORDER_DOCUMENT__U21331 ;

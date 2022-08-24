@@ -1,1 +1,0 @@
-alter table thesissummer_ext_card_type_field_info_datasource rename to THESISSUMMER_EXT_CARD_TYPE_FIELD_INFO_DATASOURCE__U10865 ;
