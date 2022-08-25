@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://orderTranfer1CEdit.caption"
+        class="com.company.thesissummer.web.ui.ordertranfer1c.OrderTranfer1CEdit"
+        datasource="orderTranfer1CDc"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.thesissummer.web.ui.ordertranfer1c">
+    <dsContext>
+        <datasource id="orderTranfer1CDc"
+                    class="com.company.thesissummer.entity.table1c.OrderTranfer1C"
+                    view="orderTranfer1C-view"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions" spacing="true">
+        <fieldGroup id="fieldGroup" datasource="orderTranfer1CDc">
+            <column width="350px">
+                <field property="number"/>
+                <field property="zaemchik"/>
+                <field property="iin"/>
+                <field property="nomerandDataKreditnogoDogovora"/>
+                <field property="summaSubsidiiKreditnogoDogovora"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

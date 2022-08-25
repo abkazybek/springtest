@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        class="com.company.thesissummer.web.ui.orderreturnneispsub1c.OrderReturnNeispSub1CEdit"
+        caption="msg://orderReturnNeispSub1CEdit.caption"
+        datasource="orderReturnNeispSub1CDc"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.thesissummer.web.ui.orderreturnneispsub1c">
+    <dsContext>
+        <datasource id="orderReturnNeispSub1CDc"
+                    class="com.company.thesissummer.entity.table1c.OrderReturnNeispSub1C"
+                    view="orderReturnNeispSub1C-view"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions" spacing="true">
+        <fieldGroup id="fieldGroup" datasource="orderReturnNeispSub1CDc" >
+            <column width="350px">
+                <field property="nomer"/>
+                <field property="naimenovanieZaemchika"/>
+                <field property="nomerDataKreditnogoDogovora"/>
+                <field property="summaSubsidiyOtkloneniya"/>
+                <field property="dogovorSubsidirovaniya"/>
+                <field property="poyasnenie"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions">
+        </frame>
+    </layout>
+</window>

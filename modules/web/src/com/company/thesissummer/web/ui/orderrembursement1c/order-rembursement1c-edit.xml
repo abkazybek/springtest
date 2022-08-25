@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://orderRembursement1cEdit.caption"
+        class="com.company.thesissummer.web.ui.orderrembursement1c.OrderRembursement1cEdit"
+        datasource="orderRembursement1cDc"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.thesissummer.web.ui.orderrembursement1c">
+    <dsContext>
+        <datasource id="orderRembursement1cDc"
+                    class="com.company.thesissummer.entity.table1c.OrderRembursement1c"
+                    view="orderRembursement1c-view"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions" spacing="true">
+        <fieldGroup id="fieldGroup" datasource="orderRembursement1cDc">
+            <column width="350px">
+                <field id="numberField" property="number"/>
+                <field id="nameofborrowerField" property="nameofborrower"/>
+                <field id="iinField" property="iin"/>
+                <field id="nomerAndDataKreditnogogDogovoraField" property="nomerAndDataKreditnogogDogovora"/>
+                <field id="summaSubField" property="summaSub"/>
+                <field id="iikZaemField" property="iikZaem"/>
+                <field id="bankField" property="bank"/>
+                <field visible="false" id="orderRembursementField" property="orderRembursement">
+                </field>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions" screen="editWindowActions">
+        </frame>
+    </layout>
+</window>

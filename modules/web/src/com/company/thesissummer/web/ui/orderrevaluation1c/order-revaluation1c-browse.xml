@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://orderRevaluation1CBrowse.caption"
+        class="com.company.thesissummer.web.ui.orderrevaluation1c.OrderRevaluation1CBrowse"
+        focusComponent="orderRevaluation1CsTable"
+        messagesPack="com.company.thesissummer.web.ui.orderrevaluation1c">
+    <dsContext>
+        <groupDatasource id="orderRevaluation1CsDc"
+                         class="com.company.thesissummer.entity.table1c.OrderRevaluation1C"
+                         view="orderRevaluation1C-view">
+            <query>
+                <![CDATA[select e from thesissummer$OrderRevaluation1C e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orderRevaluation1CsTable"
+            spacing="true">
+        <table id="orderRevaluation1CsTable"
+               width="100%">
+            <actions>
+                <action id="create" openType="NEW_TAB"/>
+                <action id="edit" openType="NEW_TAB"/>
+                <action id="remove" openType="NEW_TAB"/>
+            </actions>
+            <columns>
+                <column id="number"/>
+                <column id="zalogodatel"/>
+                <column id="dogovorswithcollateral"/>
+                <column id="predmet"/>
+                <column id="tekushayaStoimost"/>
+                <column id="pereocenennyaStoimost"/>
+                <column id="itogovyaSumma"/>
+                <column id="dataPereocenki"/>
+                <column id="osnovaniye"/>
+            </columns>
+            <rows datasource="orderRevaluation1CsDc" />
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="orderRevaluation1CsTable.create"/>
+                <button id="editBtn" action="orderRevaluation1CsTable.edit"/>
+                <button id="removeBtn" action="orderRevaluation1CsTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

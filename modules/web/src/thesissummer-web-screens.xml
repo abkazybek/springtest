@@ -49,4 +49,84 @@
             template="com/company/thesissummer/web/ui/ordervozvratvgu/order-vozvratv-gu-browse.xml"/>
     <screen id="thesissummer$OrderVozvratvGu.templateBrowse"
             template="com/company/thesissummer/web/ui/ordervozvratvgu/order-vozvratv-gu-template-browse.xml"/>
+    <screen id="thesissummer$OrderReturnNeispSub.browse"
+            template="com/company/thesissummer/web/ui/orderreturnneispsub/order-return-neisp-sub-browse.xml"/>
+    <screen id="thesissummer$OrderReturnNeispSub.edit"
+            template="com/company/thesissummer/web/ui/orderreturnneispsub/order-return-neisp-sub-edit.xml"/>
+    <screen id="thesissummer$OrderReturnNeispSub.lookup"
+            template="com/company/thesissummer/web/ui/orderreturnneispsub/order-return-neisp-sub-browse.xml"/>
+    <screen id="thesissummer$OrderReturnNeispSub.templateBrowse"
+            template="com/company/thesissummer/web/ui/orderreturnneispsub/order-return-neisp-sub-template-browse.xml"/>
+
+    <screen id="thesissummer$OrderReturnNeispSub1С.browse" template="com/company/thesissummer/web/ui/orderreturnneispsub1c/order-return-neisp-sub1c-browse.xml" />
+    <screen id= "thesissummer$OrderReturnNeispSub1C.edit" template="com/company/thesissummer/web/ui/orderreturnneispsub1c/order-return-neisp-sub1c-edit.xml"/>
+    <screen id="thesissummer$OrderReturnNeispSub1С.browse" template="com/company/thesissummer/web/ui/orderreturnneispsub1c/order-return-neisp-sub1c-browse.xml"/>
+    <screen id="thesissummer$OrderReturnNeispSub1C.edit" template="com/company/thesissummer/web/ui/orderreturnneispsub1c/order-return-neisp-sub1c-edit.xml"/>
+
+    <screen id="thesissummer$OrderRembursement1c.browse" template="com/company/thesissummer/web/ui/orderrembursement1c/order-rembursement1c-browse.xml" />
+    <screen id= "thesissummer$OrderRembursement1c.edit" template="com/company/thesissummer/web/ui/orderrembursement1c/order-rembursement1c-edit.xml"/>
+    <screen id="thesissummer$OrderRembursement1c.browse" template="com/company/thesissummer/web/ui/orderrembursement1c/order-rembursement1c-browse.xml"/>
+    <screen id="thesissummer$OrderRembursement1c.edit" template="com/company/thesissummer/web/ui/orderrembursement1c/order-rembursement1c-edit.xml"/>
+
+    <screen id="thesissummer$OrderPosting1C.browse" template="com/company/thesissummer/web/ui/orderposting1c/order-posting1c-browse.xml" />
+    <screen id= "thesissummer$OrderPosting1C.edit" template="com/company/thesissummer/web/ui/orderposting1c/order-posting1c-edit.xml"/>
+    <screen id="thesissummer$OrderPosting1C.browse" template="com/company/thesissummer/web/ui/orderposting1c/order-posting1c-browse.xml"/>
+    <screen id="thesissummer$OrderPosting1C.edit" template="com/company/thesissummer/web/ui/orderposting1c/order-posting1c-edit.xml"/>
+
+    <screen id="thesissummer$OrderRevaluation1C.browse" template="com/company/thesissummer/web/ui/orderrevaluation1c/order-revaluation1c-browse.xml" />
+    <screen id= "thesissummer$OrderRevaluation1C.edit" template="com/company/thesissummer/web/ui/orderrevaluation1c/order-revaluation1c-edit.xml"/>
+    <screen id="thesissummer$OrderRevaluation1C.browse" template="com/company/thesissummer/web/ui/orderrevaluation1c/order-revaluation1c-browse.xml"/>
+    <screen id="thesissummer$OrderRevaluation1C.edit" template="com/company/thesissummer/web/ui/orderrevaluation1c/order-revaluation1c-edit.xml"/>
+
+    <screen id="thesissummer$OrderTranfer1C.browse" template="com/company/thesissummer/web/ui/ordertranfer1c/order-tranfer1c-browse.xml" />
+    <screen id= "thesissummer$OrderTranfer1C.edit" template="com/company/thesissummer/web/ui/ordertranfer1c/order-tranfer1c-edit.xml"/>
+    <screen id="thesissummer$OrderTranfer1C.browse" template="com/company/thesissummer/web/ui/ordertranfer1c/order-tranfer1c-browse.xml"/>
+    <screen id="thesissummer$OrderTranfer1C.edit" template="com/company/thesissummer/web/ui/ordertranfer1c/order-tranfer1c-edit.xml"/>
+
+    <screen id="thesissummer$OrderWriteOff1C.browse" template="com/company/thesissummer/web/ui/orderwriteoff1c/order-write-off1c-browse.xml" />
+    <screen id= "thesissummer$OrderWriteOff1C.edit" template="com/company/thesissummer/web/ui/orderwriteoff1c/order-write-off1c-edit.xml"/>
+    <screen id="thesissummer$OrderWriteOff1C.browse" template="com/company/thesissummer/web/ui/orderwriteoff1c/order-write-off1c-browse.xml"/>
+    <screen id="thesissummer$OrderWriteOff1C.edit" template="com/company/thesissummer/web/ui/orderwriteoff1c/order-write-off1c-edit.xml"/>
+
+    <screen id="thesissummer$OrderRembursement.browse"
+            template="com/company/thesissummer/web/ui/orderrembursement/order-rembursement-browse.xml"/>
+    <screen id="thesissummer$OrderRembursement.edit"
+            template="com/company/thesissummer/web/ui/orderrembursement/order-rembursement-edit.xml"/>
+    <screen id="thesissummer$OrderRembursement.lookup"
+            template="com/company/thesissummer/web/ui/orderrembursement/order-rembursement-browse.xml"/>
+    <screen id="thesissummer$OrderRembursement.templateBrowse"
+            template="com/company/thesissummer/web/ui/orderrembursement/order-rembursement-template-browse.xml"/>
+    <screen id="thesissummer$OrderPosting.browse"
+            template="com/company/thesissummer/web/ui/orderposting/order-posting-browse.xml"/>
+    <screen id="thesissummer$OrderPosting.edit"
+            template="com/company/thesissummer/web/ui/orderposting/order-posting-edit.xml"/>
+    <screen id="thesissummer$OrderPosting.lookup"
+            template="com/company/thesissummer/web/ui/orderposting/order-posting-browse.xml"/>
+    <screen id="thesissummer$OrderPosting.templateBrowse"
+            template="com/company/thesissummer/web/ui/orderposting/order-posting-template-browse.xml"/>
+    <screen id="thesissummer$OrderRevaluation.browse"
+            template="com/company/thesissummer/web/ui/orderrevaluation/order-revaluation-browse.xml"/>
+    <screen id="thesissummer$OrderRevaluation.edit"
+            template="com/company/thesissummer/web/ui/orderrevaluation/order-revaluation-edit.xml"/>
+    <screen id="thesissummer$OrderRevaluation.lookup"
+            template="com/company/thesissummer/web/ui/orderrevaluation/order-revaluation-browse.xml"/>
+    <screen id="thesissummer$OrderRevaluation.templateBrowse"
+            template="com/company/thesissummer/web/ui/orderrevaluation/order-revaluation-template-browse.xml"/>
+    <screen id="thesissummer$OrderTranfer.browse"
+            template="com/company/thesissummer/web/ui/ordertranfer/order-tranfer-browse.xml"/>
+    <screen id="thesissummer$OrderTranfer.edit"
+            template="com/company/thesissummer/web/ui/ordertranfer/order-tranfer-edit.xml"/>
+    <screen id="thesissummer$OrderTranfer.lookup"
+            template="com/company/thesissummer/web/ui/ordertranfer/order-tranfer-browse.xml"/>
+    <screen id="thesissummer$OrderTranfer.templateBrowse"
+            template="com/company/thesissummer/web/ui/ordertranfer/order-tranfer-template-browse.xml"/>
+    <screen id="thesissummer$OrderWriteOff.browse"
+            template="com/company/thesissummer/web/ui/orderwriteoff/order-write-off-browse.xml"/>
+    <screen id="thesissummer$OrderWriteOff.edit"
+            template="com/company/thesissummer/web/ui/orderwriteoff/order-write-off-edit.xml"/>
+    <screen id="thesissummer$OrderWriteOff.lookup"
+            template="com/company/thesissummer/web/ui/orderwriteoff/order-write-off-browse.xml"/>
+    <screen id="thesissummer$OrderWriteOff.templateBrowse"
+            template="com/company/thesissummer/web/ui/orderwriteoff/order-write-off-template-browse.xml"/>
+
 </screen-config>

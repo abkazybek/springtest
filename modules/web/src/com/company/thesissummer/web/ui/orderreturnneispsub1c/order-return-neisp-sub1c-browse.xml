@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://orderReturnNeispSub1CBrowse.caption"
+        focusComponent="orderReturnNeispSub1CsTable"
+        class="com.company.thesissummer.web.ui.orderreturnneispsub1c.OrderReturnNeispSub1CBrowse"
+        lookupComponent="orderReturnNeispSub1CsTable"
+        messagesPack="com.company.thesissummer.web.ui.orderreturnneispsub1c">
+    <dsContext>
+        <groupDatasource id="orderReturn1C1sDc"
+                         class="com.company.thesissummer.entity.table1c.OrderReturnNeispSub1C"
+                         view="orderReturnNeispSub1C-view">
+            <query>
+                <![CDATA[select e from thesissummer$OrderReturnNeispSub1C e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orderReturnNeispSub1CsTable"
+            spacing="true">
+        <table id="orderReturnNeispSub1CsTable"
+               width="100%">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="nomer"/>
+                <column id="naimenovanieZaemchika"/>
+                <column id="nomerDataKreditnogoDogovora"/>
+                <column id="summaSubsidiyOtkloneniya"/>
+                <column id="dogovorSubsidirovaniya"/>
+                <column id="poyasnenie"/>
+            </columns>
+            <rowsCount/>
+            <rows datasource="orderReturn1C1sDc" />
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="orderReturnNeispSub1CsTable.create"/>
+                <button id="editBtn" action="orderReturnNeispSub1CsTable.edit"/>
+                <button id="removeBtn" action="orderReturnNeispSub1CsTable.remove"/>
+            </buttonsPanel>
+        </table>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

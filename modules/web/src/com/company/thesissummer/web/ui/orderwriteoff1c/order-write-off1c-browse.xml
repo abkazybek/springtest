@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://orderWriteOff1CBrowse.caption"
+        focusComponent="orderWriteOff1CsTable"
+        class="com.company.thesissummer.web.ui.orderwriteoff1c.OrderWriteOff1CBrowse"
+        messagesPack="com.company.thesissummer.web.ui.orderwriteoff1c">
+    <dsContext>
+        <groupDatasource id="orderWriteOff1CsDc"
+                         class="com.company.thesissummer.entity.table1c.OrderWriteOff1C"
+                         view="orderWriteOff1C-view">
+            <query>
+                <![CDATA[select e from thesissummer$OrderWriteOff1C e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orderWriteOff1CsTable"
+            spacing="true">
+        <table id="orderWriteOff1CsTable"
+               width="100%">
+            <actions>
+                <action id="create" openType="NEW_TAB"/>
+                <action id="edit" openType="NEW_TAB"/>
+                <action id="remove" openType="NEW_TAB"/>
+            </actions>
+            <columns>
+                <column id="number"/>
+                <column id="naimenovanieZalog"/>
+                <column id="dogovorSvyazSObespech"/>
+                <column id="obespecheniye"/>
+                <column id="zalogStoimost"/>
+                <column id="documentUsloviy"/>
+            </columns>
+            <rows datasource="orderWriteOff1CsDc" />
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="orderWriteOff1CsTable.create"/>
+                <button id="editBtn" action="orderWriteOff1CsTable.edit"/>
+                <button id="removeBtn" action="orderWriteOff1CsTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

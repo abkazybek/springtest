@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://orderPosting1CBrowse.caption"
+        class="com.company.thesissummer.web.ui.orderposting1c.OrderPosting1CBrowse"
+        focusComponent="orderPosting1CsTable"
+        messagesPack="com.company.thesissummer.web.ui.orderposting1c">
+    <dsContext>
+        <groupDatasource id="orderReturn1C1sDc"
+                         class="com.company.thesissummer.entity.table1c.OrderPosting1C"
+                         view="orderPosting1C-view">
+            <query>
+                <![CDATA[select e from thesissummer$OrderPosting1C e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orderPosting1CsTable"
+            spacing="true">
+        <table id="orderPosting1CsTable"
+               width="100%">
+            <actions>
+                <action id="create" openType="NEW_TAB"/>
+                <action id="edit" openType="NEW_TAB"/>
+                <action id="remove" openType="NEW_TAB"/>
+            </actions>
+            <columns>
+                <column id="number"/>
+                <column id="nameofpledger"/>
+                <column id="dogovorwithcollateral"/>
+                <column id="obespecheniye"/>
+                <column id="zalogStoimost"/>
+                <column id="documentUsl"/>
+                <column id="orderPosting"/>
+            </columns>
+            <rows datasource="orderReturn1C1sDc" />
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="orderPosting1CsTable.create"/>
+                <button id="editBtn" action="orderPosting1CsTable.edit"/>
+                <button id="removeBtn" action="orderPosting1CsTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

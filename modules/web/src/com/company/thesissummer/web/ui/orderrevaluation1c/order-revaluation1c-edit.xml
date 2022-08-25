@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://orderRevaluation1CEdit.caption"
+        class="com.company.thesissummer.web.ui.orderrevaluation1c.OrderRevaluation1CEdit"
+        datasource="orderRevaluation1CDc"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.thesissummer.web.ui.orderrevaluation1c">
+    <dsContext>
+            <datasource id="orderRevaluation1CDc"
+                        class="com.company.thesissummer.entity.table1c.OrderRevaluation1C"
+                        view="orderRevaluation1C-view"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions" spacing="true">
+        <fieldGroup id="fieldGroup" datasource="orderRevaluation1CDc">
+            <column width="350px">
+                <field id="numberField" property="number"/>
+                <field id="zalogodatelField" property="zalogodatel"/>
+                <field id="dogovorswithcollateralField" property="dogovorswithcollateral"/>
+                <field id="predmetField" property="predmet"/>
+                <field id="tekushayaStoimostField" property="tekushayaStoimost"/>
+                <field id="pereocenennyaStoimostField" property="pereocenennyaStoimost"/>
+                <field id="itogovyaSummaField" property="itogovyaSumma"/>
+                <field id="dataPereocenkiField" property="dataPereocenki"/>
+                <field id="osnovaniyeField" property="osnovaniye"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

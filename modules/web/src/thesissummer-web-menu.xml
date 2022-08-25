@@ -30,11 +30,54 @@
             <permission target="thesissummer$OrderVozvratvGu:create" type="ENTITY_OP"/>
         </permissions>
     </item>
+    <item id="thesissummer$OrderReturnNeispSub.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderReturnNeispSub:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderRembursement.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderRembursement:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderPosting.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderPosting:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderRevaluation.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderRevaluation:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderTranfer.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderTranfer:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderWriteOff.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderWriteOff:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
     <menu id="Order" caption="Распоряжения" insertBefore="df$DocKind.browse">
-    <item id="thesissummer$OrderLoan.lookup"/>
-    <item id="thesissummer$OrderIns.lookup" />
-    <item id="thesissummer$OrderTranferMoney.lookup" />
-    <item id="thesissummer$OrderLoanSI.lookup" />
-    <item id="thesissummer$OrderVozvratvGu.lookup" />
+        <item id="thesissummer$OrderLoan.browse" caption="На выдачу займа"/>
+        <item id="thesissummer$OrderIns.browse" caption="На выплату страховой премии"/>
+        <item id="thesissummer$OrderTranferMoney.browse"  caption="На перевод денежных средств"/>
+        <item id="thesissummer$OrderLoanSI.browse" caption="На выдачу займа (СИ)"/>
+        <item id="thesissummer$OrderVozvratvGu.browse" caption="На возврат в ГУ (СИ)"/>
+        <item id="thesissummer$OrderReturnNeispSub.browse" caption="На возврат неиспользованных субсидий"/>
+        <item id="thesissummer$OrderRembursement.browse" caption="На возмещение субсидий" />
+        <item id="thesissummer$OrderPosting.browse" caption="На оприход обеспечения"/>
+        <item id="thesissummer$OrderRevaluation.browse" caption="На переоценку обеспечения" />
+        <item id="thesissummer$OrderTranfer.browse" caption="На перечисление субсидий"/>
+        <item id="thesissummer$OrderWriteOff.browse" caption="На списание обеспечения"/>
     </menu>
+
 </menu-config>

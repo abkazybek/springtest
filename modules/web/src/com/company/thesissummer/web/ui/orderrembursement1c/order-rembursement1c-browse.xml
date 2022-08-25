@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://orderRembursement1cBrowse.caption"
+        focusComponent="orderRembursement1csTable"
+        class="com.company.thesissummer.web.ui.orderrembursement1c.OrderRembursement1cBrowse"
+        messagesPack="com.company.thesissummer.web.ui.orderrembursement1c">
+    <dsContext>
+        <groupDatasource id="orderRembursement1csDc"
+                         class="com.company.thesissummer.entity.table1c.OrderRembursement1c"
+                         view="orderRembursement1c-view">
+            <query>
+                <![CDATA[select e from thesissummer$OrderRembursement1c e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="orderRembursement1csTable"
+            spacing="true">
+        <table id="orderRembursement1csTable"
+               width="100%">
+            <actions>
+                <action id="create" openType="NEW_TAB"/>
+                <action id="edit" openType="NEW_TAB"/>
+                <action id="remove" openType="NEW_TAB"/>
+            </actions>
+            <columns>
+                <column id="number"/>
+                <column id="nameofborrower"/>
+                <column id="iin"/>
+                <column id="nomerAndDataKreditnogogDogovora"/>
+                <column id="summaSub"/>
+                <column id="iikZaem"/>
+                <column id="bank"/>
+                <column id="orderRembursement"/>
+            </columns>
+            <rows datasource="orderRembursement1csDc" />
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="orderRembursement1csTable.create"/>
+                <button id="editBtn" action="orderRembursement1csTable.edit"/>
+                <button id="removeBtn" action="orderRembursement1csTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

@@ -5,4 +5,10 @@
     <entity metaClass="thesissummer$OrderTranferMoney"/>
     <entity metaClass="thesissummer$OrderLoanSI"/>
     <entity metaClass="thesissummer$OrderVozvratvGu"/>
+    <entity metaClass="thesissummer$OrderReturnNeispSub"/>
+    <entity metaClass="thesissummer$OrderRembursement"/>
+    <entity metaClass="thesissummer$OrderPosting"/>
+    <entity metaClass="thesissummer$OrderRevaluation"/>
+    <entity metaClass="thesissummer$OrderTranfer"/>
+    <entity metaClass="thesissummer$OrderWriteOff"/>
 </entities>

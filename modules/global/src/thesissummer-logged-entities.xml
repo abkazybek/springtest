@@ -7,4 +7,16 @@
     <entity metaClass="thesissummer$OrderTranferMoney"/>
     <entity metaClass="thesissummer$OrderLoanSI"/>
     <entity metaClass="thesissummer$OrderVozvratvGu"/>
+    <entity metaClass="thesissummer$OrderReturnNeispSub"/>
+    <entity metaClass="thesissummer$OrderReturnNeispSub1C"/>
+    <entity metaClass="thesissummer$OrderRembursement"/>
+    <entity metaClass="thesissummer$OrderRembursement1c"/>
+    <entity metaClass="thesissummer$OrderPosting"/>
+    <entity metaClass="thesissummer$OrderPosting1C"/>
+    <entity metaClass="thesissummer$OrderRevaluation"/>
+    <entity metaClass="thesissummer$OrderRevaluation1C"/>
+    <entity metaClass="thesissummer$OrderTranfer"/>
+    <entity metaClass="thesissummer$OrderTranfer1C"/>
+    <entity metaClass="thesissummer$OrderWriteOff"/>
+    <entity metaClass="thesissummer$OrderWriteOff1C"/>
 </entities>

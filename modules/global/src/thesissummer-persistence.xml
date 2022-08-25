@@ -12,5 +12,17 @@
         <class>com.company.thesissummer.entity.OrderTranferMoney</class>
         <class>com.company.thesissummer.entity.OrderLoanSI</class>
         <class>com.company.thesissummer.entity.OrderVozvratvGu</class>
+        <class>com.company.thesissummer.entity.OrderReturnNeispSub</class>
+        <class>com.company.thesissummer.entity.table1c.OrderReturnNeispSub1C</class>
+        <class>com.company.thesissummer.entity.OrderRembursement</class>
+        <class>com.company.thesissummer.entity.table1c.OrderRembursement1c</class>
+        <class>com.company.thesissummer.entity.OrderPosting</class>
+        <class>com.company.thesissummer.entity.table1c.OrderPosting1C</class>
+        <class>com.company.thesissummer.entity.OrderRevaluation</class>
+        <class>com.company.thesissummer.entity.table1c.OrderRevaluation1C</class>
+        <class>com.company.thesissummer.entity.OrderTranfer</class>
+        <class>com.company.thesissummer.entity.table1c.OrderTranfer1C</class>
+        <class>com.company.thesissummer.entity.OrderWriteOff</class>
+        <class>com.company.thesissummer.entity.table1c.OrderWriteOff1C</class>
     </persistence-unit>
 </persistence>

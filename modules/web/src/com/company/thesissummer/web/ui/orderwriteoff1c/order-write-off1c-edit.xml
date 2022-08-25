@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://orderWriteOff1CEdit.caption"
+        datasource="orderWriteOff1CDc"
+        class="com.company.thesissummer.web.ui.orderwriteoff1c.OrderWriteOff1CEdit"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.thesissummer.web.ui.orderwriteoff1c">
+    <dsContext>
+        <datasource id="orderWriteOff1CDc"
+                    class="com.company.thesissummer.entity.table1c.OrderWriteOff1C"
+                    view="orderWriteOff1C-view"/>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions" spacing="true">
+        <fieldGroup id="fieldGroup" datasource="orderWriteOff1CDc">
+            <column width="350px">
+                <field id="numberField" property="number"/>
+                <field id="naimenovanieZalogField" property="naimenovanieZalog"/>
+                <field id="dogovorSvyazSObespechField" property="dogovorSvyazSObespech"/>
+                <field id="obespecheniyeField" property="obespecheniye"/>
+                <field id="zalogStoimostField" property="zalogStoimost"/>
+                <field id="documentUsloviyField" property="documentUsloviy"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>
