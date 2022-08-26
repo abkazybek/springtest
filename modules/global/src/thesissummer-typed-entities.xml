@@ -11,4 +11,8 @@
     <entity metaClass="thesissummer$OrderRevaluation"/>
     <entity metaClass="thesissummer$OrderTranfer"/>
     <entity metaClass="thesissummer$OrderWriteOff"/>
+    <entity metaClass="thesissummer$OrderSubsidiy"/>
+    <entity metaClass="thesissummer$OrderNaVozvrat"/>
+    <entity metaClass="thesissummer$OrderPogashOb"/>
+    <entity metaClass="thesissummer$OrderCenBumaga"/>
 </entities>

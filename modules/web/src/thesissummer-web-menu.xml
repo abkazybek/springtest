@@ -66,6 +66,30 @@
             <permission target="thesissummer$OrderWriteOff:create" type="ENTITY_OP"/>
         </permissions>
     </item>
+    <item id="thesissummer$OrderSubsidiy.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderSubsidiy:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderNaVozvrat.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderNaVozvrat:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderPogashOb.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderPogashOb:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
+    <item id="thesissummer$OrderCenBumaga.templateBrowse" insertAfter="df$AccountDoc.templateBrowse">
+        <param name="inTemplates" value="true"/>
+        <permissions>
+            <permission target="thesissummer$OrderCenBumaga:create" type="ENTITY_OP"/>
+        </permissions>
+    </item>
     <menu id="Order" caption="Распоряжения" insertBefore="df$DocKind.browse">
         <item id="thesissummer$OrderLoan.browse" caption="На выдачу займа"/>
         <item id="thesissummer$OrderIns.browse" caption="На выплату страховой премии"/>
@@ -78,6 +102,9 @@
         <item id="thesissummer$OrderRevaluation.browse" caption="На переоценку обеспечения" />
         <item id="thesissummer$OrderTranfer.browse" caption="На перечисление субсидий"/>
         <item id="thesissummer$OrderWriteOff.browse" caption="На списание обеспечения"/>
+        <item id="thesissummer$OrderSubsidiy.lookup" />
+        <item id="thesissummer$OrderNaVozvrat.lookup" />
+        <item id="thesissummer$OrderPogashOb.lookup" />
+        <item id="thesissummer$OrderCenBumaga.lookup"/>
     </menu>
-
 </menu-config>

@@ -128,5 +128,37 @@
             template="com/company/thesissummer/web/ui/orderwriteoff/order-write-off-browse.xml"/>
     <screen id="thesissummer$OrderWriteOff.templateBrowse"
             template="com/company/thesissummer/web/ui/orderwriteoff/order-write-off-template-browse.xml"/>
+    <screen id="thesissummer$OrderSubsidiy.browse"
+            template="com/company/thesissummer/web/ui/ordersubsidiy/order-subsidiy-browse.xml"/>
+    <screen id="thesissummer$OrderSubsidiy.edit"
+            template="com/company/thesissummer/web/ui/ordersubsidiy/order-subsidiy-edit.xml"/>
+    <screen id="thesissummer$OrderSubsidiy.lookup"
+            template="com/company/thesissummer/web/ui/ordersubsidiy/order-subsidiy-browse.xml"/>
+    <screen id="thesissummer$OrderSubsidiy.templateBrowse"
+            template="com/company/thesissummer/web/ui/ordersubsidiy/order-subsidiy-template-browse.xml"/>
+    <screen id="thesissummer$OrderNaVozvrat.browse"
+            template="com/company/thesissummer/web/ui/ordernavozvrat/order-na-vozvrat-browse.xml"/>
+    <screen id="thesissummer$OrderNaVozvrat.edit"
+            template="com/company/thesissummer/web/ui/ordernavozvrat/order-na-vozvrat-edit.xml"/>
+    <screen id="thesissummer$OrderNaVozvrat.lookup"
+            template="com/company/thesissummer/web/ui/ordernavozvrat/order-na-vozvrat-browse.xml"/>
+    <screen id="thesissummer$OrderNaVozvrat.templateBrowse"
+            template="com/company/thesissummer/web/ui/ordernavozvrat/order-na-vozvrat-template-browse.xml"/>
+    <screen id="thesissummer$OrderPogashOb.browse"
+            template="com/company/thesissummer/web/ui/orderpogashob/order-pogash-ob-browse.xml"/>
+    <screen id="thesissummer$OrderPogashOb.edit"
+            template="com/company/thesissummer/web/ui/orderpogashob/order-pogash-ob-edit.xml"/>
+    <screen id="thesissummer$OrderPogashOb.lookup"
+            template="com/company/thesissummer/web/ui/orderpogashob/order-pogash-ob-browse.xml"/>
+    <screen id="thesissummer$OrderPogashOb.templateBrowse"
+            template="com/company/thesissummer/web/ui/orderpogashob/order-pogash-ob-template-browse.xml"/>
+    <screen id="thesissummer$OrderCenBumaga.browse"
+            template="com/company/thesissummer/web/ui/ordercenbumaga/order-cen-bumaga-browse.xml"/>
+    <screen id="thesissummer$OrderCenBumaga.edit"
+            template="com/company/thesissummer/web/ui/ordercenbumaga/order-cen-bumaga-edit.xml"/>
+    <screen id="thesissummer$OrderCenBumaga.lookup"
+            template="com/company/thesissummer/web/ui/ordercenbumaga/order-cen-bumaga-browse.xml"/>
+    <screen id="thesissummer$OrderCenBumaga.templateBrowse"
+            template="com/company/thesissummer/web/ui/ordercenbumaga/order-cen-bumaga-template-browse.xml"/>
 
 </screen-config>

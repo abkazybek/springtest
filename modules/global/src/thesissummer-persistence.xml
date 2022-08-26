@@ -24,5 +24,9 @@
         <class>com.company.thesissummer.entity.table1c.OrderTranfer1C</class>
         <class>com.company.thesissummer.entity.OrderWriteOff</class>
         <class>com.company.thesissummer.entity.table1c.OrderWriteOff1C</class>
+        <class>com.company.thesissummer.entity.OrderSubsidiy</class>
+        <class>com.company.thesissummer.entity.OrderNaVozvrat</class>
+        <class>com.company.thesissummer.entity.OrderPogashOb</class>
+        <class>com.company.thesissummer.entity.OrderCenBumaga</class>
     </persistence-unit>
 </persistence>
