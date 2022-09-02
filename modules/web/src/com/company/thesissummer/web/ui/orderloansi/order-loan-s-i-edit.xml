@@ -47,6 +47,11 @@
                 <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
             </query>
         </collectionDatasource>
+        <collectionDatasource id="receiverDc" class="com.haulmont.thesis.core.entity.Employee" view="withuserdepartment">
+            <query>
+                <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
+            </query>
+        </collectionDatasource>
         <runtimePropsDatasource id="runtimePropsDs" mainDs="cardDs"/>
         <collectionDatasource id="categoriesDs" class="com.haulmont.cuba.core.entity.Category" view="_local">
             <query>
@@ -194,6 +199,17 @@
                                                            width="theme://thesis.gui.editor-fields.width"
                                                            caption="msg://com.company.thesissummer.entity/OrderLoanSI.podrazdelenie"/>
                                             </row>
+                                            <row id="receiverRow">
+                                                <lookupPickerField id="orderReceiver"
+                                                                   datasource="cardDs"
+                                                                   property="orderReceiver" optionsDatasource="receiverDc"
+                                                                   caption="msg://com.company.thesissummer.entity/OrderLoanSI.orderReceiver"
+                                                                   width="${width}">
+                                                    <actions>
+                                                        <action id="open"/>
+                                                    </actions>
+                                                </lookupPickerField>
+                                            </row>
                                             <row id="osnovanieRow">
                                                 <textField id="osnovanie" property="osnovanie" datasource="cardDs"
                                                            width="theme://thesis.gui.editor-fields.width"
@@ -233,6 +249,11 @@
                                             <column flex="1"/>
                                         </columns>
                                         <rows>
+                                            <row id="istochnikRow">
+                                                <textField id="istochnik" property="istochnik" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderLoanSI.istochnik"/>
+                                            </row>
                                             <row id="stavkaVozRow">
                                                 <textField id="stavkaVoz" property="stavkaVoz" datasource="cardDs"
                                                            width="theme://thesis.gui.editor-fields.width"
@@ -346,13 +367,13 @@
                         </hbox>
                     </groupBox>
                 </tab>
-                <tab id="office" caption="msg://office" lazy="false">
+               <!-- <tab id="office" caption="msg://office" lazy="false">
                     <groupBox id="officeTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="docOfficeFrame">
                         <vbox id="cardHeaderHolder" width="100%"/>
                         <frame id="docOfficeFrame" screen="docOfficeFrame" height="100%"/>
                     </groupBox>
-                </tab>
+                </tab> -->
                 <tab id="docTreeTab" caption="msg://hierarchy">
                     <groupBox id="docTreeTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="cardTreeFrameBox">

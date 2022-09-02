@@ -8,28 +8,21 @@ package com.company.thesissummer.entity;
 
 import com.haulmont.chile.core.datatypes.Datatypes;
 import com.haulmont.chile.core.model.MetaClass;
+import com.haulmont.cuba.core.entity.annotation.EnableRestore;
+import com.haulmont.cuba.core.entity.annotation.Listeners;
+import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.cuba.core.global.AppBeans;
-import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.core.global.Messages;
-
+import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.thesis.core.entity.Doc;
-
+import com.haulmont.thesis.core.entity.HasDetailedDescription;
 import com.haulmont.thesis.core.global.EntityCopyUtils;
 import org.apache.commons.lang.StringUtils;
-import com.haulmont.thesis.core.entity.HasDetailedDescription;
-import com.haulmont.cuba.core.entity.annotation.EnableRestore;
-import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Column;
-
-import com.haulmont.cuba.core.entity.annotation.Listeners;
 
 @DiscriminatorValue("2000")
 @Table(name = "THESISSUMMER_ORDER_LOAN")
@@ -41,44 +34,75 @@ import com.haulmont.cuba.core.entity.annotation.Listeners;
 public class OrderLoan extends Doc implements HasDetailedDescription {
 
     private static final long serialVersionUID = 4058041244022781874L;
+
     @Column(name = "PODRAZDELENIE")
     protected String podrazdelenie;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORDER_RECEIVER_ID")
+    protected ExtEmployee orderReceiver;
+
     @Column(name = "NOMER_ORDER")
     protected String nomerOrder;
+
     @Column(name = "DATA_ORDER")
     protected String dataOrder;
+
     @Column(name = "PODRAZDELENIE2")
     protected String podrazdelenie2;
+
     @Column(name = "NOMER_PROTOCOLA_KK")
     protected String nomerProtocolaKK;
+
     @Column(name = "CONTRAGENT")
     protected String contragent;
+
     @Column(name = "FULL_NAME")
     protected String fullName;
+
     @Column(name = "DOGOVOR")
     protected String dogovor;
+
     @Column(name = "SUMMA")
     protected String summa;
+
     @Column(name = "KREDIT_LINIYA")
     protected String kreditLiniya;
+
     @Column(name = "ISTOCHNIK")
     protected String istochnik;
+
     @Column(name = "STAVKA_VOZ")
     protected String stavkaVoz;
+
     @Column(name = "SROK_KREDITA")
     protected String srokKredita;
+
     @Column(name = "BANK")
     protected String bank;
+
     @Column(name = "BIK")
     protected String bik;
+
     @Column(name = "IIK")
     protected String iik;
+
     @Column(name = "BIN")
     protected String bin;
+
     @Column(name = "KBE")
     protected String kbe;
+
     @Column(name = "UR_ADRESS")
     protected String urAdress;
+
+    public ExtEmployee getOrderReceiver() {
+        return orderReceiver;
+    }
+
+    public void setOrderReceiver(ExtEmployee orderReceiver) {
+        this.orderReceiver = orderReceiver;
+    }
 
     public String getUrAdress() {
         return urAdress;

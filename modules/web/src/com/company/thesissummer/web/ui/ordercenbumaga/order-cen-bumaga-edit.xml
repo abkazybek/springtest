@@ -47,6 +47,11 @@
                 <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
             </query>
         </collectionDatasource>
+        <collectionDatasource id="receiverDc" class="com.haulmont.thesis.core.entity.Employee" view="withuserdepartment">
+            <query>
+                <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
+            </query>
+        </collectionDatasource>
         <runtimePropsDatasource id="runtimePropsDs" mainDs="cardDs"/>
         <collectionDatasource id="categoriesDs" class="com.haulmont.cuba.core.entity.Category" view="_local">
             <query>
@@ -178,6 +183,17 @@
                                                     </actions>
                                                 </lookupPickerField>
                                             </row>
+                                            <row id="receiverRow">
+                                                <lookupPickerField id="orderReceiver"
+                                                                   datasource="cardDs"
+                                                                   property="orderReceiver" optionsDatasource="receiverDc"
+                                                                   caption="msg://com.company.thesissummer.entity/OrderCenBumaga.orderReceiver"
+                                                                   width="${width}">
+                                                    <actions>
+                                                        <action id="open"/>
+                                                    </actions>
+                                                </lookupPickerField>
+                                            </row>
                                             <row id="nomerOrderRow">
                                                 <textField id="nomerOrder" property="nomerOrder" datasource="cardDs"
                                                            width="theme://thesis.gui.editor-fields.width"
@@ -193,6 +209,46 @@
                                                            width="theme://thesis.gui.editor-fields.width"
                                                            caption="msg://com.company.thesissummer.entity/OrderCenBumaga.contragent"/>
                                             </row>
+                                            <row id="emitentRow">
+                                                <textField id="emitent" property="emitent" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderCenBumaga.emitent"/>
+                                            </row>
+                                            <row id="baseNachRow">
+                                                <textField id="baseNach" property="baseNach" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderCenBumaga.baseNach"/>
+                                            </row>
+                                            <row id="dohodnostRepoRow">
+                                                <textField id="dohodnostRepo" property="dohodnostRepo" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderCenBumaga.dohodnostRepo"/>
+                                            </row>
+                                            <row id="dataOpenRow">
+                                                <textField id="dataOpen" property="dataOpen" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderCenBumaga.dataOpen"/>
+                                            </row>
+                                            <row id="kolvoObligRow">
+                                                <textField id="kolvoOblig" property="kolvoOblig" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderCenBumaga.kolvoOblig"/>
+                                            </row>
+                                            <row id="summaSdelkiRow">
+                                                <textField id="summaSdelki" property="summaSdelki" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderCenBumaga.summaSdelki"/>
+                                            </row>
+                                            <row id="voznagrazhdenieRow">
+                                                <textField id="voznagrazhdenie" property="voznagrazhdenie" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderCenBumaga.voznagrazhdenie"/>
+                                            </row>
+                                            <row id="dataCloseRow">
+                                                <textField id="dataClose" property="dataClose" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderCenBumaga.dataClose"/>
+                                            </row>
                                         </rows>
                                     </grid>
                                     <vbox id="gridSeparator" stylename="grid-separator" height="100%" width="1px"/>
@@ -201,7 +257,6 @@
                                             <column flex="1"/>
                                         </columns>
                                         <rows>
-
                                             <row id="emitentRow">
                                                 <textField id="emitent" property="emitent" datasource="cardDs"
                                                            width="theme://thesis.gui.editor-fields.width"
@@ -304,13 +359,6 @@
                         <hbox id="atdrop" width="100%" height="100%" margin="false,true,false,false">
                             <frame screen="cardAttachmentsFrame" id="cardAttachmentsFrame" height="100%"/>
                         </hbox>
-                    </groupBox>
-                </tab>
-                <tab id="office" caption="msg://office" lazy="false">
-                    <groupBox id="officeTabGroupBox" stylename="edit-area"
-                              height="100%" width="100%" expand="docOfficeFrame">
-                        <vbox id="cardHeaderHolder" width="100%"/>
-                        <frame id="docOfficeFrame" screen="docOfficeFrame" height="100%"/>
                     </groupBox>
                 </tab>
                 <tab id="docTreeTab" caption="msg://hierarchy">

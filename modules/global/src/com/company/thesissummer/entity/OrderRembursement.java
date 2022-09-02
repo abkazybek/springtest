@@ -42,6 +42,10 @@ public class OrderRembursement extends Doc implements HasDetailedDescription {
     @Column(name = "NOMER_ORDER")
     protected String nomerOrder;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORDER_RECEIVER_ID")
+    protected ExtEmployee orderReceiver;
+
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "orderRembursement")
@@ -82,6 +86,14 @@ public class OrderRembursement extends Doc implements HasDetailedDescription {
 
     @Column(name = "SUMMA_SUB")
     protected String summaSub;
+
+    public ExtEmployee getOrderReceiver() {
+        return orderReceiver;
+    }
+
+    public void setOrderReceiver(ExtEmployee orderReceiver) {
+        this.orderReceiver = orderReceiver;
+    }
 
     public Set<OrderRembursement1c> getOrderRembursement1c() {
         return orderRembursement1c;

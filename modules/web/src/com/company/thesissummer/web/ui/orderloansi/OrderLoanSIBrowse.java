@@ -6,9 +6,12 @@
 
 package com.company.thesissummer.web.ui.orderloansi;
 
+import com.company.thesissummer.service.parsingorders.OrderLoanSiParsService;
 import com.haulmont.thesis.web.ui.basicdoc.browse.AbstractDocBrowser;
 import com.company.thesissummer.entity.OrderLoanSI;
+import org.junit.experimental.categories.Categories;
 
+import javax.inject.Inject;
 import java.util.Map;
 
 public class OrderLoanSIBrowse<T extends OrderLoanSI> extends AbstractDocBrowser<T> {

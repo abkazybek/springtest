@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+    <services xmlns="http://schemas.haulmont.com/cuba/rest-services.xsd">
+        <!--Exposed for REST API functional tests-->
+    <service name="thesissummer_OrderCennayaBumagaParseService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderLoanParsService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderLoanSiParsService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderPogObParseService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderPostingParseService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderRembursementParseService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderReturnNeispSubParseService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderRevaluationParseService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderTransferMoneyParseService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderTransferParseService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderVozvratVGuParseService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_OrderWriteOffParseService">
+        <method name="saveXML"/>
+    </service>
+</services>

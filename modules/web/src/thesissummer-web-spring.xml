@@ -18,6 +18,30 @@
                        value="com.company.thesissummer.service.OrderTemplateService"/>
                 <entry key="thesissummer_QRCodeGeneratorService"
                        value="com.company.thesissummer.service.QRCodeGeneratorService"/>
+                <entry key="thesissummer_OrderLoanParsService"
+                       value="com.company.thesissummer.service.parsingorders.OrderLoanParsService"/>
+                <entry key="thesissummer_OrderReturnNeispSubParseService"
+                       value="com.company.thesissummer.service.parsingorders.OrderReturnNeispSubParseService"/>
+                <entry key="thesissummer_OrderLoanSiParsService"
+                       value="com.company.thesissummer.service.parsingorders.OrderLoanSiParsService"/>
+                <entry key="thesissummer_OrderVozvratVGuParseService"
+                       value="com.company.thesissummer.service.parsingorders.OrderVozvratVGuParseService"/>
+                <entry key="thesissummer_OrderRembursementParseService"
+                       value="com.company.thesissummer.service.parsingorders.OrderRembursementParseService"/>
+                <entry key="thesissummer_OrderPostingParseService"
+                       value="com.company.thesissummer.service.parsingorders.OrderPostingParseService"/>
+                <entry key="thesissummer_OrderTransferParseService"
+                       value="com.company.thesissummer.service.parsingorders.OrderTransferParseService"/>
+                <entry key="thesissummer_OrderWriteOffParseService"
+                       value="com.company.thesissummer.service.parsingorders.OrderWriteOffParseService"/>
+                <entry key="thesissummer_OrderRevaluationParseService"
+                       value="com.company.thesissummer.service.parsingorders.OrderRevaluationParseService"/>
+                <entry key="thesissummer_OrderTransferMoneyParseService"
+                       value="com.company.thesissummer.service.parsingorders.OrderTransferMoneyParseService"/>
+                <entry key="thesissummer_OrderPogObParseService"
+                       value="com.company.thesissummer.service.parsingorders.OrderPogObParseService"/>
+                <entry key="thesissummer_OrderCennayaBumagaParseService"
+                       value="com.company.thesissummer.service.parsingorders.OrderCennayaBumagaParseService"/>
             </map>
         </property>
     </bean>

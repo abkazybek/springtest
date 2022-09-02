@@ -42,6 +42,13 @@ public class OrderReturnNeispSub extends Doc implements HasDetailedDescription {
     @Column(name = "DATA_ORDER")
     protected String dataOrder;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORDER_RECEIVER_ID")
+    protected ExtEmployee orderReceiver;
+
+    @Column(name = "NOMER_ORDER")
+    protected String nomerOrder;
+
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "orderReturnNeispSub")
@@ -83,6 +90,9 @@ public class OrderReturnNeispSub extends Doc implements HasDetailedDescription {
     @Column(name = "BIN_USH")
     protected String binUsh;
 
+    @Column(name = "USH")
+    protected String ush;
+
     @Column(name = "KVARTAL2")
     protected String kvartal2;
 
@@ -100,6 +110,30 @@ public class OrderReturnNeispSub extends Doc implements HasDetailedDescription {
 
     @Column(name = "OBLAST_PODRAZDEL2")
     protected String oblastPodrazdel2;
+
+    public ExtEmployee getOrderReceiver() {
+        return orderReceiver;
+    }
+
+    public void setOrderReceiver(ExtEmployee orderReceiver) {
+        this.orderReceiver = orderReceiver;
+    }
+
+    public String getUsh() {
+        return ush;
+    }
+
+    public void setUsh(String ush) {
+        this.ush = ush;
+    }
+
+    public String getNomerOrder() {
+        return nomerOrder;
+    }
+
+    public void setNomerOrder(String nomerOrder) {
+        this.nomerOrder = nomerOrder;
+    }
 
     public Set<OrderReturnNeispSub1C> getOrderReturnNeispSub1C() {
         return orderReturnNeispSub1C;

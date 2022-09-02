@@ -1,0 +1,1 @@
+alter table THESISSUMMER_ORDER_POGASH_OB add column ORDER_RECEIVER_ID uuid ;

@@ -42,6 +42,10 @@ public class OrderPosting extends Doc implements HasDetailedDescription {
     @Column(name = "NOMER_ORDER")
     protected String nomerOrder;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORDER_RECEIVER_ID")
+    protected ExtEmployee orderReceiver;
+
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "orderPosting")
@@ -67,6 +71,14 @@ public class OrderPosting extends Doc implements HasDetailedDescription {
 
     @Column(name = "OBSHAYA_SUMMA")
     protected String obshayaSumma;
+
+    public ExtEmployee getOrderReceiver() {
+        return orderReceiver;
+    }
+
+    public void setOrderReceiver(ExtEmployee orderReceiver) {
+        this.orderReceiver = orderReceiver;
+    }
 
     public Set<OrderPosting1C> getOrderPosting1C() {
         return orderPosting1C;

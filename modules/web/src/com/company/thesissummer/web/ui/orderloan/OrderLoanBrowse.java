@@ -6,9 +6,11 @@
 
 package com.company.thesissummer.web.ui.orderloan;
 
+import com.company.thesissummer.service.parsingorders.OrderLoanParsService;
 import com.haulmont.thesis.web.ui.basicdoc.browse.AbstractDocBrowser;
 import com.company.thesissummer.entity.OrderLoan;
 
+import javax.inject.Inject;
 import java.util.Map;
 
 public class OrderLoanBrowse<T extends OrderLoan> extends AbstractDocBrowser<T> {
@@ -17,4 +19,5 @@ public class OrderLoanBrowse<T extends OrderLoan> extends AbstractDocBrowser<T> 
         super.init(params);
         entityName = "thesissummer$OrderLoan";
     }
+
 }

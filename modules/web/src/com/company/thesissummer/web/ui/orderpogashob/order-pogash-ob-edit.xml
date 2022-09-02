@@ -47,6 +47,11 @@
                 <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
             </query>
         </collectionDatasource>
+        <collectionDatasource id="receiverDc" class="com.haulmont.thesis.core.entity.Employee" view="withuserdepartment">
+            <query>
+                <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
+            </query>
+        </collectionDatasource>
         <runtimePropsDatasource id="runtimePropsDs" mainDs="cardDs"/>
         <collectionDatasource id="categoriesDs" class="com.haulmont.cuba.core.entity.Category" view="_local">
             <query>
@@ -117,24 +122,16 @@
                                                 </hbox>
                                             </row>
                                             <row id="themeRow">
-                                                <textField id="theme" caption="msg://theme" datasource="cardDs"
+                                                <textField visible="false" id="theme" caption="msg://theme" datasource="cardDs"
                                                            property="theme" width="${width}"/>
                                             </row>
                                             <row id="commentRow">
-                                                <textArea id="comment" datasource="cardDs" resizable="false"
+                                                <textArea visible="false" id="comment" datasource="cardDs" resizable="false"
                                                           property="comment" caption="msg://comment"
                                                           width="${width}" height="${textAreaHeight}"/>
                                             </row>
-                                        </rows>
-                                    </grid>
-                                    <vbox id="gridSeparator" stylename="grid-separator" height="100%" width="1px"/>
-                                    <grid id="rightGrid" spacing="true" margin="true, true, false, true">
-                                        <columns>
-                                            <column flex="1"/>
-                                        </columns>
-                                        <rows>
                                             <row id="docCategoryRow">
-                                                <lookupPickerField id="docCategory" caption="msg://docCategory"
+                                                <lookupPickerField visible="false" id="docCategory" caption="msg://docCategory"
                                                                    datasource="cardDs" property="docCategory"
                                                                    optionsDatasource="categoryDs" width="${width}">
                                                     <actions>
@@ -143,7 +140,7 @@
                                                 </lookupPickerField>
                                             </row>
                                             <row id="ownerRow">
-                                                <lookupPickerField id="owner" caption="msg://owner"
+                                                <lookupPickerField id="owner" caption="Автор"
                                                                    datasource="cardDs"
                                                                    property="owner" optionsDatasource="ownerDs"
                                                                    width="${width}">
@@ -153,7 +150,7 @@
                                                 </lookupPickerField>
                                             </row>
                                             <row id="orgRow">
-                                                <lookupPickerField id="organization" caption="msg://organization"
+                                                <lookupPickerField visible="false" id="organization" caption="msg://organization"
                                                                    datasource="cardDs"
                                                                    optionsDatasource="organizationDs"
                                                                    property="organization" width="${width}">
@@ -170,19 +167,30 @@
                                                 </lookupPickerField>
                                             </row>
                                             <row id="parentCardRow">
-                                                <pickerField id="parentCard" caption="msg://parentCard"
+                                                <pickerField visible="false" id="parentCard" caption="msg://parentCard"
                                                              datasource="cardDs" property="parentCard"
                                                              width="${width}">
                                                 </pickerField>
                                             </row>
                                             <row id="contractorRow">
-                                                <lookupPickerField id="contractor" datasource="cardDs"
+                                                <lookupPickerField visible="false" id="contractor" datasource="cardDs"
                                                                    caption="msg://contractor" property="contractor"
                                                                    width="${width}"
                                                                    optionsDatasource="contractorsDs">
                                                     <actions>
                                                         <action id="open"/>
                                                         <action id="lookup"/>
+                                                    </actions>
+                                                </lookupPickerField>
+                                            </row>
+                                            <row id="receiverRow">
+                                                <lookupPickerField id="orderReceiver"
+                                                                   datasource="cardDs"
+                                                                   property="orderReceiver" optionsDatasource="receiverDc"
+                                                                   caption="msg://com.company.thesissummer.entity/OrderPogashOb.orderReceiver"
+                                                                   width="${width}">
+                                                    <actions>
+                                                        <action id="open"/>
                                                     </actions>
                                                 </lookupPickerField>
                                             </row>
@@ -212,6 +220,16 @@
                                                            width="theme://thesis.gui.editor-fields.width"
                                                            caption="msg://com.company.thesissummer.entity/OrderPogashOb.vidCzaimorachetov"/>
                                             </row>
+                                            <row id="nomerOrderRow">
+                                                <textField id="nomerOrder" property="nomerOrder" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderPogashOb.nomerOrder"/>
+                                            </row>
+                                            <row id="dataOrderRow">
+                                                <textField id="dataOrder" property="dataOrder" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderPogashOb.dataOrder"/>
+                                            </row>
                                             <row id="summaKOplateRow">
                                                 <textField id="summaKOplate" property="summaKOplate" datasource="cardDs"
                                                            width="theme://thesis.gui.editor-fields.width"
@@ -222,6 +240,14 @@
                                                            width="theme://thesis.gui.editor-fields.width"
                                                            caption="msg://com.company.thesissummer.entity/OrderPogashOb.poluchatel"/>
                                             </row>
+                                        </rows>
+                                    </grid>
+                                    <vbox id="gridSeparator" stylename="grid-separator" height="100%" width="1px"/>
+                                    <grid id="rightGrid" spacing="true" margin="true, true, false, true">
+                                        <columns>
+                                            <column flex="1"/>
+                                        </columns>
+                                        <rows>
                                             <row id="bankovsckiySchetPlatelshikaRow">
                                                 <textField id="bankovsckiySchetPlatelshika"
                                                            property="bankovsckiySchetPlatelshika" datasource="cardDs"
@@ -342,13 +368,13 @@
                         </hbox>
                     </groupBox>
                 </tab>
-                <tab id="office" caption="msg://office" lazy="false">
+                <!--<tab id="office" caption="msg://office" lazy="false">
                     <groupBox id="officeTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="docOfficeFrame">
                         <vbox id="cardHeaderHolder" width="100%"/>
                         <frame id="docOfficeFrame" screen="docOfficeFrame" height="100%"/>
                     </groupBox>
-                </tab>
+                </tab> -->
                 <tab id="docTreeTab" caption="msg://hierarchy">
                     <groupBox id="docTreeTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="cardTreeFrameBox">

@@ -46,7 +46,7 @@ public class OrderReturnNeispSubEdit<T extends OrderReturnNeispSub> extends Abst
 
     @Override
     protected void fillHiddenTabs() {
-        hiddenTabs.put("office", getMessage("office"));
+        //hiddenTabs.put("office", getMessage("office"));
         hiddenTabs.put("attachmentsTab", getMessage("attachmentsTab"));
         hiddenTabs.put("docTreeTab", getMessage("docTreeTab"));
         if (getAccessData().getNotVersion()) {

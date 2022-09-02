@@ -146,6 +146,7 @@
                             <column id="owner" collapsed="true" caption="msg://owner"/>
                             <column id="organization" caption="msg://organization"/>
                             <column id="department" collapsed="true" caption="msg://department"/>
+                            <column id="orderReceiver"/>
                             <column id="nomerOrder"/>
                             <column id="dataOrder"/>
                             <column id="contragent"/>
@@ -155,6 +156,13 @@
                             <column id="nomerSdelki"/>
                             <column id="vid"/>
                             <column id="cennayaBumaga"/>
+                            <column id="baseNach"/>
+                            <column id="dohodnostRepo"/>
+                            <column id="dataOpen"/>
+                            <column id="kolvoOblig"/>
+                            <column id="summaSdelki"/>
+                            <column id="voznagrazhdenie"/>
+                            <column id="dataClose"/>
                             <column id="regDate" collapsed="true" caption="msg://regDate">
                                 <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
                                            format="msg://dateFormat"/>

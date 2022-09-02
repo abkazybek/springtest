@@ -47,6 +47,11 @@
                 <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
             </query>
         </collectionDatasource>
+        <collectionDatasource id="receiverDc" class="com.haulmont.thesis.core.entity.Employee" view="withuserdepartment">
+            <query>
+                <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
+            </query>
+        </collectionDatasource>
         <runtimePropsDatasource id="runtimePropsDs" mainDs="cardDs"/>
         <collectionDatasource id="categoriesDs" class="com.haulmont.cuba.core.entity.Category" view="_local">
             <query>
@@ -184,6 +189,17 @@
                                                            width="theme://thesis.gui.editor-fields.width"
                                                            caption="msg://com.company.thesissummer.entity/OrderIns.podrazdelenie"/>
                                             </row>
+                                            <row id="receiverRow">
+                                                <lookupPickerField id="orderReceiver"
+                                                                   datasource="cardDs"
+                                                                   property="orderReceiver" optionsDatasource="receiverDc"
+                                                                   caption="msg://com.company.thesissummer.entity/OrderIns.orderReceiver"
+                                                                   width="${width}">
+                                                    <actions>
+                                                        <action id="open"/>
+                                                    </actions>
+                                                </lookupPickerField>
+                                            </row>
                                             <row id="reshenieOperatoraRow">
                                                 <textField id="reshenieOperatora" property="reshenieOperatora"
                                                            datasource="cardDs"
@@ -205,6 +221,16 @@
                                                            datasource="cardDs"
                                                            width="theme://thesis.gui.editor-fields.width"
                                                            caption="msg://com.company.thesissummer.entity/OrderIns.summaDlyaPerech"/>
+                                            </row>
+                                            <row id="nomerOrderRow">
+                                                <textField id="nomerOrder" property="nomerOrder" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderIns.nomerOrder"/>
+                                            </row>
+                                            <row id="dataOrderRow">
+                                                <textField id="dataOrder" property="dataOrder" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderIns.dataOrder"/>
                                             </row>
                                         </rows>
                                     </grid>
@@ -230,11 +256,6 @@
                                                            width="theme://thesis.gui.editor-fields.width"
                                                            caption="msg://com.company.thesissummer.entity/OrderIns.iik"/>
                                             </row>
-                                            <row id="bankPoluchRow">
-                                                <textField id="bankPoluch" property="bankPoluch" datasource="cardDs"
-                                                           width="theme://thesis.gui.editor-fields.width"
-                                                           caption="msg://com.company.thesissummer.entity/OrderIns.bankPoluch"/>
-                                            </row>
                                             <row id="bikRow">
                                                 <textField id="bik" property="bik" datasource="cardDs"
                                                            width="theme://thesis.gui.editor-fields.width"
@@ -244,6 +265,21 @@
                                                 <textField id="kbe" property="kbe" datasource="cardDs"
                                                            width="theme://thesis.gui.editor-fields.width"
                                                            caption="msg://com.company.thesissummer.entity/OrderIns.kbe"/>
+                                            </row>
+                                            <row id="bankPoluchRow">
+                                                <textField id="bankPoluch" property="bankPoluch" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderIns.bankPoluch"/>
+                                            </row>
+                                            <row id="bikPoluchatelRow">
+                                                <textField id="bikPoluchatel" property="bikPoluchatel" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderIns.bikPoluchatel"/>
+                                            </row>
+                                            <row id="kbePoluchatelRow">
+                                                <textField id="bikPoluchatel" property="kbePoluchatel" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="msg://com.company.thesissummer.entity/OrderIns.kbePoluchatel"/>
                                             </row>
                                             <row id="summaNaSpecRow">
                                                 <textField id="summaNaSpec" property="summaNaSpec" datasource="cardDs"
@@ -321,13 +357,6 @@
                         <hbox id="atdrop" width="100%" height="100%" margin="false,true,false,false">
                             <frame screen="cardAttachmentsFrame" id="cardAttachmentsFrame" height="100%"/>
                         </hbox>
-                    </groupBox>
-                </tab>
-                <tab id="office" caption="msg://office" lazy="false">
-                    <groupBox id="officeTabGroupBox" stylename="edit-area"
-                              height="100%" width="100%" expand="docOfficeFrame">
-                        <vbox id="cardHeaderHolder" width="100%"/>
-                        <frame id="docOfficeFrame" screen="docOfficeFrame" height="100%"/>
                     </groupBox>
                 </tab>
                 <tab id="docTreeTab" caption="msg://hierarchy">

@@ -146,6 +146,10 @@
                             <column id="owner" collapsed="true" caption="msg://owner"/>
                             <column id="organization" caption="msg://organization"/>
                             <column id="department" collapsed="true" caption="msg://department"/>
+                            <column id="orderReceiver"/>
+                            <column id="nomerOrder"/>
+                            <column id="dataOrder"/>
+                            <column id="rasChetZach"/>
                             <column id="summaDlyAPerech"/>
                             <column id="dataPerevoda"/>
                             <column id="poluchatel"/>

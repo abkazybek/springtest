@@ -1,0 +1,1 @@
+alter table THESISSUMMER_ORDER_RETURN_NEISP_SUB add column NOMER_ORDER varchar(255) ;

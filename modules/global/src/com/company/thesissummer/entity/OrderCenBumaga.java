@@ -8,28 +8,21 @@ package com.company.thesissummer.entity;
 
 import com.haulmont.chile.core.datatypes.Datatypes;
 import com.haulmont.chile.core.model.MetaClass;
+import com.haulmont.cuba.core.entity.annotation.EnableRestore;
+import com.haulmont.cuba.core.entity.annotation.Listeners;
+import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.cuba.core.global.AppBeans;
-import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.core.global.Messages;
-
+import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.thesis.core.entity.Doc;
-
+import com.haulmont.thesis.core.entity.HasDetailedDescription;
 import com.haulmont.thesis.core.global.EntityCopyUtils;
 import org.apache.commons.lang.StringUtils;
-import com.haulmont.thesis.core.entity.HasDetailedDescription;
-import com.haulmont.cuba.core.entity.annotation.EnableRestore;
-import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Column;
-
-import com.haulmont.cuba.core.entity.annotation.Listeners;
 
 @DiscriminatorValue("3400")
 @Table(name = "THESISSUMMER_ORDER_CEN_BUMAGA")
@@ -41,24 +34,122 @@ import com.haulmont.cuba.core.entity.annotation.Listeners;
 public class OrderCenBumaga extends Doc implements HasDetailedDescription {
 
     private static final long serialVersionUID = 7899871681743718469L;
+
     @Column(name = "NOMER_ORDER")
     protected String nomerOrder;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORDER_RECEIVER_ID")
+    protected ExtEmployee orderReceiver;
+
     @Column(name = "DATA_ORDER")
     protected String dataOrder;
+
     @Column(name = "CONTRAGENT")
     protected String contragent;
+
     @Column(name = "EMITENT")
     protected String emitent;
+
     @Column(name = "NIN")
     protected String nin;
+
     @Column(name = "DOGOVOR")
     protected String dogovor;
+
     @Column(name = "NOMER_SDELKI")
     protected String nomerSdelki;
+
     @Column(name = "VID")
     protected String vid;
+
     @Column(name = "CENNAYA_BUMAGA")
     protected String cennayaBumaga;
+
+    @Column(name = "BASE_NACH")
+    protected String baseNach;
+
+    @Column(name = "DOHODNOST_REPO")
+    protected String dohodnostRepo;
+
+    @Column(name = "DATA_OPEN")
+    protected String dataOpen;
+
+    @Column(name = "KOLVO_OBLIG")
+    protected String kolvoOblig;
+
+    @Column(name = "SUMMA_SDELKI")
+    protected String summaSdelki;
+
+    @Column(name = "VOZNAGRAZHDENIE")
+    protected String voznagrazhdenie;
+
+    @Column(name = "DATA_CLOSE")
+    protected String dataClose;
+
+    public ExtEmployee getOrderReceiver() {
+        return orderReceiver;
+    }
+
+    public void setOrderReceiver(ExtEmployee orderReceiver) {
+        this.orderReceiver = orderReceiver;
+    }
+
+    public String getDataClose() {
+        return dataClose;
+    }
+
+    public void setDataClose(String dataClose) {
+        this.dataClose = dataClose;
+    }
+
+    public String getVoznagrazhdenie() {
+        return voznagrazhdenie;
+    }
+
+    public void setVoznagrazhdenie(String voznagrazhdenie) {
+        this.voznagrazhdenie = voznagrazhdenie;
+    }
+
+    public String getSummaSdelki() {
+        return summaSdelki;
+    }
+
+    public void setSummaSdelki(String summaSdelki) {
+        this.summaSdelki = summaSdelki;
+    }
+
+    public String getKolvoOblig() {
+        return kolvoOblig;
+    }
+
+    public void setKolvoOblig(String kolvoOblig) {
+        this.kolvoOblig = kolvoOblig;
+    }
+
+    public String getDataOpen() {
+        return dataOpen;
+    }
+
+    public void setDataOpen(String dataOpen) {
+        this.dataOpen = dataOpen;
+    }
+
+    public String getDohodnostRepo() {
+        return dohodnostRepo;
+    }
+
+    public void setDohodnostRepo(String dohodnostRepo) {
+        this.dohodnostRepo = dohodnostRepo;
+    }
+
+    public String getBaseNach() {
+        return baseNach;
+    }
+
+    public void setBaseNach(String baseNach) {
+        this.baseNach = baseNach;
+    }
 
     public String getCennayaBumaga() {
         return cennayaBumaga;

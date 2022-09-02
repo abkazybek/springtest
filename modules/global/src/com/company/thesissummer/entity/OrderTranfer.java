@@ -42,6 +42,10 @@ public class OrderTranfer extends Doc implements HasDetailedDescription {
     @Column(name = "NOMER_ORDER")
     protected String nomerOrder;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORDER_RECEIVER_ID")
+    protected ExtEmployee orderReceiver;
+
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "orderTranfer")
@@ -82,6 +86,14 @@ public class OrderTranfer extends Doc implements HasDetailedDescription {
 
     @Column(name = "BANK_POLUCHA")
     protected String bankPolucha;
+
+    public ExtEmployee getOrderReceiver() {
+        return orderReceiver;
+    }
+
+    public void setOrderReceiver(ExtEmployee orderReceiver) {
+        this.orderReceiver = orderReceiver;
+    }
 
     public Set<OrderTranfer1C> getOrderTranfer1C() {
         return orderTranfer1C;

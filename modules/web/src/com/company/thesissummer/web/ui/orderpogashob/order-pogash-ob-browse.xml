@@ -146,6 +146,7 @@
                             <column id="owner" collapsed="true" caption="msg://owner"/>
                             <column id="organization" caption="msg://organization"/>
                             <column id="department" collapsed="true" caption="msg://department"/>
+                            <column id="orderReceiver"/>
                             <column id="dogovor"/>
                             <column id="naznacheniye"/>
                             <column id="contragent"/>
@@ -155,6 +156,8 @@
                             <column id="poluchatel"/>
                             <column id="bankovsckiySchetPlatelshika"/>
                             <column id="dogovorPlat"/>
+                            <column id="nomerOrder"/>
+                            <column id="dataOrder"/>
                             <column id="bin"/>
                             <column id="bankBenefeciar"/>
                             <column id="bik"/>

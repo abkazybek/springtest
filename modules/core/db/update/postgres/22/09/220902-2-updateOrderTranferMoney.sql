@@ -1,0 +1,1 @@
+alter table THESISSUMMER_ORDER_TRANFER_MONEY add column ORDER_RECEIVER_ID uuid ;

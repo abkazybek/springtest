@@ -42,6 +42,10 @@ public class OrderWriteOff extends Doc implements HasDetailedDescription {
     @Column(name = "NOMER_ORDER")
     protected String nomerOrder;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORDER_RECEIVER_ID")
+    protected ExtEmployee orderReceiver;
+
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "orderWriteOff")
@@ -70,6 +74,14 @@ public class OrderWriteOff extends Doc implements HasDetailedDescription {
 
     @Column(name = "OBSHAYA_SUMMA_ZALOG_OBESPECH")
     protected String obshayaSummaZalogObespech;
+
+    public ExtEmployee getOrderReceiver() {
+        return orderReceiver;
+    }
+
+    public void setOrderReceiver(ExtEmployee orderReceiver) {
+        this.orderReceiver = orderReceiver;
+    }
 
     public Set<OrderWriteOff1C> getOrderWriteOff1C() {
         return orderWriteOff1C;

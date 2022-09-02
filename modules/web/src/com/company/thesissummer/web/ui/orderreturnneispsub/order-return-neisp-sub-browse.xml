@@ -146,6 +146,7 @@
                             <column id="owner" collapsed="true" caption="msg://owner"/>
                             <column id="organization" caption="msg://organization"/>
                             <column id="department" collapsed="true" caption="msg://department"/>
+                            <column id="nomerOrder"/>
                             <column id="dataOrder"/>
                             <column id="podrazdelenie"/>
                             <column id="schetKorporacii"/>
@@ -159,6 +160,7 @@
                             <column id="dogovorSub"/>
                             <column id="rabOrgan"/>
                             <column id="binUsh"/>
+                            <column id="ush"/>
                             <column id="kvartal2"/>
                             <column id="summaSub"/>
                             <column id="schetPoluchatelya"/>

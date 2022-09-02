@@ -1,0 +1,1 @@
+alter table THESISSUMMER_ORDER_LOAN_SI add column ORDER_RECEIVER_ID uuid ;

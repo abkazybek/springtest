@@ -46,7 +46,7 @@ public class OrderNaVozvratEdit<T extends OrderNaVozvrat> extends AbstractDocEdi
 
     @Override
     protected void fillHiddenTabs() {
-        hiddenTabs.put("office", getMessage("office"));
+        //hiddenTabs.put("office", getMessage("office"));
         hiddenTabs.put("attachmentsTab", getMessage("attachmentsTab"));
         hiddenTabs.put("docTreeTab", getMessage("docTreeTab"));
         if (getAccessData().getNotVersion()) {

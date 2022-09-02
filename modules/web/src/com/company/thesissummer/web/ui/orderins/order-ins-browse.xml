@@ -135,6 +135,9 @@
                             <column id="currentActorsString" caption="msg://currentActors" maxTextLength="40"/>
                             <column id="docKind" caption="msg://docKind"/>
                             <column id="number" caption="msg://number"/>
+                            <column id="nomerOrder"/>
+                            <column id="dataOrder" />
+
                             <column id="regNo" caption="msg://regNo"/>
                             <column id="date" caption="msg://date"/>
                             <column id="contractor" collapsed="true" caption="msg://contractor"/>
@@ -146,6 +149,7 @@
                             <column id="owner" collapsed="true" caption="msg://owner"/>
                             <column id="organization" caption="msg://organization"/>
                             <column id="department" collapsed="true" caption="msg://department"/>
+                            <column id="orderReceiver"/>
                             <column id="podrazdelenie"/>
                             <column id="reshenieOperatora"/>
                             <column id="dogovorStrah"/>
@@ -154,9 +158,11 @@
                             <column id="naimenovaniePoluch"/>
                             <column id="bin"/>
                             <column id="iik"/>
-                            <column id="bankPoluch"/>
                             <column id="bik"/>
                             <column id="kbe"/>
+                            <column id="bankPoluch"/>
+                            <column id="bikPoluchatel"/>
+                            <column id="kbePoluchatel"/>
                             <column id="summaNaSpec"/>
                             <column id="regDate" collapsed="true" caption="msg://regDate">
                                 <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"

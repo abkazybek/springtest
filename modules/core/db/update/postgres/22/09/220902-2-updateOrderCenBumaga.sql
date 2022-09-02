@@ -1,0 +1,1 @@
+alter table THESISSUMMER_ORDER_CEN_BUMAGA add column ORDER_RECEIVER_ID uuid ;

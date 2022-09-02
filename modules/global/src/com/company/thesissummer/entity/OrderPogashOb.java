@@ -8,28 +8,21 @@ package com.company.thesissummer.entity;
 
 import com.haulmont.chile.core.datatypes.Datatypes;
 import com.haulmont.chile.core.model.MetaClass;
+import com.haulmont.cuba.core.entity.annotation.EnableRestore;
+import com.haulmont.cuba.core.entity.annotation.Listeners;
+import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.cuba.core.global.AppBeans;
-import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.cuba.core.global.Messages;
-
+import com.haulmont.cuba.core.global.Metadata;
 import com.haulmont.thesis.core.entity.Doc;
-
+import com.haulmont.thesis.core.entity.HasDetailedDescription;
 import com.haulmont.thesis.core.global.EntityCopyUtils;
 import org.apache.commons.lang.StringUtils;
-import com.haulmont.thesis.core.entity.HasDetailedDescription;
-import com.haulmont.cuba.core.entity.annotation.EnableRestore;
-import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 
+import javax.persistence.*;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Column;
-
-import com.haulmont.cuba.core.entity.annotation.Listeners;
 
 @DiscriminatorValue("3300")
 @Table(name = "THESISSUMMER_ORDER_POGASH_OB")
@@ -41,38 +34,88 @@ import com.haulmont.cuba.core.entity.annotation.Listeners;
 public class OrderPogashOb extends Doc implements HasDetailedDescription {
 
     private static final long serialVersionUID = -7314528479967767687L;
+
     @Column(name = "DOGOVOR")
     protected String dogovor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ORDER_RECEIVER_ID")
+    protected ExtEmployee orderReceiver;
+
     @Column(name = "NAZNACHENIYE")
     protected String naznacheniye;
+
     @Column(name = "CONTRAGENT")
     protected String contragent;
+
     @Column(name = "DATA_PERECH")
     protected String dataPerech;
+
     @Column(name = "VID_CZAIMORACHETOV")
     protected String vidCzaimorachetov;
+
     @Column(name = "SUMMA_K_OPLATE")
     protected String summaKOplate;
+
     @Column(name = "POLUCHATEL")
     protected String poluchatel;
+
+    @Column(name = "NOMER_ORDER")
+    protected String nomerOrder;
+
+    @Column(name = "DATA_ORDER")
+    protected String dataOrder;
+
     @Column(name = "BANKOVSCKIY_SCHET_PLATELSHIKA")
     protected String bankovsckiySchetPlatelshika;
+
     @Column(name = "DOGOVOR_PLAT")
     protected String dogovorPlat;
+
     @Column(name = "BIN")
     protected String bin;
+
     @Column(name = "BANK_BENEFECIAR")
     protected String bankBenefeciar;
+
     @Column(name = "BIK")
     protected String bik;
+
     @Column(name = "IIK")
     protected String iik;
+
     @Column(name = "KBE")
     protected String kbe;
+
     @Column(name = "KNP")
     protected String knp;
+
     @Column(name = "KBK")
     protected String kbk;
+
+    public ExtEmployee getOrderReceiver() {
+        return orderReceiver;
+    }
+
+    public void setOrderReceiver(ExtEmployee orderReceiver) {
+        this.orderReceiver = orderReceiver;
+    }
+
+    public String getDataOrder() {
+        return dataOrder;
+    }
+
+    public void setDataOrder(String dataOrder) {
+        this.dataOrder = dataOrder;
+    }
+
+    public String getNomerOrder() {
+        return nomerOrder;
+    }
+
+    public void setNomerOrder(String nomerOrder) {
+        this.nomerOrder = nomerOrder;
+    }
 
     public String getKbk() {
         return kbk;

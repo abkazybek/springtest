@@ -1,0 +1,1 @@
+alter table THESISSUMMER_ORDER_WRITE_OFF add column ORDER_RECEIVER_ID uuid ;

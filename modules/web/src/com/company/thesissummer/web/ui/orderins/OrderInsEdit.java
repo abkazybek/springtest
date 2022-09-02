@@ -46,7 +46,6 @@ public class OrderInsEdit<T extends OrderIns> extends AbstractDocEditor<T> {
 
     @Override
     protected void fillHiddenTabs() {
-        hiddenTabs.put("office", getMessage("office"));
         hiddenTabs.put("attachmentsTab", getMessage("attachmentsTab"));
         hiddenTabs.put("docTreeTab", getMessage("docTreeTab"));
         if (getAccessData().getNotVersion()) {

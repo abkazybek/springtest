@@ -1,0 +1,1 @@
+alter table THESISSUMMER_ORDER_SUBSIDIY add column ORDER_RECEIVER_ID uuid ;

@@ -147,11 +147,13 @@
                             <column id="organization" caption="msg://organization"/>
                             <column id="department" collapsed="true" caption="msg://department"/>
                             <column id="nomerRasp"/>
+                            <column id="orderReceiver"/>
                             <column id="dataRasp"/>
                             <column id="podrazdelenie"/>
                             <column id="osnovanie"/>
                             <column id="kontragent"/>
                             <column id="iin"/>
+                            <column id="istochnik"/>
                             <column id="konechZaemchik"/>
                             <column id="dogovor"/>
                             <column id="summa"/>

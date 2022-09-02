@@ -1,0 +1,3 @@
+alter table THESISSUMMER_ORDER_TRANFER_MONEY add column NOMER_ORDER varchar(255) ;
+alter table THESISSUMMER_ORDER_TRANFER_MONEY add column DATA_ORDER varchar(255) ;
+alter table THESISSUMMER_ORDER_TRANFER_MONEY add column RAS_CHET_ZACH varchar(255) ;

@@ -2,70 +2,13 @@
 alter table DF_DEPARTMENT add column PODRAZDELENIE varchar(50) ^
 alter table DF_DEPARTMENT add column DESCRIBE_ varchar(255) ^
 -- end DF_DEPARTMENT
--- begin THESISSUMMER_ORDER_LOAN
-create table THESISSUMMER_ORDER_LOAN (
-    CARD_ID uuid,
-    --
-    PODRAZDELENIE varchar(255),
-    NOMER_ORDER varchar(255),
-    DATA_ORDER varchar(255),
-    PODRAZDELENIE2 varchar(255),
-    NOMER_PROTOCOLA_KK varchar(255),
-    CONTRAGENT varchar(255),
-    FULL_NAME varchar(255),
-    DOGOVOR varchar(255),
-    SUMMA varchar(255),
-    KREDIT_LINIYA varchar(255),
-    ISTOCHNIK varchar(255),
-    STAVKA_VOZ varchar(255),
-    SROK_KREDITA varchar(255),
-    BANK varchar(255),
-    BIK varchar(255),
-    IIK varchar(255),
-    BIN varchar(255),
-    KBE varchar(255),
-    UR_ADRESS varchar(255),
-    --
-    primary key (CARD_ID)
-)^
--- end THESISSUMMER_ORDER_LOAN
--- begin THESISSUMMER_ORDER_INS
-create table THESISSUMMER_ORDER_INS (
-    CARD_ID uuid,
-    --
-    PODRAZDELENIE varchar(255),
-    RESHENIE_OPERATORA varchar(255),
-    DOGOVOR_STRAH varchar(255),
-    IIK_OBSH varchar(255),
-    SUMMA_DLYA_PERECH varchar(255),
-    NAIMENOVANIE_POLUCH varchar(255),
-    BIN varchar(255),
-    IIK varchar(255),
-    BANK_POLUCH varchar(255),
-    BIK varchar(255),
-    KBE varchar(255),
-    SUMMA_NA_SPEC varchar(255),
-    --
-    primary key (CARD_ID)
-)^
--- end THESISSUMMER_ORDER_INS
--- begin THESISSUMMER_ORDER_TRANFER_MONEY
-create table THESISSUMMER_ORDER_TRANFER_MONEY (
-    CARD_ID uuid,
-    --
-    SUMMA_DLY_A_PERECH varchar(255),
-    DATA_PEREVODA varchar(255),
-    POLUCHATEL varchar(255),
-    RASCHET_SCHET varchar(255),
-    --
-    primary key (CARD_ID)
-)^
--- end THESISSUMMER_ORDER_TRANFER_MONEY
 -- begin THESISSUMMER_ORDER_LOAN_SI
 create table THESISSUMMER_ORDER_LOAN_SI (
     CARD_ID uuid,
     --
     NOMER_RASP varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    ISTOCHNIK varchar(255),
     DATA_RASP varchar(255),
     PODRAZDELENIE varchar(255),
     OSNOVANIE varchar(255),
@@ -91,6 +34,9 @@ create table THESISSUMMER_ORDER_VOZVRATV_GU (
     CARD_ID uuid,
     --
     DOGOVOR_PORUCH varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    DATA_ORDER varchar(255),
+    NOMER_ORDER varchar(255),
     ONSOVNOI_DOLG varchar(255),
     VOZNAGRAZHDENIE varchar(255),
     PENYA varchar(255),
@@ -128,33 +74,6 @@ create table THESISSUMMER_ORDER_RETURN_NEISP_SUB1C (
     primary key (ID)
 )^
 -- end THESISSUMMER_ORDER_RETURN_NEISP_SUB1C
--- begin THESISSUMMER_ORDER_RETURN_NEISP_SUB
-create table THESISSUMMER_ORDER_RETURN_NEISP_SUB (
-    CARD_ID uuid,
-    --
-    DATA_ORDER varchar(255),
-    PODRAZDELENIE varchar(255),
-    SCHET_KORPORACII varchar(255),
-    BANK_ORGANIZACII varchar(255),
-    BIK_BANKA varchar(255),
-    OBLAST_PODRAZDELENIA varchar(255),
-    KVARTAL1 varchar(255),
-    NAZNACHENIYA_PLATEZHA varchar(255),
-    SUMMA_POSTUPLENIYA varchar(255),
-    DATA_POSTUPLENIYA varchar(255),
-    DOGOVOR_SUB varchar(255),
-    RAB_ORGAN varchar(255),
-    BIN_USH varchar(255),
-    KVARTAL2 varchar(255),
-    SUMMA_SUB varchar(255),
-    SCHET_POLUCHATELYA varchar(255),
-    BIK_POLUCH varchar(255),
-    KBK varchar(255),
-    OBLAST_PODRAZDEL2 varchar(255),
-    --
-    primary key (CARD_ID)
-)^
--- end THESISSUMMER_ORDER_RETURN_NEISP_SUB
 -- begin THESISSUMMER_ORDER_REMBURSEMENT1C
 create table THESISSUMMER_ORDER_REMBURSEMENT1C (
     ID uuid,
@@ -183,6 +102,7 @@ create table THESISSUMMER_ORDER_REMBURSEMENT (
     CARD_ID uuid,
     --
     NOMER_ORDER varchar(255),
+    ORDER_RECEIVER_ID uuid,
     DATA_ORDER varchar(255),
     PODRAZDELENIE varchar(255),
     SCHET_KORPORACII varchar(255),
@@ -226,6 +146,7 @@ create table THESISSUMMER_ORDER_POSTING (
     CARD_ID uuid,
     --
     NOMER_ORDER varchar(255),
+    ORDER_RECEIVER_ID uuid,
     DATA_ORDER varchar(255),
     PODRAZDELENIE varchar(255),
     NOMER_PROTOCOLA varchar(255),
@@ -267,6 +188,7 @@ create table THESISSUMMER_ORDER_REVALUATION (
     CARD_ID uuid,
     --
     NOMER_ORDER varchar(255),
+    ORDER_RECEIVER_ID uuid,
     DATA_ORDER varchar(255),
     PODRAZDELENIE varchar(255),
     NOMER_PROTOCOLA varchar(255),
@@ -306,6 +228,7 @@ create table THESISSUMMER_ORDER_TRANFER (
     CARD_ID uuid,
     --
     NOMER_ORDER varchar(255),
+    ORDER_RECEIVER_ID uuid,
     DATA_ORDER varchar(255),
     PODRAZDELENIE varchar(255),
     SCHET_KORP varchar(255),
@@ -349,6 +272,7 @@ create table THESISSUMMER_ORDER_WRITE_OFF (
     CARD_ID uuid,
     --
     NOMER_ORDER varchar(255),
+    ORDER_RECEIVER_ID uuid,
     DATA_ORDER varchar(255),
     PODRAZDELENIE varchar(255),
     NOMER_PROTOCOLA varchar(255),
@@ -361,17 +285,135 @@ create table THESISSUMMER_ORDER_WRITE_OFF (
     primary key (CARD_ID)
 )^
 -- end THESISSUMMER_ORDER_WRITE_OFF
+-- begin THESISSUMMER_ORDER_SUBSIDIY
+create table THESISSUMMER_ORDER_SUBSIDIY (
+    CARD_ID uuid,
+    --
+    NOMER_ORDER varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    DATA_ORDER varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_ORDER_SUBSIDIY
+-- begin THESISSUMMER_ORDER_INS
+create table THESISSUMMER_ORDER_INS (
+    CARD_ID uuid,
+    --
+    PODRAZDELENIE varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    DATA_ORDER varchar(255),
+    NOMER_ORDER varchar(255),
+    RESHENIE_OPERATORA varchar(255),
+    DOGOVOR_STRAH varchar(255),
+    IIK_OBSH varchar(255),
+    SUMMA_DLYA_PERECH varchar(255),
+    NAIMENOVANIE_POLUCH varchar(255),
+    BIN varchar(255),
+    IIK varchar(255),
+    BIK varchar(255),
+    KBE varchar(255),
+    BANK_POLUCH varchar(255),
+    BIK_POLUCHATEL varchar(255),
+    KBE_POLUCHATEL varchar(255),
+    SUMMA_NA_SPEC varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_ORDER_INS
+-- begin THESISSUMMER_ORDER_NA_VOZVRAT
+create table THESISSUMMER_ORDER_NA_VOZVRAT (
+    CARD_ID uuid,
+    --
+    NOMER_ORDER varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    DATA_ORDER varchar(255),
+    PODRAZDELENIE varchar(255),
+    ISH_PISMO varchar(255),
+    PODRAZDELENIE_AKIMATA varchar(255),
+    RAYON varchar(255),
+    OBLAST varchar(255),
+    BASE_DOUBT varchar(255),
+    SUMMA_DLYA_PERECH varchar(255),
+    POLUCHATEL varchar(255),
+    BIN varchar(255),
+    IIK varchar(255),
+    BIK varchar(255),
+    KNP varchar(255),
+    KOD varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_ORDER_NA_VOZVRAT
+-- begin THESISSUMMER_ORDER_CEN_BUMAGA
+create table THESISSUMMER_ORDER_CEN_BUMAGA (
+    CARD_ID uuid,
+    --
+    NOMER_ORDER varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    DATA_ORDER varchar(255),
+    CONTRAGENT varchar(255),
+    EMITENT varchar(255),
+    NIN varchar(255),
+    DOGOVOR varchar(255),
+    NOMER_SDELKI varchar(255),
+    VID varchar(255),
+    CENNAYA_BUMAGA varchar(255),
+    BASE_NACH varchar(255),
+    DOHODNOST_REPO varchar(255),
+    DATA_OPEN varchar(255),
+    KOLVO_OBLIG varchar(255),
+    SUMMA_SDELKI varchar(255),
+    VOZNAGRAZHDENIE varchar(255),
+    DATA_CLOSE varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_ORDER_CEN_BUMAGA
+-- begin THESISSUMMER_ORDER_RETURN_NEISP_SUB
+create table THESISSUMMER_ORDER_RETURN_NEISP_SUB (
+    CARD_ID uuid,
+    --
+    DATA_ORDER varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    NOMER_ORDER varchar(255),
+    PODRAZDELENIE varchar(255),
+    SCHET_KORPORACII varchar(255),
+    BANK_ORGANIZACII varchar(255),
+    BIK_BANKA varchar(255),
+    OBLAST_PODRAZDELENIA varchar(255),
+    KVARTAL1 varchar(255),
+    NAZNACHENIYA_PLATEZHA varchar(255),
+    SUMMA_POSTUPLENIYA varchar(255),
+    DATA_POSTUPLENIYA varchar(255),
+    DOGOVOR_SUB varchar(255),
+    RAB_ORGAN varchar(255),
+    BIN_USH varchar(255),
+    USH varchar(255),
+    KVARTAL2 varchar(255),
+    SUMMA_SUB varchar(255),
+    SCHET_POLUCHATELYA varchar(255),
+    BIK_POLUCH varchar(255),
+    KBK varchar(255),
+    OBLAST_PODRAZDEL2 varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_ORDER_RETURN_NEISP_SUB
 -- begin THESISSUMMER_ORDER_POGASH_OB
 create table THESISSUMMER_ORDER_POGASH_OB (
     CARD_ID uuid,
     --
     DOGOVOR varchar(255),
+    ORDER_RECEIVER_ID uuid,
     NAZNACHENIYE varchar(255),
     CONTRAGENT varchar(255),
     DATA_PERECH varchar(255),
     VID_CZAIMORACHETOV varchar(255),
     SUMMA_K_OPLATE varchar(255),
     POLUCHATEL varchar(255),
+    NOMER_ORDER varchar(255),
+    DATA_ORDER varchar(255),
     BANKOVSCKIY_SCHET_PLATELSHIKA varchar(255),
     DOGOVOR_PLAT varchar(255),
     BIN varchar(255),
@@ -385,52 +427,47 @@ create table THESISSUMMER_ORDER_POGASH_OB (
     primary key (CARD_ID)
 )^
 -- end THESISSUMMER_ORDER_POGASH_OB
--- begin THESISSUMMER_ORDER_CEN_BUMAGA
-create table THESISSUMMER_ORDER_CEN_BUMAGA (
+-- begin THESISSUMMER_ORDER_LOAN
+create table THESISSUMMER_ORDER_LOAN (
     CARD_ID uuid,
     --
-    NOMER_ORDER varchar(255),
-    DATA_ORDER varchar(255),
-    CONTRAGENT varchar(255),
-    EMITENT varchar(255),
-    NIN varchar(255),
-    DOGOVOR varchar(255),
-    NOMER_SDELKI varchar(255),
-    VID varchar(255),
-    CENNAYA_BUMAGA varchar(255),
-    --
-    primary key (CARD_ID)
-)^
--- end THESISSUMMER_ORDER_CEN_BUMAGA
--- begin THESISSUMMER_ORDER_NA_VOZVRAT
-create table THESISSUMMER_ORDER_NA_VOZVRAT (
-    CARD_ID uuid,
-    --
-    NOMER_ORDER varchar(255),
-    DATA_ORDER varchar(255),
     PODRAZDELENIE varchar(255),
-    ISH_PISMO varchar(255),
-    PODRAZDELENIE_AKIMATA varchar(255),
-    RAYON varchar(255),
-    OBLAST varchar(255),
-    SUMMA_DLYA_PERECH varchar(255),
-    POLUCHATEL varchar(255),
-    BIN varchar(255),
-    IIK varchar(255),
-    BIK varchar(255),
-    KNP varchar(255),
-    KOD varchar(255),
-    --
-    primary key (CARD_ID)
-)^
--- end THESISSUMMER_ORDER_NA_VOZVRAT
--- begin THESISSUMMER_ORDER_SUBSIDIY
-create table THESISSUMMER_ORDER_SUBSIDIY (
-    CARD_ID uuid,
-    --
+    ORDER_RECEIVER_ID uuid,
     NOMER_ORDER varchar(255),
     DATA_ORDER varchar(255),
+    PODRAZDELENIE2 varchar(255),
+    NOMER_PROTOCOLA_KK varchar(255),
+    CONTRAGENT varchar(255),
+    FULL_NAME varchar(255),
+    DOGOVOR varchar(255),
+    SUMMA varchar(255),
+    KREDIT_LINIYA varchar(255),
+    ISTOCHNIK varchar(255),
+    STAVKA_VOZ varchar(255),
+    SROK_KREDITA varchar(255),
+    BANK varchar(255),
+    BIK varchar(255),
+    IIK varchar(255),
+    BIN varchar(255),
+    KBE varchar(255),
+    UR_ADRESS varchar(255),
     --
     primary key (CARD_ID)
 )^
--- end THESISSUMMER_ORDER_SUBSIDIY
+-- end THESISSUMMER_ORDER_LOAN
+-- begin THESISSUMMER_ORDER_TRANFER_MONEY
+create table THESISSUMMER_ORDER_TRANFER_MONEY (
+    CARD_ID uuid,
+    --
+    SUMMA_DLY_A_PERECH varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    DATA_PEREVODA varchar(255),
+    POLUCHATEL varchar(255),
+    RASCHET_SCHET varchar(255),
+    NOMER_ORDER varchar(255),
+    DATA_ORDER varchar(255),
+    RAS_CHET_ZACH varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_ORDER_TRANFER_MONEY

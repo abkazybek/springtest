@@ -147,6 +147,7 @@
                             <column id="organization" caption="msg://organization"/>
                             <column id="department" collapsed="true" caption="msg://department"/>
                             <column id="podrazdelenie"/>
+                            <column id="orderReceiver"/>
                             <column id="nomerOrder"/>
                             <column id="dataOrder"/>
                             <column id="podrazdelenie2"/>

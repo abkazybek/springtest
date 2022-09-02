@@ -41,8 +41,7 @@
             </columns>
             <rows datasource="orderWriteOff1CsDc" />
             <rowsCount/>
-            <buttonsPanel id="buttonsPanel"
-                          alwaysVisible="true">
+            <buttonsPanel id="buttonsPanel">
                 <button id="createBtn" action="orderWriteOff1CsTable.create"/>
                 <button id="editBtn" action="orderWriteOff1CsTable.edit"/>
                 <button id="removeBtn" action="orderWriteOff1CsTable.remove"/>
