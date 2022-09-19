@@ -8,15 +8,18 @@ package com.company.thesissummer.service.parsingorders;
 
 import com.company.thesissummer.entity.ExtEmployee;
 import com.company.thesissummer.entity.OrderLoan;
-import com.haulmont.cuba.core.global.CommitContext;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.chile.core.datatypes.Datatypes;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.security.entity.User;
+import com.haulmont.thesis.core.entity.Doc;
 import com.haulmont.thesis.core.entity.DocKind;
+import com.haulmont.thesis.core.entity.Employee;
 import com.haulmont.workflow.core.entity.CardProc;
 import com.haulmont.workflow.core.entity.CardRole;
 import com.haulmont.workflow.core.entity.Proc;
 import com.haulmont.workflow.core.entity.ProcRole;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -29,8 +32,10 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Base64;
 import java.util.List;
+import java.util.Locale;
 
 
 @Service(OrderLoanParsService.NAME)
@@ -44,12 +49,20 @@ public class OrderLoanParsServiceBean implements OrderLoanParsService {
     @Inject
     protected UserSessionSource userSessionSource;
 
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
+
+    //1C программист отправляет xml в base64
     @Override
     public String saveXML(String xml) {
 
-
+        //переводим в массив байтов base64
         byte[] decodeBytes = Base64.getDecoder().decode(xml);
 
+        //создаем document по которому настроим парсинг
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
         //InputSource is = new InputSource(new StringReader(decodeBytes.);
@@ -58,26 +71,29 @@ public class OrderLoanParsServiceBean implements OrderLoanParsService {
         Document document;
         try {
 
+            //создаем документ из массива байтов
             document = factory.newDocumentBuilder().parse(new ByteArrayInputStream(decodeBytes));
 
-            //Создание классса распоряжние по переоценке
+            //Создание классса распоряжние по выдачу займа
             OrderLoan orderLoan = dataManager.create(OrderLoan.class);
 
 
-            //Подгрузка вида документа
+            //Подгрузка вида документа (распоряжению по выдачи займа присваиваем код - 1)
             DocKind docKindOrder = dataManager.load(DocKind.class)
                     .query("select e from df$DocKind e where e.code = :code")
                     .parameter("code", "1")
                     .view("browse")
                     .one();
 
+            //Создаем один комитконтекст так как у нас должно комитется все в одной транзакции
             CommitContext commitContext = new CommitContext();
 
-            //Комит вида документа
+            //запись вида документа, по которому происходит прасинг
             orderLoan.setDocKind(docKindOrder);
 
             //Парсинг документа
             if (document != null) {
+                //основные атрибуты которые парсятся с тегом arg Ұпо порядку
                 orderLoan.setNomerOrder(document.getElementsByTagName("arg").item(0).getTextContent());
 
                 orderLoan.setDataOrder(document.getElementsByTagName("arg").item(1).getTextContent());
@@ -116,42 +132,51 @@ public class OrderLoanParsServiceBean implements OrderLoanParsService {
 
                 //orderLoan.setBin(document.getElementsByTagName("arg").item(17).getTextContent());
 
+                //записываем автора документа по почте
                 List<ExtEmployee> employees = dataManager.load(ExtEmployee.class)
                         .query("select e from thesissummer$ExtEmployee e where e.email = :email")
-                        .parameter("email", document.getElementsByTagName("arg").item(18).getTextContent())
-                        .view("extEmployee-view")
-                        .list();
-
+                        .parameter("email", document.getElementsByTagName("arg").item(18).getTextContent()).list();
 
                 orderLoan.setOwner(employees.get(0));
 
+                //устанавливаем текущую дату
+                orderLoan.setDate(timeSource.currentTimestamp());
 
-                //Подгрузка процесса Согласования
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderLoan))
+                    orderLoan.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
+
+                //теперь переходим к созданию процесса документа
+
+                //подтягивание процесса согласования из коробки тезис
                 Proc proc = dataManager.load(Proc.class)
                         .query("select e from wf$Proc e where e.code = :code")
                         .parameter("code", "Endorsement")
                         .view("browse")
                         .one();
 
+                //подтягивание роли инициатора
                 ProcRole initiatorRole = dataManager.load(ProcRole.class)
                         .query("select e from wf$ProcRole e where e.code = 'Initiator' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
+                //подтягивание роли согласующего
                 ProcRole endorseRole = dataManager.load(ProcRole.class)
                         .query("select e from wf$ProcRole e where e.code = 'Endorsement' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
+                //подтягивание роли подписывающего
                 ProcRole approverRole = dataManager.load(ProcRole.class)
                         .query("select e from wf$ProcRole e where e.code = 'Approver' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
-                //Подгрузка процесса согласовнаия для карточки распорядение
+                //создание процесса внутри карточки документа и комит его
                 CardProc cardProc = dataManager.create(CardProc.class);
 
                 cardProc.setCard(orderLoan);
@@ -161,9 +186,10 @@ public class OrderLoanParsServiceBean implements OrderLoanParsService {
                 commitContext.addInstanceToCommit(cardProc);
 
 
+                //создание инициатора внутри карточки cardProc документа и комит его
+                //здесь указываем на то что кто вошел в сессию тот и является инициатором
                 User user = userSessionSource.getUserSession().getCurrentOrSubstitutedUser();
 
-                //роль инициатора в карточке
                 CardRole cardInitiatior = dataManager.create(CardRole.class);
 
                 cardInitiatior.setCode("Initiator");
@@ -176,11 +202,11 @@ public class OrderLoanParsServiceBean implements OrderLoanParsService {
 
                 commitContext.addInstanceToCommit(cardInitiatior);
 
+
+                //создание подписывающего внутри карточки cardProc документа и комит его (подтягивается по почте)
                 List<User> approver = dataManager.load(User.class).query("select e from sec$User e where " +
                         "e.email = :email").parameter("email", document.getElementsByTagName("arg").item(19).getTextContent()).list();
 
-
-                //роль утверждающего в карточке
                 CardRole cardApprover = dataManager.create(CardRole.class);
 
                 cardApprover.setCode("Approver");
@@ -194,7 +220,8 @@ public class OrderLoanParsServiceBean implements OrderLoanParsService {
                 commitContext.addInstanceToCommit(cardApprover);
 
 
-                //роль согласующего в карточке
+                //создание подписывающего внутри карточки cardProc документа и комит его (подтягивается по почте)
+                //так как несколько людей согласуют распоряжение то в xml передаются несколько согласующих. Через ноды (по SAX парсеру) создаю цикл и записываю несколько согласующих
                 NodeList nodeList = document.getElementsByTagName("otvLico");
 
                 for (int i = 0; nodeList.getLength() > i; i++) {
@@ -228,11 +255,12 @@ public class OrderLoanParsServiceBean implements OrderLoanParsService {
 
             }
 
-
+            //нормализация документа
             document.getDocumentElement().normalize();
 
             commitContext.addInstanceToCommit(orderLoan);
 
+            //комит комитконтекста который сохраняет все комиты в одной транзакции
             dataManager.commit(commitContext);
 
 
@@ -248,3 +276,5 @@ public class OrderLoanParsServiceBean implements OrderLoanParsService {
     }
 
 }
+
+//распоряжение успешно прошло тест через POSTMAN

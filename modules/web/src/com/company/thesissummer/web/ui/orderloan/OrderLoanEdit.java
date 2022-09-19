@@ -6,6 +6,9 @@
 
 package com.company.thesissummer.web.ui.orderloan;
 
+import com.haulmont.cuba.gui.Notifications;
+import com.haulmont.cuba.gui.components.Action;
+import com.haulmont.cuba.gui.screen.Subscribe;
 import com.haulmont.thesis.web.actions.PrintReportAction;
 import com.haulmont.thesis.web.ui.basicdoc.editor.AbstractDocEditor;
 import com.haulmont.thesis.web.voice.VoiceActionPriorities;
@@ -31,7 +34,7 @@ public class OrderLoanEdit<T extends OrderLoan> extends AbstractDocEditor<T> {
 
     @Override
     protected String getHiddenTabsConfig() {
-        return "processTab,openHistoryTab,securityTab,cardProjectsTab,correspondenceHistoryTab,docTransferLogTab,cardLinksTab,docLogTab,versionsTab";
+        return "д, processTab";
     }
 
     @Override
@@ -47,10 +50,10 @@ public class OrderLoanEdit<T extends OrderLoan> extends AbstractDocEditor<T> {
     @Override
     protected void fillHiddenTabs() {
         hiddenTabs.put("attachmentsTab", getMessage("attachmentsTab"));
-        hiddenTabs.put("docTreeTab", getMessage("docTreeTab"));
         if (getAccessData().getNotVersion()) {
             hiddenTabs.put("cardCommentTab", getMessage("cardCommentTab"));
         }
         super.fillHiddenTabs();
     }
+
 }

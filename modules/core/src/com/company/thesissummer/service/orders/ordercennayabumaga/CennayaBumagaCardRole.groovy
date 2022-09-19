@@ -10,6 +10,7 @@ import com.company.thesissummer.entity.OrderCenBumaga
 import com.company.thesissummer.entity.OrderLoan
 import com.haulmont.cuba.core.global.DataManager
 import com.haulmont.cuba.core.global.LoadContext
+import com.haulmont.thesis.core.entity.SimpleDoc
 import com.haulmont.workflow.core.entity.CardRole
 
 import javax.inject.Inject
@@ -22,11 +23,11 @@ class CennayaBumagaCardRole {
 
     public List<Map<String, Object>> getJournalResult(Map<String,Object> params) {
 
-        OrderCenBumaga orderCenBumaga = params['entity'] as OrderCenBumaga;
+        SimpleDoc doc = params['entity'] as SimpleDoc;
 
         LoadContext<CardRole> loadContext = LoadContext.create(CardRole.class)
                 .setQuery(LoadContext.createQuery("select e from wf\$CardRole e where e.card.id = :cardId")
-                        .setParameter("cardId", orderCenBumaga.getId()))
+                        .setParameter("cardId", doc.getId()))
                 .setView("report_card");
 
         List<CardRole> list = dataManager.loadList(loadContext)

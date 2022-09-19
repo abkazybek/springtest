@@ -94,4 +94,26 @@
     <bean id="thesissummer_WriteOffTable" class="com.company.thesissummer.service.orders.orderwriteoff.WriteOffTable">
     </bean>
 
+    <bean id="thesissummer_DocQR" class="com.company.thesissummer.service.orders.doc.DocQR">
+    </bean>
+    <bean id="thesissummer_DocСardRole" class="com.company.thesissummer.service.orders.doc.DocСardRole">
+    </bean>
+
+    <bean id="thesissummer_ProtocolCardRole" class="com.company.thesissummer.service.orders.protocolkk.ProtocolCardRole">
+    </bean>
+
+    <bean id="thesissummer_ProtocolPravQR" class="com.company.thesissummer.service.orders.protocolprav.ProtocolPravQR">
+    </bean>
+    <bean id="thesissummer_ProtocolPravCardRole" class="com.company.thesissummer.service.orders.protocolprav.ProtocolPravCardRole">
+    </bean>
+
+    <bean id="thesissummer_SpravkaPoZadolQR" class="com.company.thesissummer.service.orders.spravkapozadol.SpravkaPoZadolQR">
+    </bean>
+    <bean id="thesissummer_SpravkaPoZadolCardRole" class="com.company.thesissummer.service.orders.spravkapozadol.SpravkaPoZadolCardRole">
+    </bean>
+
+    <bean id="thesissummer_ZadanieNaPlatezhQR" class="com.company.thesissummer.service.orders.zadanienaplatezh.ZadanieNaPlatezhQR">
+    </bean>
+    <bean id="thesissummer_ZadanieNaPlatezhCardRole" class="com.company.thesissummer.service.orders.zadanienaplatezh.ZadanieNaPlatezhCardRole">
+    </bean>
 </beans>

@@ -6,6 +6,13 @@
 
 package com.company.thesissummer.web.ui.ordercenbumaga;
 
+import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.gui.components.LookupField;
+import com.haulmont.cuba.gui.data.Datasource;
+import com.haulmont.cuba.gui.data.DsContext;
+import com.haulmont.cuba.security.entity.User;
+import com.haulmont.thesis.core.entity.Employee;
 import com.haulmont.thesis.web.actions.PrintReportAction;
 import com.haulmont.thesis.web.ui.basicdoc.editor.AbstractDocEditor;
 import com.haulmont.thesis.web.voice.VoiceActionPriorities;
@@ -14,6 +21,8 @@ import com.haulmont.thesis.core.entity.DocCategory;
 import com.company.thesissummer.entity.OrderCenBumaga;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
+import java.util.List;
 import java.util.Map;
 
 import static com.haulmont.thesis.web.voice.VoiceCompanionsRepository.voiceCompanion;
@@ -23,15 +32,28 @@ public class OrderCenBumagaEdit<T extends OrderCenBumaga> extends AbstractDocEdi
     @Inject
     protected LookupPickerField<DocCategory> docCategory;
 
+    @Inject
+    public DataManager dataManager;
+
+    @Inject
+    protected UserSessionSource userSessionSource;
+
+    @Inject
+    public LookupPickerField owner;
+
     @Override
     public void init(Map<String, Object> params) {
         super.init(params);
         initVoiceControl();
+        User user = userSessionSource.getUserSession().getCurrentOrSubstitutedUser();
+        List<Employee> employees = dataManager.load(Employee.class).query("select e from df$Employee e where " +
+                "e.name = :name").parameter("name", user.getName()).list();
+        owner.setCaption(employees.get(0).getName());
     }
 
     @Override
     protected String getHiddenTabsConfig() {
-        return "processTab,openHistoryTab,securityTab,cardProjectsTab,correspondenceHistoryTab,docTransferLogTab,cardLinksTab,docLogTab,versionsTab";
+        return "processTab";
     }
 
     @Override
@@ -47,10 +69,12 @@ public class OrderCenBumagaEdit<T extends OrderCenBumaga> extends AbstractDocEdi
     @Override
     protected void fillHiddenTabs() {
         hiddenTabs.put("attachmentsTab", getMessage("attachmentsTab"));
-        hiddenTabs.put("docTreeTab", getMessage("docTreeTab"));
         if (getAccessData().getNotVersion()) {
             hiddenTabs.put("cardCommentTab", getMessage("cardCommentTab"));
         }
         super.fillHiddenTabs();
     }
+
+
+
 }

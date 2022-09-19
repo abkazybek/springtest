@@ -160,5 +160,37 @@
             template="com/company/thesissummer/web/ui/ordercenbumaga/order-cen-bumaga-browse.xml"/>
     <screen id="thesissummer$OrderCenBumaga.templateBrowse"
             template="com/company/thesissummer/web/ui/ordercenbumaga/order-cen-bumaga-template-browse.xml"/>
+    <screen id="thesissummer$ProtocolKK.browse"
+            template="com/company/thesissummer/web/ui/protocolkk/protocol-k-k-browse.xml"/>
+    <screen id="thesissummer$ProtocolKK.edit"
+            template="com/company/thesissummer/web/ui/protocolkk/protocol-k-k-edit.xml"/>
+    <screen id="thesissummer$ProtocolKK.lookup"
+            template="com/company/thesissummer/web/ui/protocolkk/protocol-k-k-browse.xml"/>
+    <screen id="thesissummer$ProtocolKK.templateBrowse"
+            template="com/company/thesissummer/web/ui/protocolkk/protocol-k-k-template-browse.xml"/>
+    <screen id="thesissummer$ProtocolPrav.browse"
+            template="com/company/thesissummer/web/ui/protocolprav/protocol-prav-browse.xml"/>
+    <screen id="thesissummer$ProtocolPrav.edit"
+            template="com/company/thesissummer/web/ui/protocolprav/protocol-prav-edit.xml"/>
+    <screen id="thesissummer$ProtocolPrav.lookup"
+            template="com/company/thesissummer/web/ui/protocolprav/protocol-prav-browse.xml"/>
+    <screen id="thesissummer$ProtocolPrav.templateBrowse"
+            template="com/company/thesissummer/web/ui/protocolprav/protocol-prav-template-browse.xml"/>
+    <screen id="thesissummer$ZadanieNaPlatezh.browse"
+            template="com/company/thesissummer/web/ui/zadanienaplatezh/zadanie-na-platezh-browse.xml"/>
+    <screen id="thesissummer$ZadanieNaPlatezh.edit"
+            template="com/company/thesissummer/web/ui/zadanienaplatezh/zadanie-na-platezh-edit.xml"/>
+    <screen id="thesissummer$ZadanieNaPlatezh.lookup"
+            template="com/company/thesissummer/web/ui/zadanienaplatezh/zadanie-na-platezh-browse.xml"/>
+    <screen id="thesissummer$ZadanieNaPlatezh.templateBrowse"
+            template="com/company/thesissummer/web/ui/zadanienaplatezh/zadanie-na-platezh-template-browse.xml"/>
+    <screen id="thesissummer$SpravkaPoZadol.browse"
+            template="com/company/thesissummer/web/ui/spravkapozadol/spravka-po-zadol-browse.xml"/>
+    <screen id="thesissummer$SpravkaPoZadol.edit"
+            template="com/company/thesissummer/web/ui/spravkapozadol/spravka-po-zadol-edit.xml"/>
+    <screen id="thesissummer$SpravkaPoZadol.lookup"
+            template="com/company/thesissummer/web/ui/spravkapozadol/spravka-po-zadol-browse.xml"/>
+    <screen id="thesissummer$SpravkaPoZadol.templateBrowse"
+            template="com/company/thesissummer/web/ui/spravkapozadol/spravka-po-zadol-template-browse.xml"/>
 
 </screen-config>

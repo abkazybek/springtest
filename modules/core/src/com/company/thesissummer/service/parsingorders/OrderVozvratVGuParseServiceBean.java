@@ -6,10 +6,12 @@
 
 package com.company.thesissummer.service.parsingorders;
 
-import com.company.thesissummer.entity.OrderLoan;
 import com.company.thesissummer.entity.OrderVozvratvGu;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
 import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.PersistenceHelper;
+import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.thesis.core.entity.Department;
 import com.haulmont.thesis.core.entity.DocKind;
 import com.haulmont.thesis.core.entity.Employee;
@@ -34,6 +36,11 @@ public class OrderVozvratVGuParseServiceBean implements OrderVozvratVGuParseServ
 
     CommitContext commitContext = new CommitContext();
 
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
 
     @Override
     public String saveXML(String xml) {
@@ -54,7 +61,6 @@ public class OrderVozvratVGuParseServiceBean implements OrderVozvratVGuParseServ
 
             //Создание классса РАспоряжние по переоценке
             OrderVozvratvGu orderVozvratvGu = dataManager.create(OrderVozvratvGu.class);
-
 
             //Подгрузка вида документа
             DocKind docKindOrder = dataManager.load(DocKind.class)
@@ -77,7 +83,6 @@ public class OrderVozvratVGuParseServiceBean implements OrderVozvratVGuParseServ
 
                 orderVozvratvGu.setDepartment(departments.get(0));
 
-
                 List<Employee> user = dataManager.load(Employee.class).query("select e from df$Employee e where " +
                         "e.email = :email").parameter("email", document.getElementsByTagName("arg").item(3).getTextContent()).list();
 
@@ -91,6 +96,13 @@ public class OrderVozvratVGuParseServiceBean implements OrderVozvratVGuParseServ
 
                 orderVozvratvGu.setPenya(document.getElementsByTagName("arg").item(7).getTextContent());
 
+                //устанавливаем текущую дату
+                orderVozvratvGu.setDate(timeSource.currentTimestamp());
+
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderVozvratvGu)) {
+                    orderVozvratvGu.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
+                }
             }
 
             commitContext.addInstanceToCommit(orderVozvratvGu);
@@ -113,3 +125,5 @@ public class OrderVozvratVGuParseServiceBean implements OrderVozvratVGuParseServ
         return xml;
     }
 }
+
+//распоряжение успешно прошло тест через POSTMAN

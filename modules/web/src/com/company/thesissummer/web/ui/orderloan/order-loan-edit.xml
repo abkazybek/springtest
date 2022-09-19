@@ -357,7 +357,7 @@
                         </scrollBox>
                     </groupBox>
                 </tab>
-                <tab id="cardProjectsTab" caption="msg://cardProjectsTab" lazy="false">
+                <tab visible="false" id="cardProjectsTab" caption="msg://cardProjectsTab" lazy="false">
                     <groupBox id="cardProjectsTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="cardProjectsFrameBox">
                         <vbox id="cardHeaderHolder" width="100%"/>
@@ -374,7 +374,7 @@
                         </hbox>
                     </groupBox>
                 </tab>
-                <tab id="docTreeTab" caption="msg://hierarchy">
+                <tab visible="false" id="docTreeTab" caption="msg://hierarchy">
                     <groupBox id="docTreeTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="cardTreeFrameBox">
                         <vbox id="cardHeaderHolder" width="100%"/>
@@ -394,7 +394,7 @@
                     </groupBox>
                 </tab>
                 <tab id="processTab" caption="msg://processTab">
-                    <groupBox id="processTabGroupBox" stylename="edit-area"
+                    <groupBox  id="processTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="cardProcFrameBox">
                         <vbox id="cardHeaderHolder" width="100%"/>
                         <vbox id="cardProcFrameBox" margin="false,true,false,false">
@@ -402,8 +402,8 @@
                         </vbox>
                     </groupBox>
                 </tab>
-                <tab id="docTransferLogTab" caption="msg://docTransferLogTab" lazy="false">
-                    <groupBox id="docTransferLogTabGroupBox" stylename="edit-area"
+                <tab visible="false" id="docTransferLogTab" caption="msg://docTransferLogTab" lazy="false">
+                    <groupBox visible="false" id="docTransferLogTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="docTransferLogFrameBox">
                         <vbox id="cardHeaderHolder" width="100%"/>
                         <vbox id="docTransferLogFrameBox" margin="false,true,false,false">
@@ -411,8 +411,8 @@
                         </vbox>
                     </groupBox>
                 </tab>
-                <tab id="correspondenceHistoryTab" caption="msg://correspondenceHistoryTab" lazy="true">
-                    <groupBox id="correspondenceHistoryTabGroupBox" stylename="edit-area"
+                <tab  visible="false" id="correspondenceHistoryTab" caption="msg://correspondenceHistoryTab" lazy="true">
+                    <groupBox visible="false" id="correspondenceHistoryTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="correspondenceHistoryFrameBox">
                         <vbox id="cardHeaderHolder" width="100%"/>
                         <vbox id="correspondenceHistoryFrameBox" margin="false,true,false,false">
@@ -420,7 +420,7 @@
                         </vbox>
                     </groupBox>
                 </tab>
-                <tab id="cardLinksTab" caption="msg://cardLinksTab" lazy="false">
+                <tab visible="false" id="cardLinksTab" caption="msg://cardLinksTab" lazy="false">
                     <groupBox id="cardLinksTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="cardLinksFrameBox">
                         <vbox id="cardHeaderHolder" width="100%"/>
@@ -436,8 +436,8 @@
                         <frame id="cardCommentFrame" screen="cardCommentFrame" height="100%"/>
                     </groupBox>
                 </tab>
-                <tab id="docLogTab" caption="msg://docLogTab" lazy="true">
-                    <groupBox id="docLogTabGroupBox" stylename="edit-area"
+                <tab visible="false" id="docLogTab" caption="msg://docLogTab" lazy="true">
+                    <groupBox visible="true" id="docLogTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="cardLogFrameBox">
                         <vbox id="cardHeaderHolder" width="100%"/>
                         <vbox id="cardLogFrameBox" margin="false,true,false,false">
@@ -445,8 +445,8 @@
                         </vbox>
                     </groupBox>
                 </tab>
-                <tab id="openHistoryTab" caption="msg://openHistoryTab" lazy="false">
-                    <groupBox id="openHistoryTabGroupBox" stylename="edit-area"
+                <tab visible="false" id="openHistoryTab" caption="msg://openHistoryTab" lazy="false">
+                    <groupBox visible="false" id="openHistoryTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="openHistoryFrameBox">
                         <vbox id="cardHeaderHolder" width="100%"/>
                         <vbox id="openHistoryFrameBox" margin="false,true,false,false">
@@ -454,8 +454,8 @@
                         </vbox>
                     </groupBox>
                 </tab>
-                <tab id="versionsTab" caption="msg://versionsTab" lazy="false">
-                    <groupBox id="versionsTabGroupBox" stylename="edit-area"
+                <tab visible="false" id="versionsTab" caption="msg://versionsTab" lazy="false">
+                    <groupBox visible="false" id="versionsTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="versionsTableBox">
                         <vbox id="cardHeaderHolder" width="100%"/>
                         <vbox id="versionsTableBox" margin="false,true,false,false">
@@ -480,8 +480,8 @@
                         </vbox>
                     </groupBox>
                 </tab>
-                <tab id="securityTab" caption="msg://securityTab" lazy="true">
-                    <groupBox id="securityTabGroupBox" stylename="edit-area"
+                <tab visible="false" id="securityTab" caption="msg://securityTab" lazy="true">
+                    <groupBox visible="false" id="securityTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="securityFrameBox">
                         <vbox id="cardHeaderHolder" width="100%"/>
                         <vbox id="securityFrameBox" margin="false,true,false,false">

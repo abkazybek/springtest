@@ -28,5 +28,11 @@
         <class>com.company.thesissummer.entity.OrderNaVozvrat</class>
         <class>com.company.thesissummer.entity.OrderPogashOb</class>
         <class>com.company.thesissummer.entity.OrderCenBumaga</class>
+        <class>com.company.thesissummer.entity.ProtocolKK</class>
+        <class>com.company.thesissummer.entity.protocolkk.TypeProtocolKK</class>
+        <class>com.company.thesissummer.entity.protocolkk.City</class>
+        <class>com.company.thesissummer.entity.ProtocolPrav</class>
+        <class>com.company.thesissummer.entity.ZadanieNaPlatezh</class>
+        <class>com.company.thesissummer.entity.SpravkaPoZadol</class>
     </persistence-unit>
 </persistence>

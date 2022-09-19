@@ -9,9 +9,8 @@ package com.company.thesissummer.service.parsingorders;
 import com.company.thesissummer.entity.ExtEmployee;
 import com.company.thesissummer.entity.OrderCenBumaga;
 import com.company.thesissummer.entity.OrderPogashOb;
-import com.haulmont.cuba.core.global.CommitContext;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.thesis.core.entity.Department;
 import com.haulmont.thesis.core.entity.DocKind;
@@ -38,20 +37,24 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
     @Inject
     private DataManager dataManager;
 
-
     @Inject
     protected UserSessionSource userSessionSource;
 
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
+
     @Override
     public String saveXML(String xml) {
-
 
         byte[] decodeBytes = Base64.getDecoder().decode(xml);
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = null;
-        //InputSource is = new InputSource(new StringReader(decodeBytes.);
 
+        //InputSource is = new InputSource(new StringReader(decodeBytes.);
         //открытие документа
         Document document;
         try {
@@ -82,39 +85,45 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
 
                 orderCenBumaga.setContragent(document.getElementsByTagName("arg").item(2).getTextContent());
 
-                orderCenBumaga.setContragent(document.getElementsByTagName("arg").item(3).getTextContent());
+                orderCenBumaga.setDogovor(document.getElementsByTagName("arg").item(3).getTextContent());
 
-                orderCenBumaga.setDogovor(document.getElementsByTagName("arg").item(4).getTextContent());
+                orderCenBumaga.setDataOpen(document.getElementsByTagName("arg").item(4).getTextContent());
 
-                orderCenBumaga.setDataOpen(document.getElementsByTagName("arg").item(5).getTextContent());
+                orderCenBumaga.setVid(document.getElementsByTagName("arg").item(5).getTextContent());
 
-                orderCenBumaga.setVid(document.getElementsByTagName("arg").item(6).getTextContent());
+                orderCenBumaga.setCennayaBumaga(document.getElementsByTagName("arg").item(6).getTextContent());
 
-                orderCenBumaga.setCennayaBumaga(document.getElementsByTagName("arg").item(7).getTextContent());
+                orderCenBumaga.setNin(document.getElementsByTagName("arg").item(7).getTextContent());
 
-                orderCenBumaga.setNin(document.getElementsByTagName("arg").item(8).getTextContent());
+                orderCenBumaga.setEmitent(document.getElementsByTagName("arg").item(8).getTextContent());
 
-                orderCenBumaga.setEmitent(document.getElementsByTagName("arg").item(9).getTextContent());
+                orderCenBumaga.setDataClose(document.getElementsByTagName("arg").item(9).getTextContent());
 
-                orderCenBumaga.setDataClose(document.getElementsByTagName("arg").item(10).getTextContent());
+                orderCenBumaga.setBaseNach(document.getElementsByTagName("arg").item(10).getTextContent());
 
-                orderCenBumaga.setBaseNach(document.getElementsByTagName("arg").item(11).getTextContent());
+                orderCenBumaga.setDohodnostRepo(document.getElementsByTagName("arg").item(11).getTextContent());
 
-                orderCenBumaga.setDohodnostRepo(document.getElementsByTagName("arg").item(12).getTextContent());
+                orderCenBumaga.setVoznagrazhdenie(document.getElementsByTagName("arg").item(12).getTextContent());
 
-                orderCenBumaga.setVoznagrazhdenie(document.getElementsByTagName("arg").item(13).getTextContent());
+                orderCenBumaga.setKolvoOblig(document.getElementsByTagName("arg").item(13).getTextContent());
 
-                orderCenBumaga.setKolvoOblig(document.getElementsByTagName("arg").item(14).getTextContent());
-
-                orderCenBumaga.setSummaSdelki(document.getElementsByTagName("arg").item(15).getTextContent());
+                orderCenBumaga.setSummaSdelki(document.getElementsByTagName("arg").item(14).getTextContent());
 
                 List<ExtEmployee> employees = dataManager.load(ExtEmployee.class)
                         .query("select e from thesissummer$ExtEmployee e where e.email = :email")
-                        .parameter("email",document.getElementsByTagName("arg").item(16).getTextContent())
+                        .parameter("email",document.getElementsByTagName("arg").item(15).getTextContent())
                         .view("extEmployee-view")
                         .list();
 
                 orderCenBumaga.setOwner(employees.get(0));
+
+                //устанавливаем текущую дату
+                orderCenBumaga.setDate(timeSource.currentTimestamp());
+
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderCenBumaga))
+                    orderCenBumaga.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
+
 
                 //Подгрузка процесса Согласования
                 Proc proc = dataManager.load(Proc.class)
@@ -167,7 +176,7 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
                 commitContext.addInstanceToCommit(cardInitiatior);
 
                 List<User> approver = dataManager.load(User.class).query("select e from sec$User e where " +
-                        "e.email = :email").parameter("email", document.getElementsByTagName("arg").item(17).getTextContent()).list();
+                        "e.email = :email").parameter("email", document.getElementsByTagName("arg").item(16).getTextContent()).list();
 
 
                 //роль утверждающего в карточке
@@ -183,6 +192,10 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
 
                 commitContext.addInstanceToCommit(cardApprover);
 
+
+                List<User> endorsement = dataManager.load(User.class).query("select e from sec$User e where " +
+                        "e.email = :email").parameter("email", document.getElementsByTagName("arg").item(17).getTextContent()).list();
+
                 CardRole cardEnsorsed = dataManager.create(CardRole.class);
 
                 cardEnsorsed.setCode("Endorsement");
@@ -191,16 +204,11 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
 
                 cardEnsorsed.setProcRole(endorseRole);
 
-                List<User> endorsement = dataManager.load(User.class).query("select e from sec$User e where " +
-                        "e.email = :email").parameter("email", document.getElementsByTagName("arg").item(18).getTextContent()).list();
-
                 cardEnsorsed.setUser(endorsement.get(0));
 
                 commitContext.addInstanceToCommit(cardEnsorsed);
 
-
             }
-
 
             document.getDocumentElement().normalize();
 
@@ -220,3 +228,5 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
         return xml;
     }
 }
+
+//распоряжение успешно прошло тест через POSTMAN

@@ -8,8 +8,11 @@ package com.company.thesissummer.service.parsingorders;
 
 import com.company.thesissummer.entity.OrderRembursement;
 import com.company.thesissummer.entity.table1c.OrderRembursement1c;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
 import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.PersistenceHelper;
+import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.thesis.core.entity.Department;
 import com.haulmont.thesis.core.entity.DocKind;
 import com.haulmont.thesis.core.entity.Employee;
@@ -36,6 +39,11 @@ public class OrderRembursementParseServiceBean implements OrderRembursementParse
     @Inject
     private DataManager dataManager;
 
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
 
     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
@@ -79,8 +87,9 @@ public class OrderRembursementParseServiceBean implements OrderRembursementParse
                 List<Department> departments = dataManager.load(Department.class).query("select e from df$Department e where " +
                         "e.name = :name").parameter("name", document.getElementsByTagName("arg").item(2).getTextContent()).list();
 
-                orderRembursement.setDepartment(departments.get(0));
-
+                if(departments.size() > 0){
+                    orderRembursement.setDepartment(departments.get(0));
+                }
                 orderRembursement.setSchetKorporacii(document.getElementsByTagName("arg").item(3).getTextContent());
 
                 orderRembursement.setBankOrganizacii(document.getElementsByTagName("arg").item(4).getTextContent());
@@ -106,6 +115,13 @@ public class OrderRembursementParseServiceBean implements OrderRembursementParse
 
                 orderRembursement.setSummaSub(document.getElementsByTagName("arg").item(13).getTextContent());
 
+                //устанавливаем текущую дату
+                orderRembursement.setDate(timeSource.currentTimestamp());
+
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderRembursement)) {
+                    orderRembursement.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
+                }
 
 
             }
@@ -113,13 +129,10 @@ public class OrderRembursementParseServiceBean implements OrderRembursementParse
 
             CommitContext commitContext1 = new CommitContext();
 
-            OrderRembursement1c orderRembursement1c = dataManager.create(OrderRembursement1c.class);
-
             document.getDocumentElement().normalize();
 
             NodeList nodeList = document.getElementsByTagName("Structura");
 
-            Set<OrderRembursement1c> list  = new HashSet<>();
 
             for (int i = 0; nodeList.getLength() > i; i++) {
 
@@ -128,6 +141,10 @@ public class OrderRembursementParseServiceBean implements OrderRembursementParse
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
+
+                    OrderRembursement1c orderRembursement1c = dataManager.create(OrderRembursement1c.class);
+
+                    Set<OrderRembursement1c> list  = new HashSet<>();
 
                     orderRembursement1c.setNumber(element.getElementsByTagName("Nomer").item(0).getTextContent());
 
@@ -150,6 +167,7 @@ public class OrderRembursementParseServiceBean implements OrderRembursementParse
                     orderRembursement.setOrderRembursement1c(list);
 
                     commitContext1.addInstanceToCommit(orderRembursement1c);
+
 
                 }
 
@@ -175,3 +193,5 @@ public class OrderRembursementParseServiceBean implements OrderRembursementParse
 
     }
 }
+
+//распоряжение успешно прошло тест через POSTMAN

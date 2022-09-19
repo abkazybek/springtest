@@ -31,7 +31,7 @@ public class OrderWriteOffEdit<T extends OrderWriteOff> extends AbstractDocEdito
 
     @Override
     protected String getHiddenTabsConfig() {
-        return "processTab,openHistoryTab,securityTab,cardProjectsTab,correspondenceHistoryTab,docTransferLogTab,cardLinksTab,docLogTab,versionsTab";
+        return "processTab";
     }
 
     @Override
@@ -48,7 +48,7 @@ public class OrderWriteOffEdit<T extends OrderWriteOff> extends AbstractDocEdito
     protected void fillHiddenTabs() {
         //hiddenTabs.put("office", getMessage("office"));
         hiddenTabs.put("attachmentsTab", getMessage("attachmentsTab"));
-        hiddenTabs.put("docTreeTab", getMessage("docTreeTab"));
+        //hiddenTabs.put("docTreeTab", getMessage("docTreeTab"));
         if (getAccessData().getNotVersion()) {
             hiddenTabs.put("cardCommentTab", getMessage("cardCommentTab"));
         }

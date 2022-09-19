@@ -10,9 +10,8 @@ import com.company.thesissummer.entity.OrderPosting;
 import com.company.thesissummer.entity.OrderTranfer;
 import com.company.thesissummer.entity.table1c.OrderPosting1C;
 import com.company.thesissummer.entity.table1c.OrderTranfer1C;
-import com.haulmont.cuba.core.global.CommitContext;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.thesis.core.entity.Department;
 import com.haulmont.thesis.core.entity.DocKind;
@@ -51,6 +50,11 @@ public class OrderTransferParseServiceBean implements OrderTransferParseService 
     @Inject
     protected UserSessionSource userSessionSource;
 
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
 
     @Override
     public String saveXML(String xml) {
@@ -91,8 +95,9 @@ public class OrderTransferParseServiceBean implements OrderTransferParseService 
                 List<Department> departments = dataManager.load(Department.class).query("select e from df$Department e where " +
                         "e.name = :name").parameter("name", document.getElementsByTagName("arg").item(2).getTextContent()).list();
 
-
-                orderTranfer.setDepartment(departments.get(0));
+                if(departments.size() > 0) {
+                    orderTranfer.setDepartment(departments.get(0));
+                }
 
                 orderTranfer.setNomerOrder(document.getElementsByTagName("arg").item(3).getTextContent());
 
@@ -117,9 +122,15 @@ public class OrderTransferParseServiceBean implements OrderTransferParseService 
 
                 orderTranfer.setSummaSub(document.getElementsByTagName("arg").item(12).getTextContent());
 
+                //устанавливаем текущую дату
+                orderTranfer.setDate(timeSource.currentTimestamp());
+
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderTranfer)) {
+                    orderTranfer.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
+                }
 
             }
-
 
             OrderTranfer1C orderTranfer1C = dataManager.create(OrderTranfer1C.class);
 
@@ -157,7 +168,6 @@ public class OrderTransferParseServiceBean implements OrderTransferParseService 
 
             }
 
-
             commitContext.addInstanceToCommit(orderTranfer);
 
             dataManager.commit(commitContext);
@@ -175,3 +185,5 @@ public class OrderTransferParseServiceBean implements OrderTransferParseService 
 
     }
 }
+
+//распоряжение успешно прошло тест через POSTMAN

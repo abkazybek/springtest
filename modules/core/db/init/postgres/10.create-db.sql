@@ -223,28 +223,6 @@ create table THESISSUMMER_ORDER_TRANFER1C (
     primary key (ID)
 )^
 -- end THESISSUMMER_ORDER_TRANFER1C
--- begin THESISSUMMER_ORDER_TRANFER
-create table THESISSUMMER_ORDER_TRANFER (
-    CARD_ID uuid,
-    --
-    NOMER_ORDER varchar(255),
-    ORDER_RECEIVER_ID uuid,
-    DATA_ORDER varchar(255),
-    PODRAZDELENIE varchar(255),
-    SCHET_KORP varchar(255),
-    BANK_ORG varchar(255),
-    OBLAST_PODR varchar(255),
-    KVARTAL1 varchar(255),
-    DOGOVOR_SUB varchar(255),
-    DATA_DOGOVOR_SUB varchar(255),
-    RAB_OPERATOR varchar(255),
-    SUMMA_SUB varchar(255),
-    SCHET_POL varchar(255),
-    BANK_POLUCHA varchar(255),
-    --
-    primary key (CARD_ID)
-)^
--- end THESISSUMMER_ORDER_TRANFER
 -- begin THESISSUMMER_ORDER_WRITE_OFF1C
 create table THESISSUMMER_ORDER_WRITE_OFF1C (
     ID uuid,
@@ -471,3 +449,108 @@ create table THESISSUMMER_ORDER_TRANFER_MONEY (
     primary key (CARD_ID)
 )^
 -- end THESISSUMMER_ORDER_TRANFER_MONEY
+-- begin THESISSUMMER_TYPE_PROTOCOL_KK
+create table THESISSUMMER_TYPE_PROTOCOL_KK (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    CODE varchar(255),
+    NAME varchar(255),
+    --
+    primary key (ID)
+)^
+-- end THESISSUMMER_TYPE_PROTOCOL_KK
+-- begin THESISSUMMER_CITY
+create table THESISSUMMER_CITY (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    CODE varchar(255),
+    NAME varchar(255),
+    --
+    primary key (ID)
+)^
+-- end THESISSUMMER_CITY
+-- begin THESISSUMMER_PROTOCOL_KK
+create table THESISSUMMER_PROTOCOL_KK (
+    CARD_ID uuid,
+    --
+    NOMER_PROTOCOLA varchar(255),
+    TYPE_PROTOCOL_ID uuid,
+    CITY_ID uuid,
+    DATA_PROTOCOLA varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_PROTOCOL_KK
+-- begin THESISSUMMER_ORDER_TRANFER
+create table THESISSUMMER_ORDER_TRANFER (
+    CARD_ID uuid,
+    --
+    NOMER_ORDER varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    DATA_ORDER varchar(255),
+    PODRAZDELENIE varchar(255),
+    SCHET_KORP varchar(255),
+    BANK_ORG varchar(255),
+    OBLAST_PODR varchar(255),
+    KVARTAL1 varchar(255),
+    DOGOVOR_SUB varchar(255),
+    DATA_DOGOVOR_SUB varchar(255),
+    RAB_OPERATOR varchar(255),
+    SUMMA_SUB varchar(255),
+    SCHET_POL varchar(255),
+    BANK_POLUCHA varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_ORDER_TRANFER
+-- begin THESISSUMMER_PROTOCOL_PRAV
+create table THESISSUMMER_PROTOCOL_PRAV (
+    CARD_ID uuid,
+    --
+    NOMER_PROTOCOLA varchar(255),
+    DATA_PROTOCOLA varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_PROTOCOL_PRAV
+
+-- begin THESISSUMMER_ZADANIE_NA_PLATEZH
+create table THESISSUMMER_ZADANIE_NA_PLATEZH (
+    CARD_ID uuid,
+    --
+    NAIMENOVANIE_POL varchar(255),
+    SUMMA_TENGE varchar(255),
+    SUMMA_DOLLAR varchar(255),
+    NOMER_AND_DATA_DOGOVORA varchar(255),
+    NAZNACH_PLATESZ varchar(255),
+    SCHET_NA_OPLATU varchar(255),
+    NOMER_STATI varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_ZADANIE_NA_PLATEZH
+-- begin THESISSUMMER_SPRAVKA_PO_ZADOL
+create table THESISSUMMER_SPRAVKA_PO_ZADOL (
+    CARD_ID uuid,
+    --
+    NOMER_ORDER varchar(255),
+    DATA_ORDER varchar(255),
+    POLUCHATEL_ID uuid,
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_SPRAVKA_PO_ZADOL

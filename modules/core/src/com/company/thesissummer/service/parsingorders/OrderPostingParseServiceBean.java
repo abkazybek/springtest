@@ -10,10 +10,8 @@ import com.company.thesissummer.entity.OrderPosting;
 import com.company.thesissummer.entity.OrderRembursement;
 import com.company.thesissummer.entity.table1c.OrderPosting1C;
 import com.company.thesissummer.entity.table1c.OrderRembursement1c;
-import com.haulmont.cuba.core.global.CommitContext;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.LoadContext;
-import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.thesis.core.entity.Department;
 import com.haulmont.thesis.core.entity.DocKind;
@@ -49,6 +47,11 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
     @Inject
     protected UserSessionSource userSessionSource;
 
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
 
     @Override
     public String saveXML(String xml) {
@@ -101,6 +104,14 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
                         "e.email = :email").parameter("email", document.getElementsByTagName("arg").item(7).getTextContent()).list();
 
                 orderPosting.setOwner(employees.get(0));
+
+
+                //устанавливаем текущую дату
+                orderPosting.setDate(timeSource.currentTimestamp());
+
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderPosting))
+                    orderPosting.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
 
                 //Подгрузка процесса Согласования
                 Proc proc = dataManager.load(Proc.class)
@@ -168,6 +179,35 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
 
                 orderPosting.setObshayaSumma(document.getElementsByTagName("arg").item(9).getTextContent());
 
+                //роль согласующего в карточке
+                NodeList nodeList2 = document.getElementsByTagName("Structura2");
+
+                for (int i = 0; nodeList2.getLength() > i; i++) {
+
+                    Node node = nodeList2.item(i);
+
+                    if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+                        Element element = (Element) node;
+
+                        CardRole cardEnsorsed = dataManager.create(CardRole.class);
+
+                        cardEnsorsed.setCode("Endorsement");
+
+                        cardEnsorsed.setCard(orderPosting);
+
+                        cardEnsorsed.setProcRole(endorseRole);
+
+                        List<User> endorsement = dataManager.load(User.class).query("select e from sec$User e where " +
+                                "e.email = :email").parameter("email", element.getElementsByTagName("Soglasovanti").item(0).getTextContent()).list();
+
+                        cardEnsorsed.setUser(endorsement.get(0));
+
+                        commitContext.addInstanceToCommit(cardEnsorsed);
+
+                    }
+
+                }
 
             }
 
@@ -210,7 +250,6 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
 
             }
 
-
             commitContext.addInstanceToCommit(orderPosting);
 
             dataManager.commit(commitContext);
@@ -230,3 +269,5 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
 
     }
 }
+
+//распоряжение успешно прошло тест через POSTMAN

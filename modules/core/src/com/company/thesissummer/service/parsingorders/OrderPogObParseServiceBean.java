@@ -9,9 +9,8 @@ package com.company.thesissummer.service.parsingorders;
 import com.company.thesissummer.entity.ExtEmployee;
 import com.company.thesissummer.entity.OrderLoan;
 import com.company.thesissummer.entity.OrderPogashOb;
-import com.haulmont.cuba.core.global.CommitContext;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.thesis.core.entity.Department;
 import com.haulmont.thesis.core.entity.DocKind;
@@ -44,6 +43,12 @@ public class OrderPogObParseServiceBean implements OrderPogObParseService {
 
     @Inject
     protected UserSessionSource userSessionSource;
+
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
 
     @Override
     public String saveXML(String xml) {
@@ -86,7 +91,9 @@ public class OrderPogObParseServiceBean implements OrderPogObParseService {
                 List<Department> departments = dataManager.load(Department.class).query("select e from df$Department e where " +
                         "e.name = :name").parameter("name", document.getElementsByTagName("arg").item(2).getTextContent()).list();
 
-                orderPogashOb.setDepartment(departments.get(0));
+               if(departments.size() > 0) {
+                   orderPogashOb.setDepartment(departments.get(0));
+               }
 
                 orderPogashOb.setContragent(document.getElementsByTagName("arg").item(3).getTextContent());
 
@@ -123,6 +130,13 @@ public class OrderPogObParseServiceBean implements OrderPogObParseService {
                 orderPogashOb.setKbe(document.getElementsByTagName("arg").item(16).getTextContent());
 
                 orderPogashOb.setKnp(document.getElementsByTagName("arg").item(17).getTextContent());
+
+                //устанавливаем текущую дату
+                orderPogashOb.setDate(timeSource.currentTimestamp());
+
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderPogashOb))
+                    orderPogashOb.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
 
                 //Подгрузка процесса Согласования
                 Proc proc = dataManager.load(Proc.class)
@@ -227,3 +241,5 @@ public class OrderPogObParseServiceBean implements OrderPogObParseService {
         return xml;
     }
 }
+
+//распоряжение успешно прошло тест через POSTMAN

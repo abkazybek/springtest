@@ -40,6 +40,10 @@
                        value="com.company.thesissummer.service.parsingorders.OrderPogObParseService"/>
                 <entry key="thesissummer_OrderCennayaBumagaParseService"
                        value="com.company.thesissummer.service.parsingorders.OrderCennayaBumagaParseService"/>
+                <entry key="thesissummer_OrderMessageService"
+                       value="com.company.thesissummer.service.OrderMessageService"/>
+                <entry key="thesissummer_ParseSignatureService"
+                       value="com.company.thesissummer.service.orders.signature.ParseSignatureService"/>
             </map>
         </property>
     </bean>

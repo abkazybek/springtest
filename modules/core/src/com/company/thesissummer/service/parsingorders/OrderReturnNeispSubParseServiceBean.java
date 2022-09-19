@@ -8,8 +8,11 @@ package com.company.thesissummer.service.parsingorders;
 
 import com.company.thesissummer.entity.OrderReturnNeispSub;
 import com.company.thesissummer.entity.table1c.OrderReturnNeispSub1C;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
 import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
+import com.haulmont.cuba.core.global.PersistenceHelper;
+import com.haulmont.cuba.core.global.TimeSource;
 import com.haulmont.thesis.core.entity.Department;
 import com.haulmont.thesis.core.entity.DocKind;
 import com.haulmont.thesis.core.entity.Employee;
@@ -41,6 +44,11 @@ public class OrderReturnNeispSubParseServiceBean implements OrderReturnNeispSubP
 
     DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
 
     @Override
     public String saveXML(String xml) {
@@ -81,7 +89,10 @@ public class OrderReturnNeispSubParseServiceBean implements OrderReturnNeispSubP
                 List<Department> departments = dataManager.load(Department.class).query("select e from df$Department e where " +
                         "e.name = :name").parameter("name", document.getElementsByTagName("arg").item(2).getTextContent()).list();
 
-                orderReturnNeispSub.setDepartment(departments.get(0));
+                if(departments.size() > 0) {
+                    orderReturnNeispSub.setDepartment(departments.get(0));
+
+                }
 
                 orderReturnNeispSub.setSchetKorporacii(document.getElementsByTagName("arg").item(3).getTextContent());
 
@@ -114,18 +125,18 @@ public class OrderReturnNeispSubParseServiceBean implements OrderReturnNeispSubP
 
                 orderReturnNeispSub.setSummaSub(document.getElementsByTagName("arg").item(15).getTextContent());
 
+                //устанавливаем текущую дату
+                orderReturnNeispSub.setDate(timeSource.currentTimestamp());
+
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderReturnNeispSub))
+                    orderReturnNeispSub.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
             }
 
 
             CommitContext commitContext = new CommitContext();
 
-            OrderReturnNeispSub1C orderReturnNeispSub1C = dataManager.create(OrderReturnNeispSub1C.class);
-
-            document.getDocumentElement().normalize();
-
             NodeList nodeList = document.getElementsByTagName("Structura");
-
-            Set<OrderReturnNeispSub1C> list  = new HashSet<>();
 
             for (int i = 0; nodeList.getLength() > i; i++) {
 
@@ -134,6 +145,10 @@ public class OrderReturnNeispSubParseServiceBean implements OrderReturnNeispSubP
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
+
+                    OrderReturnNeispSub1C orderReturnNeispSub1C = dataManager.create(OrderReturnNeispSub1C.class);
+
+                    Set<OrderReturnNeispSub1C> list  = new HashSet<>();
 
                     orderReturnNeispSub1C.setNomer(element.getElementsByTagName("Nomer").item(0).getTextContent());
 
@@ -157,6 +172,7 @@ public class OrderReturnNeispSubParseServiceBean implements OrderReturnNeispSubP
 
             }
 
+            document.getDocumentElement().normalize();
 
             commitContext.addInstanceToCommit(orderReturnNeispSub);
 
@@ -177,3 +193,5 @@ public class OrderReturnNeispSubParseServiceBean implements OrderReturnNeispSubP
 
     }
 }
+
+//распоряжение успешно прошло тест через POSTMAN

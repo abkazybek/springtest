@@ -9,9 +9,8 @@ package com.company.thesissummer.service.parsingorders;
 import com.company.thesissummer.entity.ExtEmployee;
 import com.company.thesissummer.entity.OrderLoan;
 import com.company.thesissummer.entity.OrderTranferMoney;
-import com.haulmont.cuba.core.global.CommitContext;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.thesis.core.entity.DocKind;
 import com.haulmont.workflow.core.entity.CardProc;
@@ -41,6 +40,13 @@ public class OrderTransferMoneyParseServiceBean implements OrderTransferMoneyPar
 
     @Inject
     protected UserSessionSource userSessionSource;
+
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
+
 
     @Override
     public String saveXML(String xml) {
@@ -98,6 +104,13 @@ public class OrderTransferMoneyParseServiceBean implements OrderTransferMoneyPar
 
                 orderTranferMoney.setOwner(employees.get(0));
 
+                //устанавливаем текущую дату
+                orderTranferMoney.setDate(timeSource.currentTimestamp());
+
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderTranferMoney)) {
+                    orderTranferMoney.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
+                }
 
                 //Подгрузка процесса Согласования
                 Proc proc = dataManager.load(Proc.class)
@@ -132,7 +145,6 @@ public class OrderTransferMoneyParseServiceBean implements OrderTransferMoneyPar
                 cardProc.setProc(proc);
 
                 commitContext.addInstanceToCommit(cardProc);
-
 
                 User user = userSessionSource.getUserSession().getCurrentOrSubstitutedUser();
 
@@ -172,6 +184,8 @@ public class OrderTransferMoneyParseServiceBean implements OrderTransferMoneyPar
 
                 cardEnsorsed.setCard(orderTranferMoney);
 
+                cardEnsorsed.setSortOrder(1);
+
                 cardEnsorsed.setProcRole(endorseRole);
 
                 List<User> endorsement = dataManager.load(User.class).query("select e from sec$User e where " +
@@ -203,3 +217,5 @@ public class OrderTransferMoneyParseServiceBean implements OrderTransferMoneyPar
     }
 
 }
+
+//распоряжение успешно прошло тест через POSTMAN

@@ -15,4 +15,8 @@
     <entity metaClass="thesissummer$OrderNaVozvrat"/>
     <entity metaClass="thesissummer$OrderPogashOb"/>
     <entity metaClass="thesissummer$OrderCenBumaga"/>
+    <entity metaClass="thesissummer$ProtocolKK"/>
+    <entity metaClass="thesissummer$ProtocolPrav"/>
+    <entity metaClass="thesissummer$ZadanieNaPlatezh"/>
+    <entity metaClass="thesissummer$SpravkaPoZadol"/>
 </entities>

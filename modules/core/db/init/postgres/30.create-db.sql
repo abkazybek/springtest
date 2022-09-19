@@ -1533,3 +1533,399 @@ values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$
 insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
 values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$OrderSubsidiy:delete', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
 -- end insert secPermissions for OrderSubsidiy
+-- begin insert default numerator for ProtocolKK
+CREATE OR REPLACE FUNCTION baseInsert()
+RETURNS integer
+AS $$
+DECLARE
+    cnt integer = 0;
+BEGIN
+cnt = (select count(id) from DF_NUMERATOR where CODE = 'ProtocolKKNumerator' and delete_ts is null);
+if(cnt = 0) then
+    INSERT INTO DF_NUMERATOR (ID, CREATE_TS, CREATED_BY, VERSION, CODE, NUMERATOR_FORMAT, SCRIPT_ENABLED,
+                              PERIODICITY, NUMBER_INITIAL_VALUE, LOC_NAME)
+    VALUES ('1248ffbe-0034-4bb8-a2e3-807f61f708af', now(), 'system', 1, 'ProtocolKKNumerator', '[number]', FALSE, 'Y', 1,
+            '{"captionWithLanguageList":[{"language":"ru","caption":"protocolKK"},{"language":"en","caption":"ProtocolKK"}]}'
+    );
+end if;
+
+return 0;
+END;
+$$
+LANGUAGE plpgsql;
+^
+
+select baseInsert()^
+drop function if exists baseInsert()^
+-- end insert default numerator for ProtocolKK
+-- begin insert cardType for ProtocolKK
+insert into TS_CARD_TYPE (ID, CREATE_TS, CREATED_BY, NAME, DISCRIMINATOR, FIELDS_XML)
+       values ('7020728c-e89c-45c8-a759-922d3cb857ba', now(), 'system', 'thesissummer$ProtocolKK', '3500', '<?xml version="1.0" encoding="UTF-8"?>
+<fields>
+  <field name="date" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="docCategory" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="owner" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="department" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="comment" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="finishDatePlan" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="resolution" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="number" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="organization" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="parentCard" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="theme" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="nomerProtocola" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="dataProtocola" inDocKind="true" required="false" visible="true" signed="false" />
+</fields>
+')^
+-- end insert cardType for ProtocolKK
+-- begin update procCardType for ProtocolKK
+update wf_proc set card_types = regexp_replace(card_types, ',thesissummer\\$ProtocolKK', '') where code in ('Endorsement', 'Resolution', 'Acquaintance', 'Registration')^
+update wf_proc set updated_by='system', card_types = card_types || 'thesissummer$ProtocolKK,' where code in ('Endorsement', 'Resolution', 'Acquaintance', 'Registration')^
+-- end update procCardType for ProtocolKK
+-- begin insert docKind for ProtocolKK
+CREATE OR REPLACE FUNCTION baseInsert()
+RETURNS integer
+AS $$
+DECLARE
+    cnt integer = 0;
+BEGIN
+    cnt = (select count(CATEGORY_ID) from DF_DOC_KIND where CATEGORY_ID = '768817c5-0f3f-4ae0-97b2-27fc0074a5d1');
+    if (cnt = 0) then
+        insert into SYS_CATEGORY (ID, NAME, ENTITY_TYPE, IS_DEFAULT, CREATE_TS, CREATED_BY, VERSION, DISCRIMINATOR)
+        values ('768817c5-0f3f-4ae0-97b2-27fc0074a5d1', 'protocolKK', 'thesissummer$ProtocolKK', false, now(), 'system', 1, 1);
+
+        insert into DF_DOC_KIND (CATEGORY_ID, CREATE_TS, CREATED_BY, VERSION, DOC_TYPE_ID, NUMERATOR_ID,
+                                 NUMERATOR_TYPE, CATEGORY_ATTRS_PLACE, TAB_NAME, PORTAL_PUBLISH_ALLOWED, DISABLE_ADD_PROCESS_ACTORS, CREATE_ONLY_BY_TEMPLATE)
+        values ('768817c5-0f3f-4ae0-97b2-27fc0074a5d1', now(), 'system', 1, '7020728c-e89c-45c8-a759-922d3cb857ba', '1248ffbe-0034-4bb8-a2e3-807f61f708af',
+                1, 1, 'Доп. поля', false, false, false);
+end if;
+return 0;
+END;
+$$
+LANGUAGE plpgsql;
+^
+select baseInsert();^
+drop function if exists baseInsert();^
+-- end insert docKind for ProtocolKK
+-- begin insert secPermissions for ProtocolKK
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolKK:create', 0, (select ID from SEC_ROLE where NAME = 'SimpleUser'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolKK:delete', 0, (select ID from SEC_ROLE where NAME = 'SimpleUser'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolKK:create', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolKK:update', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolKK:delete', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolKK:create', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolKK:update', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolKK:delete', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+-- end insert secPermissions for ProtocolKK
+-- begin insert default numerator for ProtocolPrav
+CREATE OR REPLACE FUNCTION baseInsert()
+RETURNS integer
+AS $$
+DECLARE
+    cnt integer = 0;
+BEGIN
+cnt = (select count(id) from DF_NUMERATOR where CODE = 'ProtocolPravNumerator' and delete_ts is null);
+if(cnt = 0) then
+    INSERT INTO DF_NUMERATOR (ID, CREATE_TS, CREATED_BY, VERSION, CODE, NUMERATOR_FORMAT, SCRIPT_ENABLED,
+                              PERIODICITY, NUMBER_INITIAL_VALUE, LOC_NAME)
+    VALUES ('c981b413-6107-49f7-85fe-1fee10beac2d', now(), 'system', 1, 'ProtocolPravNumerator', '[number]', FALSE, 'Y', 1,
+            '{"captionWithLanguageList":[{"language":"ru","caption":"Протокол Правления"},{"language":"en","caption":"protocolPrav"}]}'
+    );
+end if;
+
+return 0;
+END;
+$$
+LANGUAGE plpgsql;
+^
+
+select baseInsert()^
+drop function if exists baseInsert()^
+-- end insert default numerator for ProtocolPrav
+-- begin insert cardType for ProtocolPrav
+insert into TS_CARD_TYPE (ID, CREATE_TS, CREATED_BY, NAME, DISCRIMINATOR, FIELDS_XML)
+       values ('f5eb864e-bdfb-43aa-a35d-6cd9d52c2e66', now(), 'system', 'thesissummer$ProtocolPrav', '3600', '<?xml version="1.0" encoding="UTF-8"?>
+<fields>
+  <field name="date" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="docCategory" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="owner" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="department" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="comment" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="finishDatePlan" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="resolution" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="number" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="organization" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="parentCard" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="theme" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="addressees" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="officeExecutor" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="employeeExecutor" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="officeSignedBy" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="receivingMethod" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="responseToDoc" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="sender" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="postTrackingNumber" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="nomerProtocola" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="dataProtocola" inDocKind="true" required="false" visible="true" signed="false" />
+</fields>
+')^
+-- end insert cardType for ProtocolPrav
+-- begin update procCardType for ProtocolPrav
+update wf_proc set card_types = regexp_replace(card_types, ',thesissummer\\$ProtocolPrav', '') where code in ('Endorsement', 'Resolution', 'Acquaintance', 'Registration')^
+update wf_proc set updated_by='system', card_types = card_types || 'thesissummer$ProtocolPrav,' where code in ('Endorsement', 'Resolution', 'Acquaintance', 'Registration')^
+-- end update procCardType for ProtocolPrav
+-- begin insert docKind for ProtocolPrav
+CREATE OR REPLACE FUNCTION baseInsert()
+RETURNS integer
+AS $$
+DECLARE
+    cnt integer = 0;
+BEGIN
+    cnt = (select count(CATEGORY_ID) from DF_DOC_KIND where CATEGORY_ID = '6a2cd0cd-6dbf-4151-a6ba-308354e7856d');
+    if (cnt = 0) then
+        insert into SYS_CATEGORY (ID, NAME, ENTITY_TYPE, IS_DEFAULT, CREATE_TS, CREATED_BY, VERSION, DISCRIMINATOR)
+        values ('6a2cd0cd-6dbf-4151-a6ba-308354e7856d', 'Протокол Правления', 'thesissummer$ProtocolPrav', false, now(), 'system', 1, 1);
+
+        insert into DF_DOC_KIND (CATEGORY_ID, CREATE_TS, CREATED_BY, VERSION, DOC_TYPE_ID, NUMERATOR_ID,
+                                 NUMERATOR_TYPE, CATEGORY_ATTRS_PLACE, TAB_NAME, PORTAL_PUBLISH_ALLOWED, DISABLE_ADD_PROCESS_ACTORS, CREATE_ONLY_BY_TEMPLATE)
+        values ('6a2cd0cd-6dbf-4151-a6ba-308354e7856d', now(), 'system', 1, 'f5eb864e-bdfb-43aa-a35d-6cd9d52c2e66', 'c981b413-6107-49f7-85fe-1fee10beac2d',
+                1, 1, 'Доп. поля', false, false, false);
+end if;
+return 0;
+END;
+$$
+LANGUAGE plpgsql;
+^
+select baseInsert();^
+drop function if exists baseInsert();^
+-- end insert docKind for ProtocolPrav
+-- begin insert secPermissions for ProtocolPrav
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolPrav:create', 0, (select ID from SEC_ROLE where NAME = 'SimpleUser'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolPrav:delete', 0, (select ID from SEC_ROLE where NAME = 'SimpleUser'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolPrav:create', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolPrav:update', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolPrav:delete', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolPrav:create', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolPrav:update', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ProtocolPrav:delete', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+-- end insert secPermissions for ProtocolPrav
+-- begin insert default numerator for SpravkaPoZadol
+CREATE OR REPLACE FUNCTION baseInsert()
+RETURNS integer
+AS $$
+DECLARE
+    cnt integer = 0;
+BEGIN
+cnt = (select count(id) from DF_NUMERATOR where CODE = 'SpravkaPoZadolNumerator' and delete_ts is null);
+if(cnt = 0) then
+    INSERT INTO DF_NUMERATOR (ID, CREATE_TS, CREATED_BY, VERSION, CODE, NUMERATOR_FORMAT, SCRIPT_ENABLED,
+                              PERIODICITY, NUMBER_INITIAL_VALUE, LOC_NAME)
+    VALUES ('e537e92a-c45b-405b-a5fe-d9b9187846a5', now(), 'system', 1, 'SpravkaPoZadolNumerator', '[number]', FALSE, 'Y', 1,
+            '{"captionWithLanguageList":[{"language":"ru","caption":"Справка по задолженности"},{"language":"en","caption":"SpravkaPoZadol"}]}'
+    );
+end if;
+
+return 0;
+END;
+$$
+LANGUAGE plpgsql;
+^
+
+select baseInsert()^
+drop function if exists baseInsert()^
+-- end insert default numerator for SpravkaPoZadol
+-- begin insert cardType for SpravkaPoZadol
+insert into TS_CARD_TYPE (ID, CREATE_TS, CREATED_BY, NAME, DISCRIMINATOR, FIELDS_XML)
+       values ('2431cbc2-bbd2-4cda-9971-ef4d09577292', now(), 'system', 'thesissummer$SpravkaPoZadol', '3800', '<?xml version="1.0" encoding="UTF-8"?>
+<fields>
+  <field name="date" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="docCategory" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="owner" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="department" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="comment" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="finishDatePlan" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="resolution" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="number" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="organization" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="parentCard" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="theme" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="addressees" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="officeExecutor" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="employeeExecutor" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="officeSignedBy" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="receivingMethod" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="responseToDoc" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="sender" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="postTrackingNumber" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="nomerOrder" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="dataOrder" inDocKind="true" required="false" visible="true" signed="false" />
+</fields>
+')^
+-- end insert cardType for SpravkaPoZadol
+-- begin update procCardType for SpravkaPoZadol
+update wf_proc set card_types = regexp_replace(card_types, ',thesissummer\\$SpravkaPoZadol', '') where code in ('Endorsement', 'Resolution', 'Acquaintance', 'Registration')^
+update wf_proc set updated_by='system', card_types = card_types || 'thesissummer$SpravkaPoZadol,' where code in ('Endorsement', 'Resolution', 'Acquaintance', 'Registration')^
+-- end update procCardType for SpravkaPoZadol
+-- begin insert docKind for SpravkaPoZadol
+CREATE OR REPLACE FUNCTION baseInsert()
+RETURNS integer
+AS $$
+DECLARE
+    cnt integer = 0;
+BEGIN
+    cnt = (select count(CATEGORY_ID) from DF_DOC_KIND where CATEGORY_ID = 'b437e348-9011-4769-9447-10388950d05b');
+    if (cnt = 0) then
+        insert into SYS_CATEGORY (ID, NAME, ENTITY_TYPE, IS_DEFAULT, CREATE_TS, CREATED_BY, VERSION, DISCRIMINATOR)
+        values ('b437e348-9011-4769-9447-10388950d05b', 'Справка по задолженности', 'thesissummer$SpravkaPoZadol', false, now(), 'system', 1, 1);
+
+        insert into DF_DOC_KIND (CATEGORY_ID, CREATE_TS, CREATED_BY, VERSION, DOC_TYPE_ID, NUMERATOR_ID,
+                                 NUMERATOR_TYPE, CATEGORY_ATTRS_PLACE, TAB_NAME, PORTAL_PUBLISH_ALLOWED, DISABLE_ADD_PROCESS_ACTORS, CREATE_ONLY_BY_TEMPLATE)
+        values ('b437e348-9011-4769-9447-10388950d05b', now(), 'system', 1, '2431cbc2-bbd2-4cda-9971-ef4d09577292', 'e537e92a-c45b-405b-a5fe-d9b9187846a5',
+                1, 1, 'Доп. поля', false, false, false);
+end if;
+return 0;
+END;
+$$
+LANGUAGE plpgsql;
+^
+select baseInsert();^
+drop function if exists baseInsert();^
+-- end insert docKind for SpravkaPoZadol
+-- begin insert secPermissions for SpravkaPoZadol
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$SpravkaPoZadol:create', 0, (select ID from SEC_ROLE where NAME = 'SimpleUser'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$SpravkaPoZadol:delete', 0, (select ID from SEC_ROLE where NAME = 'SimpleUser'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$SpravkaPoZadol:create', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$SpravkaPoZadol:update', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$SpravkaPoZadol:delete', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$SpravkaPoZadol:create', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$SpravkaPoZadol:update', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$SpravkaPoZadol:delete', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+-- end insert secPermissions for SpravkaPoZadol
+-- begin insert default numerator for ZadanieNaPlatezh
+CREATE OR REPLACE FUNCTION baseInsert()
+RETURNS integer
+AS $$
+DECLARE
+    cnt integer = 0;
+BEGIN
+cnt = (select count(id) from DF_NUMERATOR where CODE = 'ZadanieNaPlatezhNumerator' and delete_ts is null);
+if(cnt = 0) then
+    INSERT INTO DF_NUMERATOR (ID, CREATE_TS, CREATED_BY, VERSION, CODE, NUMERATOR_FORMAT, SCRIPT_ENABLED,
+                              PERIODICITY, NUMBER_INITIAL_VALUE, LOC_NAME)
+    VALUES ('224f2605-e7f2-491a-9abd-2830095e06b3', now(), 'system', 1, 'ZadanieNaPlatezhNumerator', '[number]', FALSE, 'Y', 1,
+            '{"captionWithLanguageList":[{"language":"ru","caption":"Задание на платеж"},{"language":"en","caption":"ZadanieNaPlatezh"}]}'
+    );
+end if;
+
+return 0;
+END;
+$$
+LANGUAGE plpgsql;
+^
+
+select baseInsert()^
+drop function if exists baseInsert()^
+-- end insert default numerator for ZadanieNaPlatezh
+-- begin insert cardType for ZadanieNaPlatezh
+insert into TS_CARD_TYPE (ID, CREATE_TS, CREATED_BY, NAME, DISCRIMINATOR, FIELDS_XML)
+       values ('b5934f83-ea3a-4137-accb-4bdc2976995a', now(), 'system', 'thesissummer$ZadanieNaPlatezh', '3700', '<?xml version="1.0" encoding="UTF-8"?>
+<fields>
+  <field name="date" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="docCategory" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="owner" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="department" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="comment" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="finishDatePlan" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="resolution" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="number" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="organization" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="parentCard" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="theme" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="addressees" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="officeExecutor" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="employeeExecutor" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="officeSignedBy" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="receivingMethod" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="responseToDoc" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="sender" inDocKind="false" required="false" visible="false" signed="false" />
+  <field name="postTrackingNumber" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="naimenovaniePol" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="summaTenge" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="summaDollar" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="nomerAndDataDogovora" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="schetNaOplatu" inDocKind="true" required="false" visible="true" signed="false" />
+  <field name="nomerStati" inDocKind="true" required="false" visible="true" signed="false" />
+</fields>
+')^
+-- end insert cardType for ZadanieNaPlatezh
+-- begin update procCardType for ZadanieNaPlatezh
+update wf_proc set card_types = regexp_replace(card_types, ',thesissummer\\$ZadanieNaPlatezh', '') where code in ('Endorsement', 'Resolution', 'Acquaintance', 'Registration')^
+update wf_proc set updated_by='system', card_types = card_types || 'thesissummer$ZadanieNaPlatezh,' where code in ('Endorsement', 'Resolution', 'Acquaintance', 'Registration')^
+-- end update procCardType for ZadanieNaPlatezh
+-- begin insert docKind for ZadanieNaPlatezh
+CREATE OR REPLACE FUNCTION baseInsert()
+RETURNS integer
+AS $$
+DECLARE
+    cnt integer = 0;
+BEGIN
+    cnt = (select count(CATEGORY_ID) from DF_DOC_KIND where CATEGORY_ID = '208bb8fa-a602-4703-b28b-ac8b94e47fbd');
+    if (cnt = 0) then
+        insert into SYS_CATEGORY (ID, NAME, ENTITY_TYPE, IS_DEFAULT, CREATE_TS, CREATED_BY, VERSION, DISCRIMINATOR)
+        values ('208bb8fa-a602-4703-b28b-ac8b94e47fbd', 'Задание на платеж', 'thesissummer$ZadanieNaPlatezh', false, now(), 'system', 1, 1);
+
+        insert into DF_DOC_KIND (CATEGORY_ID, CREATE_TS, CREATED_BY, VERSION, DOC_TYPE_ID, NUMERATOR_ID,
+                                 NUMERATOR_TYPE, CATEGORY_ATTRS_PLACE, TAB_NAME, PORTAL_PUBLISH_ALLOWED, DISABLE_ADD_PROCESS_ACTORS, CREATE_ONLY_BY_TEMPLATE)
+        values ('208bb8fa-a602-4703-b28b-ac8b94e47fbd', now(), 'system', 1, 'b5934f83-ea3a-4137-accb-4bdc2976995a', '224f2605-e7f2-491a-9abd-2830095e06b3',
+                1, 1, 'Доп. поля', false, false, false);
+end if;
+return 0;
+END;
+$$
+LANGUAGE plpgsql;
+^
+select baseInsert();^
+drop function if exists baseInsert();^
+-- end insert docKind for ZadanieNaPlatezh
+-- begin insert secPermissions for ZadanieNaPlatezh
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ZadanieNaPlatezh:create', 0, (select ID from SEC_ROLE where NAME = 'SimpleUser'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ZadanieNaPlatezh:delete', 0, (select ID from SEC_ROLE where NAME = 'SimpleUser'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ZadanieNaPlatezh:create', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ZadanieNaPlatezh:update', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ZadanieNaPlatezh:delete', 1, (select ID from SEC_ROLE where NAME = 'Administrators'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ZadanieNaPlatezh:create', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ZadanieNaPlatezh:update', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+insert into SEC_PERMISSION (ID, CREATE_TS, CREATED_BY, VERSION, UPDATE_TS, UPDATED_BY, DELETE_TS, DELETED_BY, PERMISSION_TYPE, TARGET, VALUE_, ROLE_ID)
+values (newid(), now(), 'system', 1, now(), null, null, null, 20, 'thesissummer$ZadanieNaPlatezh:delete', 1, (select ID from SEC_ROLE where NAME = 'doc_initiator'))^
+-- end insert secPermissions for ZadanieNaPlatezh

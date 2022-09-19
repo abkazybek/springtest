@@ -31,7 +31,7 @@ public class OrderLoanSIEdit<T extends OrderLoanSI> extends AbstractDocEditor<T>
 
     @Override
     protected String getHiddenTabsConfig() {
-        return "processTab,openHistoryTab,securityTab,cardProjectsTab,correspondenceHistoryTab,docTransferLogTab,cardLinksTab,docLogTab,versionsTab";
+        return "processTab";
     }
 
     @Override
@@ -48,7 +48,6 @@ public class OrderLoanSIEdit<T extends OrderLoanSI> extends AbstractDocEditor<T>
     protected void fillHiddenTabs() {
         //hiddenTabs.put("office", getMessage("office"));
         hiddenTabs.put("attachmentsTab", getMessage("attachmentsTab"));
-        hiddenTabs.put("docTreeTab", getMessage("docTreeTab"));
         if (getAccessData().getNotVersion()) {
             hiddenTabs.put("cardCommentTab", getMessage("cardCommentTab"));
         }

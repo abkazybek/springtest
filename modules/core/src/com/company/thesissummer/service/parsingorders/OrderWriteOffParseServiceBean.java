@@ -91,10 +91,11 @@ public class OrderWriteOffParseServiceBean implements OrderWriteOffParseService 
                 List<Department> departments = dataManager.load(Department.class).query("select e from df$Department e where " +
                         "e.name = :name").parameter("name", document.getElementsByTagName("arg").item(3).getTextContent()).list();
 
+                if (departments.size() > 0) {
 
-                orderWriteOff.setDepartment(departments.get(0));
+                    orderWriteOff.setDepartment(departments.get(0));
 
-
+                }
                 orderWriteOff.setDogovorRamoch(document.getElementsByTagName("arg").item(4).getTextContent());
 
                 orderWriteOff.setZaemchik(document.getElementsByTagName("arg").item(5).getTextContent());
@@ -220,6 +221,8 @@ public class OrderWriteOffParseServiceBean implements OrderWriteOffParseService 
                     cardEnsorsed.setCard(orderWriteOff);
 
                     cardEnsorsed.setProcRole(endorseRole);
+
+                    cardEnsorsed.setSortOrder(1);
 
                     List<User> endorsement = dataManager.load(User.class).query("select e from sec$User e where " +
                             "e.email = :email").parameter("email", element.getElementsByTagName("Soglasovanti").item(0).getTextContent()).list();

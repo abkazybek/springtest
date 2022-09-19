@@ -10,9 +10,8 @@ import com.company.thesissummer.entity.OrderReturnNeispSub;
 import com.company.thesissummer.entity.OrderRevaluation;
 import com.company.thesissummer.entity.table1c.OrderReturnNeispSub1C;
 import com.company.thesissummer.entity.table1c.OrderRevaluation1C;
-import com.haulmont.cuba.core.global.CommitContext;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.thesis.core.entity.Department;
 import com.haulmont.thesis.core.entity.DocKind;
@@ -50,6 +49,12 @@ public class OrderRevaluationParseServiceBean implements OrderRevaluationParseSe
 
     @Inject
     protected UserSessionSource userSessionSource;
+
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
 
 
     @Override
@@ -97,8 +102,10 @@ public class OrderRevaluationParseServiceBean implements OrderRevaluationParseSe
                 List<Department> departments = dataManager.load(Department.class).query("select e from df$Department e where " +
                         "e.name = :name").parameter("name", document.getElementsByTagName("arg").item(3).getTextContent()).list();
 
-                orderRevaluation.setDepartment(departments.get(0));
+                if(departments.size() > 0) {
+                    orderRevaluation.setDepartment(departments.get(0));
 
+                }
                 orderRevaluation.setDogovorRamoch(document.getElementsByTagName("arg").item(4).getTextContent());
 
                 orderRevaluation.setZaemchik(document.getElementsByTagName("arg").item(5).getTextContent());
@@ -114,16 +121,22 @@ public class OrderRevaluationParseServiceBean implements OrderRevaluationParseSe
 
                 orderRevaluation.setObshayaItogPereocenki(document.getElementsByTagName("arg").item(9).getTextContent());
 
+                //устанавливаем текущую дату
+                orderRevaluation.setDate(timeSource.currentTimestamp());
+
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderRevaluation)) {
+                    orderRevaluation.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
+                }
+
+
             }
 
-
-            OrderRevaluation1C orderRevaluation1C = dataManager.create(OrderRevaluation1C.class);
 
             document.getDocumentElement().normalize();
 
             NodeList nodeList = document.getElementsByTagName("Structura");
 
-            Set<OrderRevaluation1C> list  = new HashSet<>();
 
             for (int i = 0; nodeList.getLength() > i; i++) {
 
@@ -132,6 +145,10 @@ public class OrderRevaluationParseServiceBean implements OrderRevaluationParseSe
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
 
                     Element element = (Element) node;
+
+                    OrderRevaluation1C orderRevaluation1C = dataManager.create(OrderRevaluation1C.class);
+
+                    Set<OrderRevaluation1C> list  = new HashSet<>();
 
                     orderRevaluation1C.setNumber(element.getElementsByTagName("Nomer").item(0).getTextContent());
 
@@ -262,3 +279,5 @@ public class OrderRevaluationParseServiceBean implements OrderRevaluationParseSe
 
     }
 }
+
+//распоряжение успешно прошло тест через POSTMAN

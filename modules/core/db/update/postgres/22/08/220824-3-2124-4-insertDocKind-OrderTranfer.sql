@@ -19,7 +19,6 @@ return 0;
 END;
 $$
 LANGUAGE plpgsql;
-^
-select baseInsert();^
-drop function if exists baseInsert();^
+select baseInsert();
+drop function if exists baseInsert();
 -- end insert docKind for OrderTranfer

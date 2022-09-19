@@ -31,7 +31,7 @@ class LoanQR {
 
         OrderLoan orderLoan = params['entity'] as OrderLoan;
 
-        return [['QRcodeimage': getPDF417Barcode(orderLoan.getCreator().getLogin())]]
+        return [['QRcodeimage': getPDF417Barcode(orderLoan.signatures.substring(55,60))]]
 
     }
 

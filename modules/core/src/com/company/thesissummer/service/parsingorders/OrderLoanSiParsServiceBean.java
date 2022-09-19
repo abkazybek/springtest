@@ -8,9 +8,8 @@ package com.company.thesissummer.service.parsingorders;
 
 import com.company.thesissummer.entity.OrderLoan;
 import com.company.thesissummer.entity.OrderLoanSI;
-import com.haulmont.cuba.core.global.CommitContext;
-import com.haulmont.cuba.core.global.DataManager;
-import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.*;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.thesis.core.entity.DocKind;
 import com.haulmont.thesis.core.entity.Employee;
@@ -46,6 +45,11 @@ public class OrderLoanSiParsServiceBean implements OrderLoanSiParsService {
     @Inject
     protected UserSessionSource userSessionSource;
 
+    @Inject
+    protected TimeSource timeSource;
+
+    @Inject
+    public UniqueNumbersService uniqueNumbersService1;
 
     @Override
     public String saveXML(String xml) {
@@ -96,6 +100,13 @@ public class OrderLoanSiParsServiceBean implements OrderLoanSiParsService {
 
 
                 orderLoanSI.setOwner(employees.get(0));
+
+                //устанавливаем текущую дату
+                orderLoanSI.setDate(timeSource.currentTimestamp());
+
+                //устанавливаем порядкувую нумерацию
+                if (PersistenceHelper.isNew(orderLoanSI))
+                    orderLoanSI.setNumber(String.valueOf(uniqueNumbersService1.getNextNumber("NUMBER_")));
 
                 //Подгрузка процесса Согласования
                 Proc proc = dataManager.load(Proc.class)
@@ -236,3 +247,5 @@ public class OrderLoanSiParsServiceBean implements OrderLoanSiParsService {
         return xml;
     }
 }
+
+//распоряжение успешно прошло тест через POSTMAN

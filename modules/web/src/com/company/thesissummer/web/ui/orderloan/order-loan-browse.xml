@@ -108,6 +108,8 @@
                             <button id="refreshBtn" action="cardsTable.refresh"/>
                             <button id="excel" action="cardsTable.excel"/>
                             <button id="expandBtn" action="cardsTable.expand"/>
+                            <button id="completeBtn"
+                                    action="cardsTable.completeVisit"/>
                             <runReportPopupButton id="printButton" icon="ts-font-icon:PRINT" description="msg://print"/>
                         </buttonsPanel>
                         <actions>
@@ -119,6 +121,10 @@
                             <action id="openNewTab"/>
                             <action id="showLink"/>
                             <action id="expand"/>
+                            <action id="completeVisit"
+                                    trackSelection="true"
+                                    caption="Отправить исполнителю"
+                                    icon="SEND"/>
                         </actions>
                         <tableSettings id="tableSettings"/>
                         <rowsCount/>

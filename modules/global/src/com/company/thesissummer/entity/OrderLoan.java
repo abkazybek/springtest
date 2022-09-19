@@ -10,6 +10,7 @@ import com.haulmont.chile.core.datatypes.Datatypes;
 import com.haulmont.chile.core.model.MetaClass;
 import com.haulmont.cuba.core.entity.annotation.EnableRestore;
 import com.haulmont.cuba.core.entity.annotation.Listeners;
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.cuba.core.global.AppBeans;
 import com.haulmont.cuba.core.global.Messages;
@@ -24,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.Set;
 
+@PublishEntityChangedEvents
 @DiscriminatorValue("2000")
 @Table(name = "THESISSUMMER_ORDER_LOAN")
 @Entity(name = "thesissummer$OrderLoan")
@@ -31,7 +33,7 @@ import java.util.Set;
 @EnableRestore
 @TrackEditScreenHistory
 @PrimaryKeyJoinColumn(name = "CARD_ID", referencedColumnName = "ID")
-public class OrderLoan extends Doc implements HasDetailedDescription {
+public class OrderLoan extends Doc implements HasDetailedDescription, HasSignatureOrderLoan {
 
     private static final long serialVersionUID = 4058041244022781874L;
 
@@ -293,5 +295,9 @@ public class OrderLoan extends Doc implements HasDetailedDescription {
         } else {
             return description;
         }
+    }
+
+    public void setSignatures(String signatures) {
+        this.signatures = signatures;
     }
 }

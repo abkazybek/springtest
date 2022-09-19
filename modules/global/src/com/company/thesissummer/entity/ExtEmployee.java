@@ -9,9 +9,7 @@ package com.company.thesissummer.entity;
 import com.haulmont.cuba.core.entity.annotation.Extends;
 import com.haulmont.thesis.core.entity.Employee;
 
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @javax.persistence.DiscriminatorValue("X")
 @Table(name = "DF_EMPLOYEE")
@@ -21,4 +19,14 @@ import javax.persistence.Table;
 public class ExtEmployee extends Employee {
     private static final long serialVersionUID = -8686422661464186998L;
 
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "poluchatel")
+    protected SpravkaPoZadol spravkaPoZadol;
+
+    public SpravkaPoZadol getSpravkaPoZadol() {
+        return spravkaPoZadol;
+    }
+
+    public void setSpravkaPoZadol(SpravkaPoZadol spravkaPoZadol) {
+        this.spravkaPoZadol = spravkaPoZadol;
+    }
 }

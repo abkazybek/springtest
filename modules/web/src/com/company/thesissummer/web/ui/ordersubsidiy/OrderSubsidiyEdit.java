@@ -6,6 +6,9 @@
 
 package com.company.thesissummer.web.ui.ordersubsidiy;
 
+import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.security.entity.User;
+import com.haulmont.thesis.core.entity.Employee;
 import com.haulmont.thesis.web.actions.PrintReportAction;
 import com.haulmont.thesis.web.ui.basicdoc.editor.AbstractDocEditor;
 import com.haulmont.thesis.web.voice.VoiceActionPriorities;
@@ -14,6 +17,7 @@ import com.haulmont.thesis.core.entity.DocCategory;
 import com.company.thesissummer.entity.OrderSubsidiy;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.Map;
 
 import static com.haulmont.thesis.web.voice.VoiceCompanionsRepository.voiceCompanion;
@@ -31,7 +35,7 @@ public class OrderSubsidiyEdit<T extends OrderSubsidiy> extends AbstractDocEdito
 
     @Override
     protected String getHiddenTabsConfig() {
-        return "processTab,openHistoryTab,securityTab,cardProjectsTab,correspondenceHistoryTab,docTransferLogTab,cardLinksTab,docLogTab,versionsTab";
+        return "processTab";
     }
 
     @Override
@@ -48,7 +52,7 @@ public class OrderSubsidiyEdit<T extends OrderSubsidiy> extends AbstractDocEdito
     protected void fillHiddenTabs() {
         //hiddenTabs.put("office", getMessage("office"));
         hiddenTabs.put("attachmentsTab", getMessage("attachmentsTab"));
-        hiddenTabs.put("docTreeTab", getMessage("docTreeTab"));
+        //hiddenTabs.put("docTreeTab", getMessage("docTreeTab"));
         if (getAccessData().getNotVersion()) {
             hiddenTabs.put("cardCommentTab", getMessage("cardCommentTab"));
         }

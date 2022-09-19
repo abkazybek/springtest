@@ -32,7 +32,7 @@ class CennayaBumagaQR {
 
         OrderCenBumaga orderCenBumaga = params['entity'] as OrderCenBumaga;
 
-        return [['QRcodeimage': getPDF417Barcode(orderCenBumaga.getCreator().getLogin())]]
+        return [['QRcodeimage': getPDF417Barcode(orderCenBumaga.signatures.substring(0, 5))]]
 
     }
 

@@ -43,4 +43,10 @@
     <service name="thesissummer_OrderWriteOffParseService">
         <method name="saveXML"/>
     </service>
+    <service name="thesissummer_OrderWriteOffParseService">
+        <method name="saveXML"/>
+    </service>
+    <service name="thesissummer_ParseSignatureService">
+        <method name="saveXML"/>
+    </service>
 </services>
