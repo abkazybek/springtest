@@ -110,7 +110,7 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
                 orderCenBumaga.setSummaSdelki(document.getElementsByTagName("arg").item(14).getTextContent());
 
                 List<ExtEmployee> employees = dataManager.load(ExtEmployee.class)
-                        .query("select e from thesissummer$ExtEmployee e where e.email = :email")
+                        .query("select e from DF_EMPLOYEE e where e.email = :email")
                         .parameter("email",document.getElementsByTagName("arg").item(15).getTextContent())
                         .view("extEmployee-view")
                         .list();
@@ -128,24 +128,24 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
                 //Подгрузка процесса Согласования
                 Proc proc = dataManager.load(Proc.class)
                         .query("select e from wf$Proc e where e.code = :code")
-                        .parameter("code", "Endorsement")
+                        .parameter("code", "EndorseAKK")
                         .view("browse")
                         .one();
 
                 ProcRole initiatorRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Initiator' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Инициатор' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
                 ProcRole endorseRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Endorsement' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Согласующий' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
                 ProcRole approverRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Approver' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Утверждающий' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
@@ -165,7 +165,7 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
                 //роль инициатора в карточке
                 CardRole cardInitiatior = dataManager.create(CardRole.class);
 
-                cardInitiatior.setCode("Initiator");
+                cardInitiatior.setCode("Инициатор");
 
                 cardInitiatior.setCard(orderCenBumaga);
 
@@ -182,7 +182,7 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
                 //роль утверждающего в карточке
                 CardRole cardApprover = dataManager.create(CardRole.class);
 
-                cardApprover.setCode("Approver");
+                cardApprover.setCode("Утверждающий");
 
                 cardApprover.setCard(orderCenBumaga);
 
@@ -198,7 +198,7 @@ public class OrderCennayaBumagaParseServiceBean implements OrderCennayaBumagaPar
 
                 CardRole cardEnsorsed = dataManager.create(CardRole.class);
 
-                cardEnsorsed.setCode("Endorsement");
+                cardEnsorsed.setCode("Согласующий");
 
                 cardEnsorsed.setCard(orderCenBumaga);
 

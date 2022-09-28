@@ -96,13 +96,14 @@ public class OrderTransferMoneyParseServiceBean implements OrderTransferMoneyPar
 
 
                 List<ExtEmployee> employees = dataManager.load(ExtEmployee.class)
-                        .query("select e from thesissummer$ExtEmployee e where e.email = :email")
+                        .query("select e from DF_EMPLOYEE e where e.email = :email")
                         .parameter("email", document.getElementsByTagName("arg").item(6).getTextContent())
-                        .view("extEmployee-view")
+                        .view("browse")
                         .list();
 
-
-                orderTranferMoney.setOwner(employees.get(0));
+                if(employees.size() != 0) {
+                    orderTranferMoney.setOwner(employees.get(0));
+                }
 
                 //устанавливаем текущую дату
                 orderTranferMoney.setDate(timeSource.currentTimestamp());
@@ -115,24 +116,27 @@ public class OrderTransferMoneyParseServiceBean implements OrderTransferMoneyPar
                 //Подгрузка процесса Согласования
                 Proc proc = dataManager.load(Proc.class)
                         .query("select e from wf$Proc e where e.code = :code")
-                        .parameter("code", "Endorsement")
+                        .parameter("code", "EndorseAKK")
                         .view("browse")
                         .one();
 
+                //подтягивание роли инициатора
                 ProcRole initiatorRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Initiator' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Инициатор' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
+                //подтягивание роли согласующего
                 ProcRole endorseRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Endorsement' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Согласующий' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
+                //подтягивание роли подписывающего
                 ProcRole approverRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Approver' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Утверждающий' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
@@ -151,7 +155,7 @@ public class OrderTransferMoneyParseServiceBean implements OrderTransferMoneyPar
                 //роль инициатора в карточке
                 CardRole cardInitiatior = dataManager.create(CardRole.class);
 
-                cardInitiatior.setCode("Initiator");
+                cardInitiatior.setCode("Инициатор");
 
                 cardInitiatior.setCard(orderTranferMoney);
 
@@ -168,7 +172,7 @@ public class OrderTransferMoneyParseServiceBean implements OrderTransferMoneyPar
                 //роль утверждающего в карточке
                 CardRole cardApprover = dataManager.create(CardRole.class);
 
-                cardApprover.setCode("Approver");
+                cardApprover.setCode("Утверждающий");
 
                 cardApprover.setCard(orderTranferMoney);
 
@@ -180,7 +184,7 @@ public class OrderTransferMoneyParseServiceBean implements OrderTransferMoneyPar
 
                 CardRole cardEnsorsed = dataManager.create(CardRole.class);
 
-                cardEnsorsed.setCode("Endorsement");
+                cardEnsorsed.setCode("Согласующий");
 
                 cardEnsorsed.setCard(orderTranferMoney);
 

@@ -81,7 +81,9 @@ public class OrderVozvratVGuParseServiceBean implements OrderVozvratVGuParseServ
                 List<Department> departments = dataManager.load(Department.class).query("select e from df$Department e where " +
                         "e.name = :name").parameter("name", document.getElementsByTagName("arg").item(2).getTextContent()).list();
 
-                orderVozvratvGu.setDepartment(departments.get(0));
+                if(departments.size() != 0) {
+                    orderVozvratvGu.setDepartment(departments.get(0));
+                }
 
                 List<Employee> user = dataManager.load(Employee.class).query("select e from df$Employee e where " +
                         "e.email = :email").parameter("email", document.getElementsByTagName("arg").item(3).getTextContent()).list();

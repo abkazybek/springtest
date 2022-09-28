@@ -135,7 +135,7 @@
                             <column id="currentActorsString" caption="msg://currentActors" maxTextLength="40"/>
                             <column id="docKind" caption="msg://docKind"/>
                             <column id="number" caption="msg://number"/>
-                            <column id="nomerOrder"/>
+                            <column id="nomerOrder" />
                             <column id="dataOrder" />
 
                             <column id="regNo" caption="msg://regNo"/>

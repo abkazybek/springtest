@@ -191,7 +191,7 @@
                                                                    caption="msg://com.company.thesissummer.entity/OrderRevaluation.orderReceiver"
                                                                    width="${width}">
                                                     <actions>
-                                                        <action id="open"/>
+                                                        <action id="greeting" icon="SEND"/>
                                                     </actions>
                                                 </lookupPickerField>
                                             </row>

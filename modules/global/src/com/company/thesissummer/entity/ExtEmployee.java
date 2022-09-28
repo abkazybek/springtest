@@ -13,7 +13,7 @@ import javax.persistence.*;
 
 @javax.persistence.DiscriminatorValue("X")
 @Table(name = "DF_EMPLOYEE")
-@Entity(name = "thesissummer$ExtEmployee")
+@Entity(name = "DF_EMPLOYEE")
 @PrimaryKeyJoinColumn(name = "CORRESPONDENT_ID", referencedColumnName = "ID")
 @Extends(Employee.class)
 public class ExtEmployee extends Employee {

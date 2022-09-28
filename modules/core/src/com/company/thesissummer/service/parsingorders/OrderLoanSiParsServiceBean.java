@@ -6,6 +6,7 @@
 
 package com.company.thesissummer.service.parsingorders;
 
+import com.company.thesissummer.entity.ExtEmployee;
 import com.company.thesissummer.entity.OrderLoan;
 import com.company.thesissummer.entity.OrderLoanSI;
 import com.haulmont.cuba.core.app.UniqueNumbersService;
@@ -95,8 +96,10 @@ public class OrderLoanSiParsServiceBean implements OrderLoanSiParsService {
 
                 orderLoanSI.setOsnovanie(document.getElementsByTagName("arg").item(3).getTextContent());
 
-                List<Employee> employees = dataManager.load(Employee.class).query("select e from df$Employee e where " +
-                        "e.email = :email").parameter("email", document.getElementsByTagName("arg").item(4).getTextContent()).list();
+                List<ExtEmployee> employees = dataManager.load(ExtEmployee.class)
+                        .query("select e from DF_EMPLOYEE e where e.email = :email")
+                        .parameter("email", document.getElementsByTagName("arg").item(4).getTextContent())
+                        .list();
 
 
                 orderLoanSI.setOwner(employees.get(0));
@@ -111,24 +114,24 @@ public class OrderLoanSiParsServiceBean implements OrderLoanSiParsService {
                 //Подгрузка процесса Согласования
                 Proc proc = dataManager.load(Proc.class)
                         .query("select e from wf$Proc e where e.code = :code")
-                        .parameter("code", "Endorsement")
+                        .parameter("code", "EndorseAKK")
                         .view("browse")
                         .one();
 
                 ProcRole initiatorRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Initiator' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Инициатор' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
                 ProcRole endorseRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Endorsement' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Согласующий' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
                 ProcRole approverRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Approver' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Утверждающий' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
@@ -146,7 +149,7 @@ public class OrderLoanSiParsServiceBean implements OrderLoanSiParsService {
                 //роль инициатора в карточке
                 CardRole cardInitiatior = dataManager.create(CardRole.class);
 
-                cardInitiatior.setCode("Initiator");
+                cardInitiatior.setCode("Инициатор");
 
                 cardInitiatior.setCard(orderLoanSI);
 
@@ -162,7 +165,7 @@ public class OrderLoanSiParsServiceBean implements OrderLoanSiParsService {
                 //роль утверждающего в карточке
                 CardRole cardApprover = dataManager.create(CardRole.class);
 
-                cardApprover.setCode("Approver");
+                cardApprover.setCode("Утверждающий");
 
                 cardApprover.setCard(orderLoanSI);
 
@@ -209,7 +212,7 @@ public class OrderLoanSiParsServiceBean implements OrderLoanSiParsService {
 
                         CardRole cardEnsorsed = dataManager.create(CardRole.class);
 
-                        cardEnsorsed.setCode("Endorsement");
+                        cardEnsorsed.setCode("Согласующий");
 
                         cardEnsorsed.setCard(orderLoanSI);
 

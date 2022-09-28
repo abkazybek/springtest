@@ -488,6 +488,8 @@ create table THESISSUMMER_PROTOCOL_KK (
     CARD_ID uuid,
     --
     NOMER_PROTOCOLA varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    JURIST_ID uuid,
     TYPE_PROTOCOL_ID uuid,
     CITY_ID uuid,
     DATA_PROTOCOLA varchar(255),
@@ -536,6 +538,7 @@ create table THESISSUMMER_ZADANIE_NA_PLATEZH (
     SUMMA_TENGE varchar(255),
     SUMMA_DOLLAR varchar(255),
     NOMER_AND_DATA_DOGOVORA varchar(255),
+    ORDER_RECEIVER_ID uuid,
     NAZNACH_PLATESZ varchar(255),
     SCHET_NA_OPLATU varchar(255),
     NOMER_STATI varchar(255),

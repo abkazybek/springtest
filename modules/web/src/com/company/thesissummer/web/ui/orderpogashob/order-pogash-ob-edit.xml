@@ -47,9 +47,9 @@
                 <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
             </query>
         </collectionDatasource>
-        <collectionDatasource id="receiverDc" class="com.haulmont.thesis.core.entity.Employee" view="withuserdepartment">
+        <collectionDatasource id="receiverDc" class="com.company.thesissummer.entity.ExtEmployee" view="browse">
             <query>
-                <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
+                <![CDATA[select e from DF_EMPLOYEE e left join e.user user where (user is null or user.active = true) order by e.name]]>
             </query>
         </collectionDatasource>
         <runtimePropsDatasource id="runtimePropsDs" mainDs="cardDs"/>
@@ -190,7 +190,7 @@
                                                                    caption="msg://com.company.thesissummer.entity/OrderPogashOb.orderReceiver"
                                                                    width="${width}">
                                                     <actions>
-                                                        <action id="open"/>
+                                                        <action id="greeting" icon="SEND"/>
                                                     </actions>
                                                 </lookupPickerField>
                                             </row>

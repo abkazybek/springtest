@@ -116,24 +116,25 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
                 //Подгрузка процесса Согласования
                 Proc proc = dataManager.load(Proc.class)
                         .query("select e from wf$Proc e where e.code = :code")
-                        .parameter("code", "Endorsement")
+                        .parameter("code", "EndorseAKK")
                         .view("browse")
                         .one();
 
                 ProcRole initiatorRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Initiator' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Инициатор' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
+
                 ProcRole endorseRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Endorsement' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Согласующий' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
 
                 ProcRole approverRole = dataManager.load(ProcRole.class)
-                        .query("select e from wf$ProcRole e where e.code = 'Approver' and e.proc.id = :procId")
+                        .query("select e from wf$ProcRole e where e.code = 'Утверждающий' and e.proc.id = :procId")
                         .parameter("procId", proc.getId())
                         .view("browse")
                         .one();
@@ -151,7 +152,7 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
                 //роль инициатора в карточке
                 CardRole cardInitiatior = dataManager.create(CardRole.class);
 
-                cardInitiatior.setCode("Initiator");
+                cardInitiatior.setCode("Инициатор");
 
                 cardInitiatior.setCard(orderPosting);
 
@@ -167,7 +168,7 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
                 //роль утверждающего в карточке
                 CardRole cardApprover = dataManager.create(CardRole.class);
 
-                cardApprover.setCode("Approver");
+                cardApprover.setCode("Утверждающий");
 
                 cardApprover.setCard(orderPosting);
 
@@ -178,6 +179,44 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
                 commitContext.addInstanceToCommit(cardApprover);
 
                 orderPosting.setObshayaSumma(document.getElementsByTagName("arg").item(9).getTextContent());
+
+                OrderPosting1C orderPosting1C = dataManager.create(OrderPosting1C.class);
+
+                NodeList nodeList = document.getElementsByTagName("Structura");
+
+                Set<OrderPosting1C> list  = new HashSet<>();
+
+                for (int i = 0; nodeList.getLength() > i; i++) {
+
+                    Node node = nodeList.item(i);
+
+                    if (node.getNodeType() == Node.ELEMENT_NODE) {
+
+                        Element element = (Element) node;
+
+                        orderPosting1C.setNumber(element.getElementsByTagName("Nomer").item(0).getTextContent());
+
+                        orderPosting1C.setNameofpledger(element.getElementsByTagName("Zalogodatel").item(0).getTextContent());
+
+                        orderPosting1C.setDogovorwithcollateral(element.getElementsByTagName("DogovorZalogaGarantii").item(0).getTextContent());
+
+                        orderPosting1C.setObespecheniye(element.getElementsByTagName("Obespechenie").item(0).getTextContent());
+
+                        orderPosting1C.setZalogStoimost(element.getElementsByTagName("ZalogovayStoimost").item(0).getTextContent());
+
+                        orderPosting1C.setDocumentUsl(element.getElementsByTagName("DokumentUsloviy").item(0).getTextContent());
+
+                        orderPosting1C.setOrderPosting(orderPosting);
+
+                        list.add(orderPosting1C);
+
+                        orderPosting.setOrderPosting1C(list);
+
+                        commitContext.addInstanceToCommit(orderPosting1C);
+
+                    }
+
+                }
 
                 //роль согласующего в карточке
                 NodeList nodeList2 = document.getElementsByTagName("Structura2");
@@ -192,7 +231,7 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
 
                         CardRole cardEnsorsed = dataManager.create(CardRole.class);
 
-                        cardEnsorsed.setCode("Endorsement");
+                        cardEnsorsed.setCode("Согласующий");
 
                         cardEnsorsed.setCard(orderPosting);
 
@@ -211,51 +250,9 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
 
             }
 
-
-            OrderPosting1C orderPosting1C = dataManager.create(OrderPosting1C.class);
-
-            NodeList nodeList = document.getElementsByTagName("Structura");
-
-            Set<OrderPosting1C> list  = new HashSet<>();
-
-            for (int i = 0; nodeList.getLength() > i; i++) {
-
-                Node node = nodeList.item(i);
-
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-
-                    Element element = (Element) node;
-
-                    orderPosting1C.setNumber(element.getElementsByTagName("Nomer").item(0).getTextContent());
-
-                    orderPosting1C.setNameofpledger(element.getElementsByTagName("Zalogodatel").item(0).getTextContent());
-
-                    orderPosting1C.setDogovorwithcollateral(element.getElementsByTagName("DogovorZalogaGarantii").item(0).getTextContent());
-
-                    orderPosting1C.setObespecheniye(element.getElementsByTagName("Obespechenie").item(0).getTextContent());
-
-                    orderPosting1C.setZalogStoimost(element.getElementsByTagName("ZalogovayStoimost").item(0).getTextContent());
-
-                    orderPosting1C.setDocumentUsl(element.getElementsByTagName("DokumentUsloviy").item(0).getTextContent());
-
-                    orderPosting1C.setOrderPosting(orderPosting);
-
-                    list.add(orderPosting1C);
-
-                    orderPosting.setOrderPosting1C(list);
-
-                    commitContext.addInstanceToCommit(orderPosting1C);
-
-                }
-
-            }
-
             commitContext.addInstanceToCommit(orderPosting);
 
             dataManager.commit(commitContext);
-
-
-
 
         } catch (IOException e) {
             e.printStackTrace();

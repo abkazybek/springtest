@@ -183,24 +183,24 @@ public class OrderRevaluationParseServiceBean implements OrderRevaluationParseSe
             //Подгрузка процесса Согласования
             Proc proc = dataManager.load(Proc.class)
                     .query("select e from wf$Proc e where e.code = :code")
-                    .parameter("code", "Endorsement")
+                    .parameter("code", "EndorseAKK")
                     .view("browse")
                     .one();
 
             ProcRole initiatorRole = dataManager.load(ProcRole.class)
-                    .query("select e from wf$ProcRole e where e.code = 'Initiator' and e.proc.id = :procId")
+                    .query("select e from wf$ProcRole e where e.code = 'Инициатор' and e.proc.id = :procId")
                     .parameter("procId", proc.getId())
                     .view("browse")
                     .one();
 
             ProcRole endorseRole = dataManager.load(ProcRole.class)
-                    .query("select e from wf$ProcRole e where e.code = 'Endorsement' and e.proc.id = :procId")
+                    .query("select e from wf$ProcRole e where e.code = 'Согласующий' and e.proc.id = :procId")
                     .parameter("procId", proc.getId())
                     .view("browse")
                     .one();
 
             ProcRole approverRole = dataManager.load(ProcRole.class)
-                    .query("select e from wf$ProcRole e where e.code = 'Approver' and e.proc.id = :procId")
+                    .query("select e from wf$ProcRole e where e.code = 'Утверждающий' and e.proc.id = :procId")
                     .parameter("procId", proc.getId())
                     .view("browse")
                     .one();
@@ -218,7 +218,7 @@ public class OrderRevaluationParseServiceBean implements OrderRevaluationParseSe
             //роль инициатора в карточке
             CardRole cardInitiatior = dataManager.create(CardRole.class);
 
-            cardInitiatior.setCode("Initiator");
+            cardInitiatior.setCode("Инициатор");
 
             cardInitiatior.setCard(orderRevaluation);
 
@@ -242,7 +242,7 @@ public class OrderRevaluationParseServiceBean implements OrderRevaluationParseSe
 
                     CardRole cardEnsorsed = dataManager.create(CardRole.class);
 
-                    cardEnsorsed.setCode("Endorsement");
+                    cardEnsorsed.setCode("Согласующий");
 
                     cardEnsorsed.setCard(orderRevaluation);
 

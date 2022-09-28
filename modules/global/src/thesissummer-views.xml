@@ -9,7 +9,7 @@
         <property name="organization" view="_local"/>
         <property name="parentDepartment" view="_local"/>
     </view>
-    <view entity="thesissummer$ExtEmployee" name="edit" overwrite="true" extends="_local">
+    <view entity="DF_EMPLOYEE" name="edit" overwrite="true" extends="_local">
         <property name="organization" view="_minimal"/>
         <property name="employeeDepartmentPositionRelations" view="browse"/>
         <property name="correspondentAttachments" view="correspondent_attachment_edit"/>
@@ -21,7 +21,7 @@
         <property name="user" view="_local"/>
         <property name="department" view="employee-edit"/>
     </view>
-    <view entity="thesissummer$ExtEmployee" name="browse" overwrite="true" extends="_local">
+    <view entity="DF_EMPLOYEE" name="browse" overwrite="true" extends="_local">
         <property name="avatar" view="_local"/>
         <property name="position" view="_local"/>
         <property name="user" view="_local"/>
@@ -1300,9 +1300,13 @@
         <property name="roles" view="report_card"/>
     </view>
     <view entity="sys$FileDescriptor" name="browse-1" extends="_local"/>
-    <view entity="thesissummer$ExtEmployee" name="extEmployee-view" extends="_local">
+    <view entity="DF_EMPLOYEE" name="extEmployee-view" extends="_local">
         <property name="department" view="_minimal"/>
-        <property name="user" view="_minimal"/>
+        <property name="user" view="_local">
+            <property name="group" view="_minimal"/>
+            <property name="substitutions" view="_minimal"/>
+            <property name="userRoles" view="_minimal"/>
+        </property>
     </view>
     <view entity="df$Signature" name="signature" extends="_local">
         <property name="name"/>
@@ -1337,6 +1341,8 @@
         <property name="packageDoc" view="with-proc-base-info"/>
         <property name="typeProtocol" view="_minimal"/>
         <property name="city" view="_minimal"/>
+        <property name="orderReceiver" view="_minimal"/>
+        <property name="jurist" view="_minimal"/>
     </view>
     <view entity="thesissummer$ProtocolKK" name="edit" extends="_local">
         <property name="category" view="_minimal"/>
@@ -1362,6 +1368,8 @@
         <property name="typeProtocol" view="_minimal"/>
         <property name="city" view="_minimal"/>
         <property name="creator" view="_minimal"/>
+        <property name="orderReceiver" view="_minimal"/>
+        <property name="jurist" view="_minimal"/>
     </view>
     <view entity="thesissummer$ProtocolKK" name="cycle" extends="_local">
         <property name="docOfficeData" view="cycle"/>
@@ -1501,7 +1509,57 @@
         <property name="projects" view="_minimal"/>
         <property name="organization" view="_minimal"/>
         <property name="docKind" view="edit"/>
-        <property name="owner" view="withuserdepartment"/>
+        <property name="owner" view="withuserdepartment">
+            <property name="user" view="_minimal">
+                <property name="loginLowerCase"/>
+                <property name="password"/>
+                <property name="passwordEncryption"/>
+                <property name="firstName"/>
+                <property name="lastName"/>
+                <property name="position"/>
+                <property name="email"/>
+                <property name="language"/>
+                <property name="timeZone"/>
+                <property name="timeZoneAuto"/>
+                <property name="active"/>
+                <property name="changePasswordAtNextLogon"/>
+                <property name="group" view="_minimal"/>
+                <property name="groupNames"/>
+                <property name="userRoles" view="_minimal"/>
+                <property name="substitutions" view="_minimal"/>
+                <property name="ipMask"/>
+                <property name="sysTenantId"/>
+                <property name="createTs"/>
+                <property name="createdBy"/>
+                <property name="updateTs"/>
+                <property name="updatedBy"/>
+            </property>
+            <property name="firstName"/>
+            <property name="lastName"/>
+            <property name="middleName"/>
+            <property name="position" view="_minimal"/>
+            <property name="phone"/>
+            <property name="fax"/>
+            <property name="email"/>
+            <property name="comment"/>
+            <property name="sex"/>
+            <property name="birthday"/>
+            <property name="number"/>
+            <property name="mobilePhone"/>
+            <property name="photo" view="_minimal"/>
+            <property name="avatar" view="_minimal"/>
+            <property name="mobileAvatar" view="_minimal"/>
+            <property name="facsimile" view="_minimal"/>
+            <property name="employeeDepartmentPositionRelations" view="_minimal"/>
+            <property name="emdCertificateThumbprint"/>
+            <property name="createTs"/>
+            <property name="createdBy"/>
+            <property name="updateTs"/>
+            <property name="updatedBy"/>
+            <property name="organization" view="_minimal"/>
+            <property name="correspondentAttachments" view="_minimal"/>
+            <property name="hasAttachments"/>
+        </property>
         <property name="docCategory" view="_local"/>
         <property name="department" view="_local"/>
         <property name="versionOf" view="_minimal"/>
@@ -1510,6 +1568,7 @@
         <property name="createdBy"/>
         <property name="createTs"/>
         <property name="packageDoc" view="with-proc-base-info"/>
+        <property name="orderReceiver" view="_minimal"/>
     </view>
     <view entity="thesissummer$ZadanieNaPlatezh" name="cycle" extends="_local">
         <property name="docOfficeData" view="cycle"/>
@@ -1581,6 +1640,7 @@
         <property name="createdBy"/>
         <property name="createTs"/>
         <property name="packageDoc" view="with-proc-base-info"/>
+        <property name="poluchatel" view="_minimal"/>
     </view>
     <view entity="thesissummer$SpravkaPoZadol" name="cycle" extends="_local">
         <property name="docOfficeData" view="cycle"/>
@@ -1613,5 +1673,32 @@
         <property name="number"/>
         <property name="date"/>
         <property name="description"/>
+    </view>
+    <view entity="wf$CardProc" name="card" extends="_local">
+        <property name="card" view="_minimal"/>
+        <property name="proc" view="_minimal"/>
+    </view>
+    <view entity="sec$User" name="user">
+        <property name="login"/>
+        <property name="loginLowerCase"/>
+        <property name="password"/>
+        <property name="passwordEncryption"/>
+        <property name="name"/>
+        <property name="firstName"/>
+        <property name="lastName"/>
+        <property name="middleName"/>
+        <property name="position"/>
+        <property name="email"/>
+        <property name="language"/>
+        <property name="timeZone"/>
+        <property name="timeZoneAuto"/>
+        <property name="active"/>
+        <property name="changePasswordAtNextLogon"/>
+        <property name="group" view="_minimal"/>
+        <property name="groupNames"/>
+        <property name="userRoles" view="_minimal"/>
+        <property name="substitutions" view="_minimal"/>
+        <property name="ipMask"/>
+        <property name="sysTenantId"/>
     </view>
 </views>

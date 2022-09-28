@@ -40,49 +40,8 @@ public class OrderLoanBrowse<T extends OrderLoan> extends AbstractDocBrowser<T> 
     public void init(Map<String, Object> params) {
         super.init(params);
         entityName = "thesissummer$OrderLoan";
-        parseSignatureService.saveXML();
-    }
-
-    @Inject
-    private ParseSignatureService parseSignatureService;
-
-    public DataManager dataManager;
-
-    @Inject
-    private Notifications notifications;
-
-    @Inject
-    protected NotificationPanel notificationPanel;
-
-    @Inject
-    private OrderMessageService orderMessageService;
-
-    @Inject
-    protected UserSessionSource userSessionSource;
-
-    @Inject
-    private Events events;
-
-
-    @Subscribe("cardsTable.completeVisit")
-    protected void completeVisit(Action.ActionPerformedEvent event) {
-        OrderLoan orderLoan = cardsTable.getSingleSelected();
-        boolean visitWasCompleted = orderMessageService.completeOrders(orderLoan);
-
-        if (visitWasCompleted) {
-            events.publish(new OrderClickEvent(this));
-            notifications.create(Notifications.NotificationType.HUMANIZED)
-                    .withCaption(messages.formatMessage(this.getClass(), "Распоряжение отправлено получателю"))
-                    .show();}
-        else {
-            notifications.create(Notifications.NotificationType.ERROR)
-                    .withCaption(messages.formatMessage(this.getClass(), "У вас нет получателя, поэтому вам хана"))
-                    .show();
-        }
+        //parseSignatureService.saveXML();
     }
 
 
-
-        //if (cardsTable.getSingleSelected() != null) {
-
-}
+    }

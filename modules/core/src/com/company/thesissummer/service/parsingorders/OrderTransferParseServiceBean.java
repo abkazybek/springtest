@@ -115,7 +115,7 @@ public class OrderTransferParseServiceBean implements OrderTransferParseService 
 
                 orderTranfer.setSchetPol(document.getElementsByTagName("arg").item(10).getTextContent());
 
-                List<Employee> employees = dataManager.load(Employee.class).query("select e from df$Employee e where " +
+                List<Employee> employees = dataManager.load(Employee.class).query("select e from DF_EMPLOYEE e where " +
                         "e.email = :email").parameter("email", document.getElementsByTagName("arg").item(11).getTextContent()).list();
 
                 orderTranfer.setOwner(employees.get(0));
