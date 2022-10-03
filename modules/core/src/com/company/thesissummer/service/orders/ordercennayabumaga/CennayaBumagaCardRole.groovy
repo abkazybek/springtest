@@ -23,11 +23,11 @@ class CennayaBumagaCardRole {
 
     public List<Map<String, Object>> getJournalResult(Map<String,Object> params) {
 
-        SimpleDoc doc = params['entity'] as SimpleDoc;
+        OrderCenBumaga orderCenBumaga = params['entity'] as OrderCenBumaga;
 
         LoadContext<CardRole> loadContext = LoadContext.create(CardRole.class)
                 .setQuery(LoadContext.createQuery("select e from wf\$CardRole e where e.card.id = :cardId")
-                        .setParameter("cardId", doc.getId()))
+                        .setParameter("cardId", orderCenBumaga.getId()))
                 .setView("report_card");
 
         List<CardRole> list = dataManager.loadList(loadContext)

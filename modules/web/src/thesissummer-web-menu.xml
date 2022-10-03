@@ -134,6 +134,8 @@
     </menu>
     <menu id="ProtocolKK" caption="Протоколы" insertBefore="df$DocKind.browse">
     <item id="thesissummer$ProtocolKK.lookup" caption="Протокол КК"/>
+        <item id="thesissummer$TypeProtocolKK.browse" caption="Тип Протокола КК"/>
+        <item id="thesissummer$City.browse" caption="Города"/>
         <item id="thesissummer$ProtocolPrav.lookup" caption="Протокол Правления" />
     </menu>
     <item id="thesissummer$ZadanieNaPlatezh.lookup" insertAfter="df$DocKind.browse"/>

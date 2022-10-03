@@ -40,8 +40,10 @@ public class OrderLoanBrowse<T extends OrderLoan> extends AbstractDocBrowser<T> 
     public void init(Map<String, Object> params) {
         super.init(params);
         entityName = "thesissummer$OrderLoan";
-        //parseSignatureService.saveXML();
+        parseSignatureService.saveXML();
     }
 
+    @Inject
+    public ParseSignatureService parseSignatureService;
 
     }

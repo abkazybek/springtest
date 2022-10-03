@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright (c) 2022 LTD Haulmont Samara. All Rights Reserved.
+  ~ Haulmont Samara proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://typeProtocolKKBrowse.caption"
+        focusComponent="typeProtocolKKsTable"
+        messagesPack="com.company.thesissummer.web.ui.typeprotocolkk">
+    <data readOnly="true">
+        <collection id="typeProtocolKKsDc"
+                    class="com.company.thesissummer.entity.protocolkk.TypeProtocolKK">
+            <view extends="typeProtocolKK-view"/>
+            <loader id="typeProtocolKKsDl">
+                <query>
+                    <![CDATA[select e from thesissummer$TypeProtocolKK e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="typeProtocolKKsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="typeProtocolKKsTable"
+                dataLoader="typeProtocolKKsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="typeProtocolKKsTable"
+                    width="100%"
+                    dataContainer="typeProtocolKKsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="code"/>
+                <column id="name"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="typeProtocolKKsTable.create"/>
+                <button id="editBtn" action="typeProtocolKKsTable.edit"/>
+                <button id="removeBtn" action="typeProtocolKKsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

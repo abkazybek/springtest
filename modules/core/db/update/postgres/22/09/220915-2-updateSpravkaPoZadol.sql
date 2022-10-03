@@ -1,0 +1,1 @@
+alter table THESISSUMMER_SPRAVKA_PO_ZADOL add column POLUCHATEL_ID uuid ;

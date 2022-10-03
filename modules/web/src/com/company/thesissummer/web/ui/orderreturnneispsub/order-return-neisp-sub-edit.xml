@@ -577,7 +577,7 @@
                     <popupButton id="createSubCardButton" width="100%"
                                  icon="ts-font-icon:PLUS" caption="msg://actions.Create"/>
                     <runReportPopupButton id="print"
-                                          icon="ts-font-icon:PRINT" caption="msg://print"
+                                          icon="ts-font-icon:PRINT" caption="Шаблон"
                                           width="100%"/>
                     <button id="copyLinkButton" caption="msg://copyLink" width="100%"
                             icon="ts-font-icon:LINK"/>

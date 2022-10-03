@@ -162,6 +162,7 @@
             template="com/company/thesissummer/web/ui/ordercenbumaga/order-cen-bumaga-template-browse.xml"/>
     <screen id="thesissummer$ProtocolKK.browse"
             template="com/company/thesissummer/web/ui/protocolkk/protocol-k-k-browse.xml"/>
+
     <screen id="thesissummer$ProtocolKK.edit"
             template="com/company/thesissummer/web/ui/protocolkk/protocol-k-k-edit.xml"/>
     <screen id="thesissummer$ProtocolKK.lookup"

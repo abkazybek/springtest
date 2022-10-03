@@ -102,6 +102,9 @@
     <bean id="thesissummer_ProtocolCardRole" class="com.company.thesissummer.service.orders.protocolkk.ProtocolCardRole">
     </bean>
 
+    <bean id="thesissummer_ProtocolKKQR" class="com.company.thesissummer.service.orders.protocolkk.ProtocolKKQR">
+    </bean>
+
     <bean id="thesissummer_ProtocolPravQR" class="com.company.thesissummer.service.orders.protocolprav.ProtocolPravQR">
     </bean>
     <bean id="thesissummer_ProtocolPravCardRole" class="com.company.thesissummer.service.orders.protocolprav.ProtocolPravCardRole">

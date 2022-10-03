@@ -105,7 +105,6 @@ public class OrderPostingParseServiceBean implements OrderPostingParseService {
 
                 orderPosting.setOwner(employees.get(0));
 
-
                 //устанавливаем текущую дату
                 orderPosting.setDate(timeSource.currentTimestamp());
 
