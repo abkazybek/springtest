@@ -59,10 +59,6 @@ public class UserService implements UserDetailsService {
     public boolean saveUser(User user) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
 
-        if (userFromDB != null) {
-            return false;
-        }
-
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
@@ -77,8 +73,14 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
+
     public List<User> usergtList(Long idMin) {
         return em.createQuery("SELECT u FROM User u WHERE u.id > :paramId", User.class)
                 .setParameter("paramId", idMin).getResultList();
+    }
+
+
+    public void saveOrder(Order order) {
+        orderRepository.save(order);
     }
 }

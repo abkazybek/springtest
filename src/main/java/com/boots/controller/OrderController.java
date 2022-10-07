@@ -2,6 +2,7 @@ package com.boots.controller;
 
 import com.boots.entity.Order;
 import com.boots.entity.User;
+import com.boots.repository.OrderRepository;
 import com.boots.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,12 @@ import javax.validation.Valid;
 
 @Controller
 public class OrderController {
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    OrderRepository orderRepository;
 
     @RequestMapping("/")
     public String getIndex(){
@@ -37,25 +44,32 @@ public class OrderController {
         return "listOrders";
     }
 
-
-    @Autowired
-    private UserService userService;
-
     @GetMapping("/createOrders")
-    public String registration(Model model) {
+    public String registrationOrder(Model model) {
         model.addAttribute("orderForm", new Order());
 
         return "createOrders";
     }
 
     @PostMapping("/createOrders")
-    public String addUser(@ModelAttribute("orderForm") @Valid Order orderForm, BindingResult bindingResult, Model model) {
+    public String addOrder(@ModelAttribute("orderForm") Order orderForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "createOrders";
         }
 
-        model.addAttribute("orderForm", new Order());
+        Order order = new Order();
+
+        order.setId(orderForm.getId());
+        order.setName(orderForm.getName());
+        order.setAddres(orderForm.getAddres());
+        order.setAmount(orderForm.getAmount());
+        order.setTelephone(orderForm.getTelephone());
+        order.setThing(orderForm.getThing());
+
+        model.addAttribute("orderForm", order);
+
+        userService.saveOrder(order);
 
         return "redirect:/";
     }

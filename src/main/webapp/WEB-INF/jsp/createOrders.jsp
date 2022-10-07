@@ -11,6 +11,7 @@
 
 <body>
 <div>
+    <%--@elvariable id="orderForm" type=""--%>
     <form:form method="POST" modelAttribute="orderForm">
         <h2>Cоздание товара</h2>
         <div>
