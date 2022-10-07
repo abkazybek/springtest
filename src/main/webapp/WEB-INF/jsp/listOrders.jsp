@@ -19,7 +19,6 @@
     <th>Адрес доставки</th>
     <th>Номер телефона</th>
     </thead>
-    <%--@elvariable id="allOrders" type="java.util.List"--%>
     <c:forEach items="${allOrders}" var="order">
       <tr>
         <td>${order.id}</td>
@@ -28,11 +27,6 @@
         <td>${order.addres}</td>
         <td>${order.telephone}</td>
         <td>
-          <form action="${pageContext.request.contextPath}/admin" method="post">
-            <input type="hidden" name="userId" value="${user.id}"/>
-            <input type="hidden" name="action" value="delete"/>
-            <button type="submit">Delete</button>
-          </form>
       </tr>
     </c:forEach>
   </table>

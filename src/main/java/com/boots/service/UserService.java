@@ -27,8 +27,7 @@ public class UserService implements UserDetailsService {
     UserRepository userRepository;
     @Autowired
     RoleRepository roleRepository;
-    @Autowired
-    OrderRepository orderRepository;
+
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -52,9 +51,6 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public List<Order>  allOrders() {
-        return orderRepository.findAll();
-    }
 
     public boolean saveUser(User user) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
@@ -80,7 +76,4 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public void saveOrder(Order order) {
-        orderRepository.save(order);
-    }
 }
