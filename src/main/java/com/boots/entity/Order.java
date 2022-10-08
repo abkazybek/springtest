@@ -7,6 +7,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_order")
 public class Order  {
+
     @Id
     private Long id;
 

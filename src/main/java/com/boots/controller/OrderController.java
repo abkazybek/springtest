@@ -21,11 +21,6 @@ public class OrderController {
     @Autowired
     OrderRepository orderRepository;
 
-    @RequestMapping("/")
-    public String getIndex(){
-        return "index";
-    }
-
     //страница orders
     @RequestMapping("/orders")
     public String getOrders(){
