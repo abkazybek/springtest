@@ -20,6 +20,9 @@
         ${usernameError}
     </div>
     <div>
+         <form:input type="file" path="photos" name="image" accept="image/png, image/jpeg" />
+      <div>
+    <div>
       <form:input type="password" path="password" placeholder="Password"></form:input>
     </div>
     <div>
