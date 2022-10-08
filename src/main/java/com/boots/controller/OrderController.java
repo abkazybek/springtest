@@ -1,18 +1,15 @@
 package com.boots.controller;
 
 import com.boots.entity.Order;
-import com.boots.entity.OrderJSON;
 import com.boots.repository.OrderRepository;
 import com.boots.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -74,17 +71,9 @@ public class OrderController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/createOrders/1", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String addOrder(OrderJSON orderJSON) {
+    @PostMapping(value = "/createOrders/1", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> addOrder(@RequestBody Order order) {
 
-        Order order = new Order();
-        order.setId(orderJSON.getId());
-        order.setName(orderJSON.getName());
-        order.setAddres(orderJSON.getAddres());
-        order.setAmount(orderJSON.getAmount());
-        order.setTelephone(orderJSON.getTelephone());
-        order.setThing(orderJSON.getThing());
-        orderService.saveOrder(order);
-        return "Создался новый товар!";
+        return ResponseEntity.ok(new Order(order.getId(), order.getName(), order.getThing()));
     }
 }

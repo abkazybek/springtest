@@ -1,9 +1,7 @@
 package com.boots.service;
 
-import com.boots.entity.Order;
 import com.boots.entity.Role;
 import com.boots.entity.User;
-import com.boots.repository.OrderRepository;
 import com.boots.repository.RoleRepository;
 import com.boots.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

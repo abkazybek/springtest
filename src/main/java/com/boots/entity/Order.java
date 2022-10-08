@@ -1,8 +1,8 @@
 package com.boots.entity;
 
-import org.springframework.security.core.GrantedAuthority;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "t_order")
@@ -31,6 +31,9 @@ public class Order  {
 
     public Order() {
 
+    }
+
+    public Order(Long id, String name, String thing) {
     }
 
     public Long getId() {
