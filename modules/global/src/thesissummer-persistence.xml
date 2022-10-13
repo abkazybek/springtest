@@ -34,5 +34,6 @@
         <class>com.company.thesissummer.entity.ProtocolPrav</class>
         <class>com.company.thesissummer.entity.ZadanieNaPlatezh</class>
         <class>com.company.thesissummer.entity.SpravkaPoZadol</class>
+        <class>com.company.thesissummer.entity.ProtocolFileTemplate</class>
     </persistence-unit>
 </persistence>

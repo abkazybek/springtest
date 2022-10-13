@@ -8,80 +8,64 @@
     </bean>
     <bean id="thesissummer_CennayaBumagaQR" class="com.company.thesissummer.service.orders.ordercennayabumaga.CennayaBumagaQR">
     </bean>
-
     <bean id="thesissummer_InsCardRole" class="com.company.thesissummer.service.orders.orderIns.InsCardRole">
     </bean>
     <bean id="thesissummer_InsQR" class="com.company.thesissummer.service.orders.orderIns.InsQR">
     </bean>
-
     <bean id="thesissummer_LoanCardRole" class="com.company.thesissummer.service.orders.orderLoan.LoanCardRole">
     </bean>
     <bean id="thesissummer_LoanQR" class="com.company.thesissummer.service.orders.orderLoan.LoanQR">
     </bean>
-
     <bean id="thesissummer_LoanSiCardRole" class="com.company.thesissummer.service.orders.orderloansi.LoanSiCardRole">
     </bean>
     <bean id="thesissummer_LoanSiQR" class="com.company.thesissummer.service.orders.orderloansi.LoanSiQR">
     </bean>
-
     <bean id="thesissummer_NaVozvratCardRole" class="com.company.thesissummer.service.orders.ordernacozvratv.NaVozvratCardRole">
     </bean>
     <bean id="thesissummer_NaVozvratQR" class="com.company.thesissummer.service.orders.ordernacozvratv.NaVozvratQR">
     </bean>
-
     <bean id="thesissummer_PogasheniyeObCardRole" class="com.company.thesissummer.service.orders.ordernapogasheniyeob.PogasheniyeObCardRole">
     </bean>
     <bean id="thesissummer_PogasheniyeObQR" class="com.company.thesissummer.service.orders.ordernapogasheniyeob.PogasheniyeObQR">
     </bean>
-
     <bean id="thesissummer_PostingCardRole" class="com.company.thesissummer.service.orders.orderPosting.PostingCardRole">
     </bean>
     <bean id="thesissummer_PostingQR" class="com.company.thesissummer.service.orders.orderPosting.PostingQR">
     </bean>
     <bean id="thesissummer_PostingTable" class="com.company.thesissummer.service.orders.orderPosting.PostingTable">
     </bean>
-
     <bean id="thesissummer_RembursementCardRole" class="com.company.thesissummer.service.orders.orderrembursement.RembursementCardRole">
     </bean>
     <bean id="thesissummer_RembursementQR" class="com.company.thesissummer.service.orders.orderrembursement.RembursementQR">
     </bean>
-
     <bean id="thesissummer_RembursementTable" class="com.company.thesissummer.service.orders.orderrembursement.RembursementTable">
     </bean>
-
     <bean id="thesissummer_NaReturnNeispSubCardRole" class="com.company.thesissummer.service.orders.orderreturnneispsub.NaReturnNeispSubCardRole">
     </bean>
     <bean id="thesissummer_NaReturnNeispSubQR" class="com.company.thesissummer.service.orders.orderreturnneispsub.NaReturnNeispSubQR">
     </bean>
-
     <bean id="thesissummer_NaReturnNeispSubTable" class="com.company.thesissummer.service.orders.orderreturnneispsub.NaReturnNeispSubTable">
     </bean>
-
-
     <bean id="thesissummer_RevaluationCardRole" class="com.company.thesissummer.service.orders.orderrevaluation.RevaluationCardRole">
     </bean>
     <bean id="thesissummer_RevaluationQR" class="com.company.thesissummer.service.orders.orderrevaluation.RevaluationQR">
     </bean>
     <bean id="thesissummer_RevaluationTable" class="com.company.thesissummer.service.orders.orderrevaluation.RevaluationTable">
     </bean>
-
     <bean id="thesissummer_SubsidiyCardRole" class="com.company.thesissummer.service.orders.ordersubsidiy.SubsidiyCardRole">
     </bean>
     <bean id="thesissummer_SubsidiyQR" class="com.company.thesissummer.service.orders.ordersubsidiy.SubsidiyQR">
     </bean>
-
     <bean id="thesissummer_TransferCardRole" class="com.company.thesissummer.service.orders.ordertranfer.TransferCardRole">
     </bean>
     <bean id="thesissummer_TransferQR" class="com.company.thesissummer.service.orders.ordertranfer.TransferQR">
     </bean>
     <bean id="thesissummer_TransferTable" class="com.company.thesissummer.service.orders.ordertranfer.TransferTable">
     </bean>
-
     <bean id="thesissummer_TransferMoneyCardRole" class="com.company.thesissummer.service.orders.ordertransfermoney.TransferMoneyCardRole">
     </bean>
     <bean id="thesissummer_TranferMoneyQR" class="com.company.thesissummer.service.orders.ordertransfermoney.TranferMoneyQR">
     </bean>
-
     <bean id="thesissummer_VozvratVGuCardRole" class="com.company.thesissummer.service.orders.ordervozvratvgu.VozvratVGuCardRole">
     </bean>
     <bean id="thesissummer_VozvratVGuQR" class="com.company.thesissummer.service.orders.ordervozvratvgu.VozvratVGuQR">

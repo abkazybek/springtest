@@ -43,6 +43,8 @@
                        value="com.company.thesissummer.service.OrderMessageService"/>
                 <entry key="thesissummer_ParseSignatureService"
                        value="com.company.thesissummer.service.orders.signature.ParseSignatureService"/>
+                <entry key="thesissummer_OrderSubsidyuTemplateService"
+                       value="com.company.thesissummer.service.OrderSubsidyuTemplateService"/>
             </map>
         </property>
     </bean>

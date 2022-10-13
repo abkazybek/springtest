@@ -130,6 +130,8 @@
         <item id="thesissummer$OrderNaVozvrat.lookup" />
         <item id="thesissummer$OrderPogashOb.lookup" />
         <item id="thesissummer$OrderCenBumaga.lookup"/>
+        <item screen="thesissummer$ProtocolFileTemplate.browse"
+              caption="mainMsg://menu_config.thesissummer$ProtocolFileTemplate.browse"/>
 
     </menu>
     <menu id="ProtocolKK" caption="Протоколы" insertBefore="df$DocKind.browse">

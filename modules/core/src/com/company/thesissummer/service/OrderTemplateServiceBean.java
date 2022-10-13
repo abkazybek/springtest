@@ -6,41 +6,47 @@
 
 package com.company.thesissummer.service;
 
+import com.company.thesissummer.entity.OrderLoan;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.haulmont.cuba.core.app.FileStorageService;
-import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.entity.FileDescriptor;
 import com.haulmont.cuba.core.global.*;
+import com.haulmont.workflow.core.entity.CardAttachment;
+import com.haulmont.workflow.core.entity.CardRole;
 import com.haulmont.yarg.formatters.impl.doc.connector.OfficeIntegration;
 import com.haulmont.yarg.formatters.impl.doc.connector.OfficeIntegrationAPI;
 import com.haulmont.yarg.formatters.impl.xls.DocumentConverter;
 import com.haulmont.yarg.formatters.impl.xls.DocumentConverterImpl;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+import sun.security.x509.X509CertImpl;
 
 import javax.inject.Inject;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.*;
+import java.security.cert.CertPath;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.util.*;
+
 
 @Service(OrderTemplateService.NAME)
 public class OrderTemplateServiceBean implements OrderTemplateService {
     private static final Logger log = LoggerFactory.getLogger(OrderTemplateServiceBean.class);
 
-    @Override
-    public void generateTemplate(Entity nomerOrder) {
 
-    }
-/*
     @Inject
     private DataManager dataManager;
 
@@ -66,82 +72,180 @@ public class OrderTemplateServiceBean implements OrderTemplateService {
     private QRCodeGeneratorService qRCodeGeneratorService;
 
 
+    private CertPath decodeCertPath(String certPathBase64) {
+        if (!StringUtils.isBlank(certPathBase64)) {
+            byte[] bytes = Base64.decodeBase64(certPathBase64.getBytes());
+            try {
+                ByteArrayInputStream bis = new ByteArrayInputStream(bytes);
+                CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
+                CertPath certPath = certFactory.generateCertPath(bis);
+                return certPath;
+            } catch (CertificateException e) {
+                System.out.println("Ошибка");
+            }
+        }
+
+        return null;
+    }
+
+
     @Override
-    public void generateTemplate(Entity nomerOrder) {
+    public void generateOrderLoan(OrderLoan entityLoan) {
 
 
-        ProtocolFileTemplate fileTemp = dataManager.load(ProtocolFileTemplate.class)
-                .query("select e from thesissummer$ProtocolFileTemplate e where e.code = :code")
-                .parameter("code", "2")
-                .view("protocolFileTemplate-view")
+        CardAttachment cardAttachment = dataManager.load(CardAttachment.class)
+                .query("select e from wf$CardAttachment e where e.card.id = :cardId and e.name = :name")
+                .parameter("cardId", entityLoan.getId())
+                .parameter("name", "orderloanEdit")
+                .view("att2")
                 .one();
 
-        List<OrderDocument> userOrder = dataManager.load(OrderDocument.class)
-                .query("select distinct d from thesissummer$OrderLoan d where d.nomerOrder = :nomerOrder")
-                .parameter("nomerOrder", "1")
-                .view("browse")
-                .list();
 
         //OrderLoan orderLoan = dataManager.load(OrderLoan.class).id(nomerProtocola).view("browsr").one();
 
-        for (OrderDocument orderDocument : userOrder) {
 
-            try {
+        try {
+            InputStream inputStream = fileLoader.openStream(cardAttachment.getFile());
+            XWPFDocument document = new XWPFDocument(inputStream);
 
-                InputStream inputStream = fileLoader.openStream(fileTemp.getFileDescriptor());
-                XWPFDocument document = new XWPFDocument(inputStream);
+            ReplaceTextInDoc(document, "${entity.nomerOrder}", entityLoan.getNumber());
+            ReplaceTextInDoc(document, "${entity.dataOrder}", entityLoan.getDate().toString());
+            ReplaceTextInDoc(document, "${entity.nomerProtocolaKK}", entityLoan.getNomerProtocolaKK());
+            ReplaceTextInDoc(document, "${entity.dogovor}", entityLoan.getDogovor());
+            ReplaceTextInDoc(document, "${entity.kredit}", entityLoan.getKreditLiniya());
+            // ReplaceTextInDoc(document, "${entity.summa}", entityLoan.getSumma());
+            ReplaceTextInDoc(document, "${entity.istochnik}", entityLoan.getIstochnik());
+            ReplaceTextInDoc(document, "${entity.stavkaVoz}", entityLoan.getStavkaVoz());
+            ReplaceTextInDoc(document, "${entity.srokKredita}", entityLoan.getSrokKredita());
+            ReplaceTextInDoc(document, "${entity.fullName}", entityLoan.getFullName());
+            ReplaceTextInDoc(document, "${entity.bin}", entityLoan.getBin());
+            ReplaceTextInDoc(document, "${entity.urAdress}", entityLoan.getUrAdress());
+            ReplaceTextInDoc(document, "${entity.bank}", entityLoan.getBank());
+            ReplaceTextInDoc(document, "${entity.bik}", entityLoan.getBik());
+            ReplaceTextInDoc(document, "${entity.kbe}", entityLoan.getKbe());
+            ReplaceTextInDoc(document, "${entity.iik}", entityLoan.getIik());
 
-                ReplaceTextInDoc(document, "nomerOrder", orderDocument.getNumber());
-                ReplaceTextInDoc(document, "dateOrder", orderDocument.getDate().toString());
-                ReplaceTextInDoc(document, "protocolNumber", orderDocument.getNomerProtocola());
-                ReplaceTextInDoc(document, "dogovor", orderDocument.getDogovor());
-                ReplaceTextInDoc(document, "credit", orderDocument.getKreditnayaLiniya());
-                ReplaceTextInDoc(document, "borrow", orderDocument.getIstochnikFinansirovaniya());
-                ReplaceTextInDoc(document, "o_sum", orderDocument.getSumma());
-                ReplaceTextInDoc(document, "o_source", orderDocument.getIstochnikFinansirovaniya());
-                ReplaceTextInDoc(document, "o_bid", orderDocument.getStavkaVoz());
-                ReplaceTextInDoc(document, "date_expiration", orderDocument.getSrokKredita());
-                ReplaceTextInDoc(document, "o_counterparty", orderDocument.getPolnoeNaimenovanie());
-                ReplaceTextInDoc(document, "bin", orderDocument.getBin());
-                ReplaceTextInDoc(document, "uradress", orderDocument.getUrAdres());
-                ReplaceTextInDoc(document, "bank", orderDocument.getBank());
-                ReplaceTextInDoc(document, "bik", orderDocument.getBik());
-                ReplaceTextInDoc(document, "kbe", orderDocument.getKbe());
-                ReplaceTextInDoc(document, "o_iik", orderDocument.getIik());
 
-                //SetQuestionsList(document, nomerProtocola);
-                //SetQuestionVoteResult(document, meetingId, userVoteResult);
+            XWPFTable table = GetTable(document, "soglasPosition"); // таблица с участниками
+            if (table == null) return;
 
-                String qr = "SBid: " + orderDocument.getSignatures();
 
-                FileDescriptor qrFileDescriptor = qRCodeGeneratorService.getQRCode(qr);
-                if(qrFileDescriptor != null){
-                    addQRToWordDocument(document,qrFileDescriptor);
+            LoadContext<CardRole> loadContext = LoadContext.create(CardRole.class)
+                    .setQuery(LoadContext.createQuery("select e from wf$CardRole e where e.card.id = :cardId")
+                            .setParameter("cardId", entityLoan))
+                    .setView("report_card");
+
+            List<CardRole> list = dataManager.loadList(loadContext);
+
+            List<HashMap> soglasav = new ArrayList<>();
+
+            for (CardRole cardRole : list) {
+                Map<String, Object> map = new HashMap();
+                map.put("position", cardRole.getUser().getPosition());
+                map.put("name", cardRole.getUser().getName());
+                soglasav.add((HashMap) map);
+            }
+            for (int i = 0; i < list.size(); i++) {
+
+                XWPFTableRow newRow = table.createRow();
+                newRow.setHeight(20);
+                XWPFRun run1 = newRow.getCell(0).getParagraphArray(0).createRun();
+                run1.setText(list.get(i).getUser().getPosition());
+                run1.setFontSize(11);
+                run1.setFontFamily("Times New Roman");
+                XWPFRun run2 = newRow.getCell(1).getParagraphArray(0).createRun();
+                run2.setText(list.get(i).getUser().getName());
+                run2.setFontSize(11);
+                run2.setFontFamily("Times New Roman");
+
+            }
+            // удаляем первую строку с шаблоном (шапка тут есть)
+            table.removeRow(0);
+            //String text = userRun.getText(0);
+            //text = text.replace("user_persist_table", userStr);
+            //userRun.setText(text, 0);
+
+
+            //SetQuestionsList(document, nomerProtocola);
+            //SetQuestionVoteResult(document, meetingId, userVoteResult);
+
+
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+
+            Document doc = db.parse(new org.xml.sax.InputSource(new StringReader(cardAttachment.getSignatures())));
+
+
+            CertPath certPath = decodeCertPath(doc.getElementsByTagName("cert").item(0).getTextContent());
+
+            X509CertImpl x509Cert = (X509CertImpl) certPath.getCertificates().get(0);
+
+            String s = x509Cert.getSubjectDN().getName();
+
+            s = s.replaceAll("GIVENNAME=", "");
+
+            s = s.replaceAll("C=KZ, SERIALNUMBER=", "");
+
+            s = s.replaceAll("SURNAME=", "");
+
+            s = s.replaceAll("CN=", "");
+
+            String data = doc.getElementsByTagName("date").item(0).getTextContent();
+            String str = s + " " + data;
+
+            FileDescriptor qrFileDescriptor = qRCodeGeneratorService.getQRCode(str);
+            if (qrFileDescriptor != null) {
+                addQRToWordDocument(document, qrFileDescriptor);
+            }
+
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            document.write(outputStream);
+
+            FileDescriptor fileDescriptorNew = metadata.create(FileDescriptor.class);
+            fileDescriptorNew.setName("Шаблон.docx");
+            fileDescriptorNew.setExtension("docx");
+            fileDescriptorNew.setCreateDate(new Date());
+
+            byte[] decodedBytes = outputStream.toByteArray();
+            fileLoader.saveStream(fileDescriptorNew, () -> new ByteArrayInputStream(decodedBytes));
+
+            FileDescriptor pdfFileDescriptor = Word2PdfConverter(fileDescriptorNew, "Лист голосования");
+
+           if (pdfFileDescriptor != null) {
+                entityLoan.setProtocolTemplate(pdfFileDescriptor);
+                dataManager.commit(entityLoan);
+            }
+
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } catch (ParserConfigurationException parserConfigurationException) {
+            parserConfigurationException.printStackTrace();
+        } catch (FileStorageException fileStorageException) {
+            fileStorageException.printStackTrace();
+        } catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException invalidFormatException) {
+            invalidFormatException.printStackTrace();
+        } catch (SAXException saxException) {
+            saxException.printStackTrace();
+        }
+
+}
+
+    private XWPFTable GetTable(XWPFDocument doc, String tableKey) {
+        for (XWPFTable tbl : doc.getTables()) {
+            for (XWPFTableRow row : tbl.getRows()) {
+                for (XWPFTableCell cell : row.getTableCells()) {
+                    for (XWPFParagraph p : cell.getParagraphs()) {
+                        for (XWPFRun r : p.getRuns()) {
+                            String text = r.getText(0);
+                            if (text != null && text.contains(tableKey)) {
+                                return tbl;
+                            }
+                        }
+                    }
                 }
-
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-                document.write(outputStream);
-
-                FileDescriptor fileDescriptorNew = metadata.create(FileDescriptor.class);
-                fileDescriptorNew.setName("Шаблон.docx");
-                fileDescriptorNew.setExtension("docx");
-                fileDescriptorNew.setCreateDate(new Date());
-
-                byte[] decodedBytes = outputStream.toByteArray();
-                fileLoader.saveStream(fileDescriptorNew, () -> new ByteArrayInputStream(decodedBytes));
-
-                FileDescriptor pdfFileDescriptor = Word2PdfConverter(fileDescriptorNew, "Лист голосования");
-
-                if (pdfFileDescriptor != null) {
-                    orderDocument.setSetOrder(pdfFileDescriptor);
-                    dataManager.commit(orderDocument);
-                }
-            } catch (IOException | FileStorageException e) {
-                log.error("Error ioe or filestorage", e);
-            } catch (org.apache.poi.openxml4j.exceptions.InvalidFormatException e) {
-                e.printStackTrace();
             }
         }
+        return null;
     }
 
 
@@ -176,9 +280,7 @@ public class OrderTemplateServiceBean implements OrderTemplateService {
             try {
                 byte[] decodedBytes = outputResult.toByteArray();
                 fileLoader.saveStream(fileDescriptorNew, () -> new ByteArrayInputStream(decodedBytes));
-
                 fileDescriptorNew = dataManager.commit(fileDescriptorNew);
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -207,7 +309,6 @@ public class OrderTemplateServiceBean implements OrderTemplateService {
                 }
             }
         }
-
         for (XWPFTable tbl : doc.getTables()) {
             for (XWPFTableRow row : tbl.getRows()) {
                 for (XWPFTableCell cell : row.getTableCells()) {
@@ -271,21 +372,22 @@ public class OrderTemplateServiceBean implements OrderTemplateService {
                 return "";
         }
     }
-    private void addQRToWordDocument(XWPFDocument document , FileDescriptor imageFileDescriptor) throws IOException, FileStorageException, InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException {
+
+    private void addQRToWordDocument(XWPFDocument document, FileDescriptor imageFileDescriptor) throws IOException, FileStorageException, InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException {
 
         XWPFParagraph qrParagraph = null;
 
         List<XWPFFooter> footerList = document.getFooterList();
 
-        for(XWPFFooter f : footerList){
+        for (XWPFFooter f : footerList) {
             for (XWPFParagraph p : f.getParagraphs()) {
                 List<XWPFRun> runs = p.getRuns();
                 if (runs != null) {
                     for (XWPFRun r : runs) {
                         String text = r.getText(0);
-                        if (text != null && text.contains("time")) {
+                        if (text != null && text.contains("")) {
 
-                            text = text.replace("time", "1111");
+                            text = text.replace("", "");
                             r.setText(text, 0);
                         }
                     }
@@ -315,7 +417,7 @@ public class OrderTemplateServiceBean implements OrderTemplateService {
 
         }
 
-        if(qrParagraph != null){
+        if (qrParagraph != null) {
 
             XWPFRun r = qrParagraph.createRun();
             r.addPicture(fileLoader.openStream(imageFileDescriptor), XWPFDocument.PICTURE_TYPE_PNG, imageFileDescriptor.getName(), Units.toEMU(80), Units.toEMU(80));

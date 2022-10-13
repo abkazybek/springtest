@@ -41,10 +41,10 @@
                 <![CDATA[select d from thesissummer$OrderIns d where d.versionOf.id = :ds$cardDs order by d.createTs]]>
             </query>
         </collectionDatasource>
-        <collectionDatasource id="ownerDs" class="com.haulmont.thesis.core.entity.Employee" view="withuserdepartment"
+        <collectionDatasource id="ownerDs" class="com.company.thesissummer.entity.ExtEmployee" view="browse"
                               refreshMode="NEVER">
             <query>
-                <![CDATA[select e from df$Employee e left join e.user user where (user is null or user.active = true) order by e.name]]>
+                <![CDATA[select e from DF_EMPLOYEE e left join e.user user where (user is null or user.active = true) order by e.name]]>
             </query>
         </collectionDatasource>
         <collectionDatasource id="receiverDc" class="com.company.thesissummer.entity.ExtEmployee" view="browse">
@@ -84,6 +84,9 @@
             </query>
         </collectionDatasource>
     </dsContext>
+    <actions>
+        <action id="attachAction"/>
+    </actions>
     <assign name="width" value="theme://thesis.gui.editor-fields.width"/>
     <assign name="small_width" value="180px"/>
     <assign name="textAreaHeight" value="176px"/>
@@ -231,6 +234,17 @@
                                                 <textField id="dataOrder" property="dataOrder" datasource="cardDs"
                                                            width="theme://thesis.gui.editor-fields.width"
                                                            caption="msg://com.company.thesissummer.entity/OrderIns.dataOrder"/>
+                                            </row>
+                                            <row id="templateRow">
+                                                <vbox>
+                                                <upload id="protocolTemplate1"
+                                                        property="protocolTemplate"
+                                                        fileStoragePutMode="IMMEDIATE"
+                                                        datasource="cardDs"
+                                                        width="400px"
+                                                        caption="Итоговый шаблон" />
+                                                <button action="attachAction" caption="Отправить в вложение" icon="SEND" width="200px" />
+                                                </vbox>
                                             </row>
                                         </rows>
                                     </grid>

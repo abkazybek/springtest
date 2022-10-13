@@ -23,10 +23,16 @@
     </view>
     <view entity="DF_EMPLOYEE" name="browse" overwrite="true" extends="_local">
         <property name="avatar" view="_local"/>
-        <property name="position" view="_local"/>
+        <property name="position" view="_local">
+            <property name="employees" view="_minimal">
+                <property name="position" view="_minimal"/>
+            </property>
+        </property>
         <property name="user" view="_local"/>
         <property name="organization" view="_minimal"/>
-        <property name="department" view="_minimal"/>
+        <property name="department" view="_minimal">
+            <property name="employees" view="_minimal"/>
+        </property>
     </view>
     <view entity="thesissummer$OrderLoan" name="browse" extends="_local">
         <property name="proc" view="proc-minimal"/>
@@ -45,6 +51,7 @@
         <property name="createTs"/>
         <property name="packageDoc" view="with-proc-base-info"/>
         <property name="orderReceiver" view="_minimal"/>
+        <property name="protocolTemplate" view="_minimal"/>
     </view>
     <view entity="thesissummer$OrderLoan" name="edit" extends="_local">
         <property name="category" view="_minimal"/>
@@ -69,6 +76,7 @@
         <property name="packageDoc" view="with-proc-base-info"/>
         <property name="orderReceiver" view="_minimal">
         </property>
+        <property name="protocolTemplate" view="_minimal"/>
     </view>
     <view entity="thesissummer$OrderLoan" name="cycle" extends="_local">
         <property name="docOfficeData" view="cycle"/>
@@ -142,6 +150,10 @@
         <property name="createTs"/>
         <property name="packageDoc" view="with-proc-base-info"/>
         <property name="orderReceiver" view="_minimal"/>
+        <property name="protocolTemplate" view="_minimal">
+            <property name="size"/>
+            <property name="createTs"/>
+        </property>
     </view>
     <view entity="thesissummer$OrderIns" name="cycle" extends="_local">
         <property name="docOfficeData" view="cycle"/>
@@ -1319,8 +1331,25 @@
         <property name="subscriberEdm" view="_minimal"/>
     </view>
     <view class="com.haulmont.workflow.core.entity.CardAttachment" name="att2" extends="_local">
-        <property name="card" view="_minimal"/>
-        <property name="assignment" view="_minimal"/>
+        <property name="card" view="_minimal">
+            <property name="attachments" view="_minimal">
+                <property name="card" view="_minimal"/>
+                <property name="assignment" view="_minimal"/>
+                <property name="file" view="_minimal"/>
+                <property name="comment"/>
+                <property name="signatures"/>
+                <property name="attachType" view="_minimal"/>
+                <property name="versionOf" view="_minimal"/>
+            </property>
+        </property>
+        <property name="assignment" view="_minimal">
+            <property name="name"/>
+            <property name="attachments" view="_minimal">
+                <property name="card" view="_minimal"/>
+                <property name="file" view="_minimal"/>
+            </property>
+            <property name="hasAttachments"/>
+        </property>
         <property name="attachType" view="_minimal"/>
     </view>
     <view entity="thesissummer$ProtocolKK" name="browse" extends="_local">
@@ -1701,4 +1730,5 @@
         <property name="ipMask"/>
         <property name="sysTenantId"/>
     </view>
+    <view entity="wf$AttachmentType" name="attachmentType-view" extends="_local"/>
 </views>

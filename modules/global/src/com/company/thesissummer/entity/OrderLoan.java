@@ -8,6 +8,7 @@ package com.company.thesissummer.entity;
 
 import com.haulmont.chile.core.datatypes.Datatypes;
 import com.haulmont.chile.core.model.MetaClass;
+import com.haulmont.cuba.core.entity.FileDescriptor;
 import com.haulmont.cuba.core.entity.annotation.EnableRestore;
 import com.haulmont.cuba.core.entity.annotation.Listeners;
 import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
@@ -39,6 +40,10 @@ public class OrderLoan extends Doc implements HasDetailedDescription, HasSignatu
 
     @Column(name = "PODRAZDELENIE")
     protected String podrazdelenie;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "PROTOCOL_TEMPLATE_ID")
+    protected FileDescriptor protocolTemplate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ORDER_RECEIVER_ID")
@@ -97,6 +102,14 @@ public class OrderLoan extends Doc implements HasDetailedDescription, HasSignatu
 
     @Column(name = "UR_ADRESS")
     protected String urAdress;
+
+    public FileDescriptor getProtocolTemplate() {
+        return protocolTemplate;
+    }
+
+    public void setProtocolTemplate(FileDescriptor protocolTemplate) {
+        this.protocolTemplate = protocolTemplate;
+    }
 
     public ExtEmployee getOrderReceiver() {
         return orderReceiver;

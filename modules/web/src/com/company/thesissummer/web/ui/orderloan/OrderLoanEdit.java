@@ -7,12 +7,11 @@
 package com.company.thesissummer.web.ui.orderloan;
 
 import com.company.thesissummer.entity.ExtEmployee;
-import com.haulmont.cuba.core.app.UniqueNumbersService;
-import com.haulmont.cuba.core.global.TimeSource;
+import com.company.thesissummer.service.OrderTemplateService;
 import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.*;
-import com.haulmont.cuba.gui.data.CollectionDatasource;
+import com.haulmont.cuba.gui.export.ExportDisplay;
 import com.haulmont.cuba.gui.screen.Subscribe;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.thesis.web.actions.PrintReportAction;
@@ -24,11 +23,10 @@ import com.haulmont.workflow.core.entity.CardProc;
 import com.haulmont.workflow.core.entity.CardRole;
 import com.haulmont.workflow.core.entity.Proc;
 import com.haulmont.workflow.core.entity.ProcRole;
-
 import javax.inject.Inject;
+import java.io.FileDescriptor;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.haulmont.thesis.web.voice.VoiceCompanionsRepository.voiceCompanion;
 
@@ -42,6 +40,23 @@ public class OrderLoanEdit<T extends OrderLoan> extends AbstractDocEditor<T> {
 
     @Inject
     public LookupPickerField owner;
+
+    //@Inject
+    //OrderTemplateService orderTemplateService;
+
+    @Inject
+    ExportDisplay exportDisplay;
+
+
+    @Subscribe("templateButton")
+    protected void generateTemplateNow(Action.ActionPerformedEvent event) {
+        //OrderTemplateService.generateOrderLoan(getEditedEntity());
+        //exportDisplay.show(getEditedEntity().getProtocolTemplate());
+
+        notifications.create()
+                .withCaption("Шаблон сгенерировался")
+                .show();
+    }
 
     @Override
     public void init(Map<String, Object> params) {

@@ -92,11 +92,9 @@ class CennayaBumagaQR {
 
                     CertPath certPath = decodeCertPath(element.getElementsByTagName("cert").item(0).getTextContent());
 
-
                     X509CertImpl x509Cert = certPath.getCertificates().get(0);
 
                     String s = x509Cert.subjectDN.name
-
 
                     s = s.replaceAll("GIVENNAME=", "");
 
@@ -109,7 +107,6 @@ class CennayaBumagaQR {
                     String data = element.getElementsByTagName("date").item(0).getTextContent();
                     String str = s + " " + data;
                     stringList.add(str);
-
 
                 }
             }

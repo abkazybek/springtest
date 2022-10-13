@@ -29,4 +29,5 @@
     <entity metaClass="thesissummer$ProtocolPrav"/>
     <entity metaClass="thesissummer$ZadanieNaPlatezh"/>
     <entity metaClass="thesissummer$SpravkaPoZadol"/>
+    <entity metaClass="thesissummer$ProtocolFileTemplate"/>
 </entities>

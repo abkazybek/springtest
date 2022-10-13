@@ -84,6 +84,9 @@
             </query>
         </collectionDatasource>
     </dsContext>
+    <actions>
+        <action id="templateButton"/>
+    </actions>
     <assign name="width" value="theme://thesis.gui.editor-fields.width"/>
     <assign name="small_width" value="180px"/>
     <assign name="textAreaHeight" value="176px"/>
@@ -301,6 +304,11 @@
                                                            width="theme://thesis.gui.editor-fields.width"
                                                            caption="msg://com.company.thesissummer.entity/OrderLoan.urAdress"/>
                                             </row>
+                                            <row id="templateRow">
+                                                <upload id="protocolTemplate" property="protocolTemplate" datasource="cardDs"
+                                                           width="theme://thesis.gui.editor-fields.width"
+                                                           caption="Шаблон"/>
+                                            </row>
                                             <row id="checkBoxesRow">
                                                 <vbox id="checkBoxesBox" stylename="thesis-checkbox-box" spacing="true">
                                                     <checkBox id="availableForAllCheckBox" datasource="cardDs"
@@ -369,6 +377,7 @@
                 <tab id="attachmentsTab" caption="msg://attachments">
                     <groupBox id="attachmentsTabGroupBox" stylename="edit-area"
                               height="100%" width="100%" expand="atdrop">
+                        <!--<button caption="Сгенерировать шаблон"  action="templateButton" /> -->
                         <hbox id="atdrop" width="100%" height="100%" margin="false,true,false,false">
                             <frame screen="cardAttachmentsFrame" id="cardAttachmentsFrame" height="100%"/>
                         </hbox>

@@ -7,6 +7,7 @@
 package com.company.thesissummer.service;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
@@ -26,6 +27,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.Hashtable;
 
 @Service(QRCodeGeneratorService.NAME)
 public class QRCodeGeneratorServiceBean implements QRCodeGeneratorService {
@@ -50,8 +52,11 @@ public class QRCodeGeneratorServiceBean implements QRCodeGeneratorService {
     public byte[] getQRCodeByteArray(String content) throws IOException {
         BitMatrix qrCode;
         try {
+            Hashtable<EncodeHintType, String> hints = new Hashtable<>();
+            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+
             BufferedImage image;
-            qrCode = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, size, size);
+            qrCode = new QRCodeWriter().encode(content, BarcodeFormat.QR_CODE, size, size, hints);
 
             image = new BufferedImage(size, size, BufferedImage.TYPE_INT_RGB);
             for (int i = 0; i < size; i++) {
@@ -80,7 +85,11 @@ public class QRCodeGeneratorServiceBean implements QRCodeGeneratorService {
 
             FileDescriptor fileDescriptor = dataManager.commit(initial, viewRepository.getView(FileDescriptor.class, "browse"));
 
+            fileDescriptor.setExtension("png");
+            fileDescriptor.setCreateDate(new Date());
+
             fileLoader.saveStream(fileDescriptor, () -> inputStream);
+
 
             return fileDescriptor;
         }catch (Exception e){

@@ -665,5 +665,8 @@
                 <c join="left join {E}.versionOf v">v is null</c>
             </reindexQueryFilter>
         </entity>
+        <entity class="com.company.thesissummer.entity.ProtocolFileTemplate">
+            <include re=".*"/>
+        </entity>
     </entities>
 </fts-config>

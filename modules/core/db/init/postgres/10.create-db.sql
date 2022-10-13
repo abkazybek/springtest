@@ -274,31 +274,6 @@ create table THESISSUMMER_ORDER_SUBSIDIY (
     primary key (CARD_ID)
 )^
 -- end THESISSUMMER_ORDER_SUBSIDIY
--- begin THESISSUMMER_ORDER_INS
-create table THESISSUMMER_ORDER_INS (
-    CARD_ID uuid,
-    --
-    PODRAZDELENIE varchar(255),
-    ORDER_RECEIVER_ID uuid,
-    DATA_ORDER varchar(255),
-    NOMER_ORDER varchar(255),
-    RESHENIE_OPERATORA varchar(255),
-    DOGOVOR_STRAH varchar(255),
-    IIK_OBSH varchar(255),
-    SUMMA_DLYA_PERECH varchar(255),
-    NAIMENOVANIE_POLUCH varchar(255),
-    BIN varchar(255),
-    IIK varchar(255),
-    BIK varchar(255),
-    KBE varchar(255),
-    BANK_POLUCH varchar(255),
-    BIK_POLUCHATEL varchar(255),
-    KBE_POLUCHATEL varchar(255),
-    SUMMA_NA_SPEC varchar(255),
-    --
-    primary key (CARD_ID)
-)^
--- end THESISSUMMER_ORDER_INS
 -- begin THESISSUMMER_ORDER_NA_VOZVRAT
 create table THESISSUMMER_ORDER_NA_VOZVRAT (
     CARD_ID uuid,
@@ -405,34 +380,6 @@ create table THESISSUMMER_ORDER_POGASH_OB (
     primary key (CARD_ID)
 )^
 -- end THESISSUMMER_ORDER_POGASH_OB
--- begin THESISSUMMER_ORDER_LOAN
-create table THESISSUMMER_ORDER_LOAN (
-    CARD_ID uuid,
-    --
-    PODRAZDELENIE varchar(255),
-    ORDER_RECEIVER_ID uuid,
-    NOMER_ORDER varchar(255),
-    DATA_ORDER varchar(255),
-    PODRAZDELENIE2 varchar(255),
-    NOMER_PROTOCOLA_KK varchar(255),
-    CONTRAGENT varchar(255),
-    FULL_NAME varchar(255),
-    DOGOVOR varchar(255),
-    SUMMA varchar(255),
-    KREDIT_LINIYA varchar(255),
-    ISTOCHNIK varchar(255),
-    STAVKA_VOZ varchar(255),
-    SROK_KREDITA varchar(255),
-    BANK varchar(255),
-    BIK varchar(255),
-    IIK varchar(255),
-    BIN varchar(255),
-    KBE varchar(255),
-    UR_ADRESS varchar(255),
-    --
-    primary key (CARD_ID)
-)^
--- end THESISSUMMER_ORDER_LOAN
 -- begin THESISSUMMER_ORDER_TRANFER_MONEY
 create table THESISSUMMER_ORDER_TRANFER_MONEY (
     CARD_ID uuid,
@@ -488,11 +435,11 @@ create table THESISSUMMER_PROTOCOL_KK (
     CARD_ID uuid,
     --
     NOMER_PROTOCOLA varchar(255),
-    ORDER_RECEIVER_ID uuid,
-    JURIST_ID uuid,
     TYPE_PROTOCOL_ID uuid,
     CITY_ID uuid,
     DATA_PROTOCOLA varchar(255),
+    ORDER_RECEIVER_ID uuid,
+    JURIST_ID uuid,
     --
     primary key (CARD_ID)
 )^
@@ -538,10 +485,10 @@ create table THESISSUMMER_ZADANIE_NA_PLATEZH (
     SUMMA_TENGE varchar(255),
     SUMMA_DOLLAR varchar(255),
     NOMER_AND_DATA_DOGOVORA varchar(255),
-    ORDER_RECEIVER_ID uuid,
     NAZNACH_PLATESZ varchar(255),
     SCHET_NA_OPLATU varchar(255),
     NOMER_STATI varchar(255),
+    ORDER_RECEIVER_ID uuid,
     --
     primary key (CARD_ID)
 )^
@@ -557,3 +504,76 @@ create table THESISSUMMER_SPRAVKA_PO_ZADOL (
     primary key (CARD_ID)
 )^
 -- end THESISSUMMER_SPRAVKA_PO_ZADOL
+-- begin THESISSUMMER_PROTOCOL_FILE_TEMPLATE
+create table THESISSUMMER_PROTOCOL_FILE_TEMPLATE (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    CODE varchar(255),
+    FILECONTENT bytea,
+    FILE_DESCRIPTOR_ID uuid,
+    --
+    primary key (ID)
+)^
+-- end THESISSUMMER_PROTOCOL_FILE_TEMPLATE
+-- begin THESISSUMMER_ORDER_LOAN
+create table THESISSUMMER_ORDER_LOAN (
+    CARD_ID uuid,
+    --
+    PODRAZDELENIE varchar(255),
+    PROTOCOL_TEMPLATE_ID uuid,
+    ORDER_RECEIVER_ID uuid,
+    NOMER_ORDER varchar(255),
+    DATA_ORDER varchar(255),
+    PODRAZDELENIE2 varchar(255),
+    NOMER_PROTOCOLA_KK varchar(255),
+    CONTRAGENT varchar(255),
+    FULL_NAME varchar(255),
+    DOGOVOR varchar(255),
+    SUMMA varchar(255),
+    KREDIT_LINIYA varchar(255),
+    ISTOCHNIK varchar(255),
+    STAVKA_VOZ varchar(255),
+    SROK_KREDITA varchar(255),
+    BANK varchar(255),
+    BIK varchar(255),
+    IIK varchar(255),
+    BIN varchar(255),
+    KBE varchar(255),
+    UR_ADRESS varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_ORDER_LOAN
+-- begin THESISSUMMER_ORDER_INS
+create table THESISSUMMER_ORDER_INS (
+    CARD_ID uuid,
+    --
+    PODRAZDELENIE varchar(255),
+    PROTOCOL_TEMPLATE_ID uuid,
+    ORDER_RECEIVER_ID uuid,
+    DATA_ORDER varchar(255),
+    NOMER_ORDER varchar(255),
+    RESHENIE_OPERATORA varchar(255),
+    DOGOVOR_STRAH varchar(255),
+    IIK_OBSH varchar(255),
+    SUMMA_DLYA_PERECH varchar(255),
+    NAIMENOVANIE_POLUCH varchar(255),
+    BIN varchar(255),
+    IIK varchar(255),
+    BIK varchar(255),
+    KBE varchar(255),
+    BANK_POLUCH varchar(255),
+    BIK_POLUCHATEL varchar(255),
+    KBE_POLUCHATEL varchar(255),
+    SUMMA_NA_SPEC varchar(255),
+    --
+    primary key (CARD_ID)
+)^
+-- end THESISSUMMER_ORDER_INS
