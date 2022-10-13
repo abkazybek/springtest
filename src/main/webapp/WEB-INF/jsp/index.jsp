@@ -17,6 +17,7 @@
     <h4><a href="/registration">Зарегистрироваться</a></h4>
   </sec:authorize>
   <sec:authorize access="isAuthenticated()">
+    <img src="${pageContext.request.remoteUser}"/>
     <h4><a href="/logout">Выйти</a></h4>
   </sec:authorize>
   <h4><a href="/news">Новости (только пользователь)</a></h4>

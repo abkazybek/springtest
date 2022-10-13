@@ -26,6 +26,13 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String photos;
 
+    @Transient
+    public String getPhotosImagePath() {
+        if (photos == null || id == null) return null;
+
+        return "/user-photos/" + id + "/" + photos;
+    }
+
     public User() {
     }
 

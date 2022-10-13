@@ -51,6 +51,10 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
+    public User oneUser(User user){
+        return userRepository.findByUsername(user.getPhotosImagePath());
+    }
+
 
     public boolean saveUser(User user) {
         User userFromDB = userRepository.findByUsername(user.getUsername());
